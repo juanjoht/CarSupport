@@ -1,7 +1,7 @@
 {
-  "name": "carsupport.front",
+  "name": "carsupport.frontend",
   "version": "1.1.1",
-  "description": "CarSupport.Front: An Ionic project",
+  "description": "CarSupport.FrontEnd: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
