@@ -28,11 +28,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/app/menu/menu.html',
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
+    .state('app.home', {
+    url: '/home'
+  })
+
+ /* .state('app.search', {
     url: '/search',
     views: {
       'menuContent': {
@@ -68,6 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   });
+*/
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/home');
 });
