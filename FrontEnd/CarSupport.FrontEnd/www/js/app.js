@@ -33,7 +33,44 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
     .state('app.home', {
-    url: '/home'
+    url: '/home',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/home.html'
+       }
+    } 
+  })
+.state('app.fallas', {
+    url: '/fallas',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/fallas.html'
+      }
+    }
+  })
+.state('app.mantenimiento', {
+    url: '/mantenimiento',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/mantenimiento.html'
+      }
+    }
+  })
+.state('app.tips', {
+    url: '/tips',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/tips.html'
+      }
+    }
+  })
+.state('app.foro', {
+    url: '/foro',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/foro.html'
+      }
+    }
   })
 
  /* .state('app.search', {
@@ -74,5 +111,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 */
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/menu/home');
 });
