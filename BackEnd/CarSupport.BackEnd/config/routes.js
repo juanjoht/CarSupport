@@ -34,7 +34,8 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+     
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +46,5 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-
+'get/me': 'UserController.index' 
 };
