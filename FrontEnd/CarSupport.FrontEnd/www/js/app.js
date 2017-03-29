@@ -7,121 +7,36 @@
 angular.module('starter', ['ionic', 'starter.controllers'])
 
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+    $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+    $stateProvider
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/app/menu/menu.html',
-    controller: 'AppCtrl'
-  })
+        .state('app', {
+        url: '/app',
+        abstract: true,
+        templateUrl: 'templates/app/menu/menu.html',
+        controller: 'AppCtrl'
+    })
 
     .state('app.home', {
-    url: '/home',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/home.html'
-       }
-    } 
-  })
-.state('app.fallas', {
-    url: '/fallas',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/fallas.html'
-      }
-    }
-  })
-.state('app.mantenimiento', {
-    url: '/mantenimiento',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/mantenimiento.html'
-      }
-    }
-  })
-.state('app.tips', {
-    url: '/tips',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/tips.html'
-      }
-    }
-  })
-.state('app.foro', {
-    url: '/foro',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/foro.html'
-      }
-    }
-  })
+        url: '/home'
+    })
 
-.state('app.aspectos', {
-    url: '/aspectos',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/fallas/aspectos.html'
-      }
-    }
-  })
-.state('app.registrofallas', {
-    url: '/registrofallas',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/fallas/registrofallas.html'
-      }
-    }
-  })
-.state('app.fallasximagen', {
-    url: '/fallasximagen',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/fallas/fallasximagen.html'
-      }
-    }
-  })
-.state('app.fallasxpreguntas', {
-    url: '/fallasxpreguntas',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/fallas/fallasxpreguntas.html'
-      }
-    }
-  })
-.state('app.confignotificacion', {
-    url: '/confignotificacion',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/app/menu/mantenimiento/confignotificacion.html'
-      }
-    }
-  })
-.state('diagnostico', {
-    url: '/diagnostico',
-    //views: {
-      //'menuContent': {
-        templateUrl: 'templates/app/menu/fallas/diagnostico.html'
-     // }
-   // }
-  })
- /* .state('app.search', {
+    /* .state('app.search', {
     url: '/search',
     views: {
       'menuContent': {
@@ -158,6 +73,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
 */
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/home');
 });
