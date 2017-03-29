@@ -1,0 +1,29 @@
+<ion-view view-title="ORIENTACION POR PREGUNTAS">
+  <ion-content>
+    
+    <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                  Seleccione la parte afectada
+                </div>
+                <select>
+                  <option selected>Chasis</option>
+                  <option>Mofle</option>
+                  <option>Culata</option>
+                  <option>Buges</option>
+                </select>
+              </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Describa la falla que presenta su automovil</span>
+              <input type="text" value="dificultades en el arranque del motor" style="border: 1px solid gray">
+            </label>
+            <div class="padding">
+              <button ng-click="diagnosticos()" class="button button-block button-positive ion-checkmark-round">
+                Aceptar
+              </button>
+            </div>
+      </div>
+      <ion-nav-view></ion-nav-view>
+	</ion-content>
+</ion-view>
+

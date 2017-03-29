@@ -73,6 +73,54 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+.state('app.aspectos', {
+    url: '/aspectos',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/fallas/aspectos.html'
+      }
+    }
+  })
+.state('app.registrofallas', {
+    url: '/registrofallas',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/fallas/registrofallas.html'
+      }
+    }
+  })
+.state('app.fallasximagen', {
+    url: '/fallasximagen',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/fallas/fallasximagen.html'
+      }
+    }
+  })
+.state('app.fallasxpreguntas', {
+    url: '/fallasxpreguntas',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/fallas/fallasxpreguntas.html'
+      }
+    }
+  })
+.state('app.confignotificacion', {
+    url: '/confignotificacion',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/menu/mantenimiento/confignotificacion.html'
+      }
+    }
+  })
+.state('diagnostico', {
+    url: '/diagnostico',
+    //views: {
+      //'menuContent': {
+        templateUrl: 'templates/app/menu/fallas/diagnostico.html'
+     // }
+   // }
+  })
  /* .state('app.search', {
     url: '/search',
     views: {
@@ -111,5 +159,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   });
 */
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/menu/home');
+  $urlRouterProvider.otherwise('/app/home');
 });

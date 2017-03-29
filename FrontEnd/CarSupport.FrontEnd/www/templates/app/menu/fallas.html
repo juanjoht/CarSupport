@@ -3,13 +3,35 @@
     
     <div >
 
-    	<h2 align="center">Datos del automovil</h2>
+    	<h2 align="center">Administrar fallas</h2>
     	<div class="row">
-  			<div class="col col-20" align="center" style="border: 1px solid gray">
-  				
-</div>
+  			<div class="col col-67 col-offset-20" align="center" style="border: 1px solid gray">
+  			<b>Antes de comenzar a utilizar el sistema de diagnostico de fallas es recomendable que revise bien algunos aspectos de su automovil como los siguientes:</b>
+  			<ul type="circle">
+  				<li>- Que el automovil tenga combustible</li>
+  				<li>- Que el automovil tenga electricidad</li>
+  				<li>- Que las llantas esten cada una bien infladas</li>
+  			</ul>
+			</div>
+
+			
+		
+		</div>
+		<br>
+		<div class="row">
+		    <div class="col col-80 col-offset-10">
+			<ion-list>
+				<ion-item href="#/app/aspectos"><i class="icon ion-eye"></i> ver aspectos a revisar</ion-item>
+				<ion-item href="#/app/registrofallas"><i class="icon ion-document"></i> Registrar Fallas</ion-item>
+				<ion-item>Ver historial de fallas</ion-item>
+				<ion-item>Tips</ion-item>
+				<ion-item>Foro</ion-item>
+			</ion-list>	
+			</div>
 		</div>
 		
+		<ion-nav-view name="menuContent"></ion-nav-view>
     </div>
+
 	</ion-content>
 </ion-view>
