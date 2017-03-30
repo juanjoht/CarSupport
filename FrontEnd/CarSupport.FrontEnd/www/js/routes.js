@@ -1,35 +1,41 @@
 angular.module('app.routes', [])
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+    .config(function($stateProvider, $urlRouterProvider) {
+        $stateProvider
 
-  .state('main', {
-    url: '/main',
-    templateUrl: 'templates/main.html',
-    controller: 'mainCtrl'
-  })
+            .state('main', {
+            url: '/main',
+            templateUrl: 'templates/main.html',
+            controller: 'mainCtrl'
+        })
 
-    .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'loginCtrl'
+        })
 
-  .state('menu', {
-    url: '/menu',
-    templateUrl: 'templates/menu.html',
-    controller: 'menuCtrl'
-  })
+        .state('menu', {
+            url: '/menu',
+            templateUrl: 'templates/menu.html',
+            controller: 'menuCtrl'
+        })
+
+        .state('autenticar', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'loginCtrl'
+        })
 
 
         .state('menu.home', {
-    url: '/home',
-    views: {
-      'menu': {
-        templateUrl: 'templates/home.html',
-        controller: 'homeCtrl'
-      }
-    } 
-  })
+            url: '/home',
+            views: {
+                'menu': {
+                    templateUrl: 'templates/home.html',
+                    controller: 'loginCtrl'
+                }
+            }
+        })
 
-  $urlRouterProvider.otherwise('/main')
-});
+        $urlRouterProvider.otherwise('/main')
+    });

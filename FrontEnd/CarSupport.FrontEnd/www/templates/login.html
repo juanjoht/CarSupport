@@ -1,20 +1,21 @@
 <ion-view title="Login" id="page7">
-  <ion-content padding="true" class="has-header">
-    <form id="login-form5" class="list">
-      <ion-list id="login-list2">
-        <label class="item item-input" id="login-input11">
+    <ion-content padding="true" class="has-header">
+        <form id="login-form5" class="list">
+            <ion-list id="login-list2">
+                <label class="item item-input" id="login-input11">
           <span class="input-label">Username</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="" name="username" ng-model="data.username">
         </label>
-        <label class="item item-input" id="login-input12">
+                <label class="item item-input" id="login-input12">
           <span class="input-label">Contraseña</span>
-          <input type="password" placeholder="">
+          <input type="password" placeholder="" name="password" ng-model="data.password" >
         </label>
-      </ion-list>
-      <div class="spacer" style="height: 40px;"></div>
-      <a ui-sref="menu.home" id="login-button5" class="button button-positive  button-block">Iniciar Sección</a>
-    </form>
-    <a ui-sref="menu.home" id="login-button7" class="button button-positive  button-block icon-right ion-social-facebook">Conectar con Facebook</a>
-    <a ui-sref="menu.home" id="login-button8" class="button button-positive  button-block icon-right ion-social-googleplus">Conectar con Google +</a>
-  </ion-content>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <!--<a ui-sref="autenticar" id="login-button5" class="button button-positive  button-block">Iniciar Sección</a> !-->
+            <button class="button button-block button-calm" ng-click="login()">Login</button>
+        </form>
+        <a ui-sref="menu.home" id="login-button7" class="button button-positive  button-block icon-right ion-social-facebook">Conectar con Facebook</a>
+        <a ui-sref="menu.home" id="login-button8" class="button button-positive  button-block icon-right ion-social-googleplus">Conectar con Google +</a>
+    </ion-content>
 </ion-view>

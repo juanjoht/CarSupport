@@ -20,22 +20,42 @@ module.exports = {
      * `AuthController.process()`
      */
     process: function(req, res) {
-        passport.authenticate('local', function(err, user, info) {
-            if ((err) || (!user)) {
-                res.redirect('/login');
-                return;
-            }
+        if (req.body.isApp) {
+            passport.authenticate('local', function(err, user, info) {
+                if ((err) || (!user)) {
 
-            req.logIn(user, function(err) {
-                if (err) {
+                    return 'Error login o No User';
+                }
+
+                req.logIn(user, function(err) {
+                    if (err) {
+                        return 'Error Login';
+                    }
+
+
+                    return 'Bienvenido!';
+
+                });
+            })(req, res);
+
+        } else {
+            passport.authenticate('local', function(err, user, info) {
+                if ((err) || (!user)) {
                     res.redirect('/login');
                     return;
                 }
 
-                res.redirect('/');
-                return;
-            });
-        })(req, res);
+                req.logIn(user, function(err) {
+                    if (err) {
+                        res.redirect('/login');
+                        return;
+                    }
+
+                    res.redirect('/');
+                    return;
+                });
+            })(req, res);
+        }
     },
 
 
