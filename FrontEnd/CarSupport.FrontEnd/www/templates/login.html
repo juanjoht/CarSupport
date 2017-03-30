@@ -1,25 +1,20 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
+<ion-view title="Login" id="page7">
+  <ion-content padding="true" class="has-header">
+    <form id="login-form5" class="list">
+      <ion-list id="login-list2">
+        <label class="item item-input" id="login-input11">
           <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
+          <input type="text" placeholder="">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+        <label class="item item-input" id="login-input12">
+          <span class="input-label">Contraseña</span>
+          <input type="password" placeholder="">
         </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
+      </ion-list>
+      <div class="spacer" style="height: 40px;"></div>
+      <a ui-sref="menu.home" id="login-button5" class="button button-positive  button-block">Iniciar Sección</a>
     </form>
+    <a ui-sref="menu.home" id="login-button7" class="button button-positive  button-block icon-right ion-social-facebook">Conectar con Facebook</a>
+    <a ui-sref="menu.home" id="login-button8" class="button button-positive  button-block icon-right ion-social-googleplus">Conectar con Google +</a>
   </ion-content>
-</ion-modal-view>
+</ion-view>
