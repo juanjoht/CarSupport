@@ -50,11 +50,11 @@ angular.module('app.controllers', ['app.services'])
     }
 ])
 
-.controller('loginCtrl', ['$scope', '$stateParams', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams', '$location', '$state', '$ionicPopup', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
 
-    function($scope, $stateParams, AppFactory) {
+    function($scope, $stateParams, $location, $state, $ionicPopup, AppFactory) {
         $scope.data = {
             username: '',
             password: '',
@@ -63,8 +63,14 @@ angular.module('app.controllers', ['app.services'])
 
         $scope.login = function() {
             AppFactory.loginLocal($scope.data).then(function(response) {
-                $scope.s = response;
-                console.log(response);
+                if (response.data.account) {
+                    $state.go('menu.home');
+                } else {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Login failed!',
+                        template: response.data.error
+                    });
+                }
             });
         }
     }

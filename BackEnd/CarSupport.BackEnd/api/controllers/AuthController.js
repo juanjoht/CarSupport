@@ -23,21 +23,16 @@ module.exports = {
         if (req.body.isApp) {
             passport.authenticate('local', function(err, user, info) {
                 if ((err) || (!user)) {
-
-                    return 'Error login o No User';
+                    return res.json({ error: info.message });
                 }
-
                 req.logIn(user, function(err) {
                     if (err) {
-                        return 'Error Login';
+                        return res.json({ error: info.message });
                     }
-
-
-                    return 'Bienvenido!';
+                    return res.json({ account: user});
 
                 });
             })(req, res);
-
         } else {
             passport.authenticate('local', function(err, user, info) {
                 if ((err) || (!user)) {
