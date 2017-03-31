@@ -20,19 +20,32 @@ angular.module('app.routes', [])
             controller: 'menuCtrl'
         })
 
-        .state('autenticar', {
-            url: '/login',
-            templateUrl: 'templates/login.html',
-            controller: 'loginCtrl'
-        })
-
-
         .state('menu.home', {
             url: '/home',
             views: {
                 'menu': {
                     templateUrl: 'templates/home.html',
                     controller: 'loginCtrl'
+                }
+            }
+        })
+
+        .state('menu.historyFailures', {
+            url: '/history-failures',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/history-failures.html',
+                    controller: 'historyFailuressCtrl'
+                }
+            }
+        })
+
+        .state('menu.selectPart', {
+            url: '/select-part ',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/select-part.html',
+                    controller: 'selectPartCtrl'
                 }
             }
         })

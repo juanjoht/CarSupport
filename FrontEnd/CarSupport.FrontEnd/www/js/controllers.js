@@ -95,6 +95,60 @@ angular.module('app.controllers', ['app.services'])
 ])
 
 
+.controller('historyFailuressCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+
+    }
+])
+
+.controller('selectPartCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+        var items = [{
+                title: "Fur",
+                description: "The fur of clouded leopards is of a dark grey or ochreous...",
+                position: {
+                    left: 710,
+                    top: 290
+                }
+            },
+            {
+                title: "Canines",
+                description: "They are often referred to as a \"modern-day saber tooth\"...",
+                position: {
+                    left: 305,
+                    top: 345
+                }
+                //picture: "/img/clouded-leopard-head.jpg"
+            },
+            {
+                title: "Threats",
+                description: "Many of the remaining forest areas are too small to ensure...",
+                position: {
+                    left: 660,
+                    top: 70
+                },
+                link: {
+                    href: "http://www.website.org/",
+                    label: "Website"
+                }
+            }
+        ];
+
+        // Plugin configuration
+        var options = {
+            debug: true
+        };
+
+        // Activate the plugin
+        $('#interactiveI').interactiveImage(items, options);
+    }
+])
+
 
 .controller('PlaylistsCtrl', function($scope) {
     $scope.playlists = [
