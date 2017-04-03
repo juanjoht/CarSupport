@@ -13229,11 +13229,8 @@ a.dark {
     left: 22%;
 }
 
-.interactive-image {
-    display: block;
-    background: url('/img/clouded-leopard.jpg');
-    width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+.redhotspot {
+    border: solid 1px #990000;
+    background: #cc0000;
+    border-radius: 6px
 }

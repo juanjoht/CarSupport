@@ -62,6 +62,7 @@ angular.module('app.controllers', ['app.services'])
         };
 
         $scope.login = function() {
+            //$state.go('menu.home');
             AppFactory.loginLocal($scope.data).then(function(response) {
                 if (response.data.account) {
                     $state.go('menu.home');
@@ -104,50 +105,58 @@ angular.module('app.controllers', ['app.services'])
     }
 ])
 
-.controller('selectPartCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('selectPartCtrl', ['$scope', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams, $state) {
+
+
+
+        function blink_hotspot() {
+            $('.redhotspot').animate({ "opacity": '0.3' }, 'slow').animate({ 'opacity': '0.8' }, 'fast', function() { blink_hotspot(); });
+        }
+
+
+        blink_hotspot();
+
+
+        $("#fhotspot1").LiteTooltip({
+            textalign: "left",
+            trigger: "hover",
+            templatename: "BostonBlue",
+            title: '<div class="template">' +
+                '<p style="padding: 5px; font-size: 11px; line-height: 20px;">' +
+                '<img onclick=goto("menu.frecuentFaults") src="img/allow.jpg" class="image-left" style="max-width: 75px; width: 100%;" />' +
+                '</p>' +
+                '</div>'
+        });
+
+        $("#fhotspot2").LiteTooltip({
+            textalign: "left",
+            trigger: "hover",
+            templatename: "BostonBlue",
+            title: '<div class="template">' +
+                '<p style="padding: 5px; font-size: 11px; line-height: 20px;">' +
+                '<img onclick=goto("menu.frecuentFaults") src="img/interior-ford.jpg" class="image-left" style="max-width: 200px; width: 100%;" />' +
+                '</p>' +
+                '</div>'
+        });
+
+        goto = function(toState, params) {
+            $state.go(toState, params)
+        }
+    }
+])
+
+.controller('frecuentFaultsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function($scope, $stateParams) {
-        var items = [{
-                title: "Fur",
-                description: "The fur of clouded leopards is of a dark grey or ochreous...",
-                position: {
-                    left: 710,
-                    top: 290
-                }
-            },
-            {
-                title: "Canines",
-                description: "They are often referred to as a \"modern-day saber tooth\"...",
-                position: {
-                    left: 305,
-                    top: 345
-                }
-                //picture: "/img/clouded-leopard-head.jpg"
-            },
-            {
-                title: "Threats",
-                description: "Many of the remaining forest areas are too small to ensure...",
-                position: {
-                    left: 660,
-                    top: 70
-                },
-                link: {
-                    href: "http://www.website.org/",
-                    label: "Website"
-                }
-            }
-        ];
 
-        // Plugin configuration
-        var options = {
-            debug: true
-        };
 
-        // Activate the plugin
-        $('#interactiveI').interactiveImage(items, options);
     }
 ])
+
 
 
 .controller('PlaylistsCtrl', function($scope) {

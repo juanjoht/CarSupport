@@ -50,5 +50,17 @@ angular.module('app.routes', [])
             }
         })
 
+
+        .state('menu.frecuentFaults', {
+            url: '/frequent-faults',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/frequent-faults.html',
+                    controller: 'frecuentFaultsCtrl'
+                }
+            }
+        })
+
+
         $urlRouterProvider.otherwise('/main')
     });

@@ -1,20 +1,28 @@
 <ion-view title="Seleccionar Parte" id="page10">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="css/litetooltip.min.css" rel="stylesheet">
     <ion-content padding="true" class="has-header">
         <div id="seleccionarParte-markdown12" class="show-list-numbers-and-dots">
             <p style="color:#000000;">Seleccione en la imagen la parte del automóvil que está presentando la falla:</p>
         </div>
         <div>
-            <div class="interactive-image" id="interactiveI">
+            <div class="imagehotspot-container" style="position: relative; max-width: 600px; /* max-width: actual width of image*/ width: 100%; height: auto; z-index: 101; overflow: hidden">
+                <div style="position: relative; height: 0px; padding-bottom: 48%; /* padding-bottom: image's height divided by width multiply by 100 */">
+                    <img style="position: absolute; top: 0px; left: 0px; z-index: 102;" alt="" src="img/ford-fusion.jpg" />
+                    <div class="redhotspot" id="fhotspot1" style="position: absolute; z-index: 103; width: 1.667%; height: 3.472%; top: 81%; left: 41.9%;"></div>
+                    <div class="redhotspot" id="fhotspot2" style="position: absolute; z-index: 103; width: 1.667%; height: 3.472%; top: 47%; left: 42%;"></div>
+                </div>
             </div>
-            <div id="seleccionarParte-markdown13" class="show-list-numbers-and-dots">
-                <p style="color:#000000;">Si no conoce o no se encuentra en la imagen la parte afectada, seleccione la opción:
-                    <strong>2</strong>
-                </p>
-            </div>
-            <div id="seleccionarParte-button-bar1" class="button-bar">
-                <button id="seleccionarParte-button13" class="button button-positive  button-block">1</button>
-                <a ui-sref="menu.registrarFalla" id="seleccionarParte-button14" class="button button-positive  button-block button-outline">2</a>
-            </div>
+        </div>
+        <div id="seleccionarParte-markdown13" class="show-list-numbers-and-dots">
+            <p style="color:#000000;">Si no conoce o no se encuentra en la imagen la parte afectada, seleccione la opción:
+                <strong>2</strong>
+            </p>
+        </div>
+        <div id="seleccionarParte-button-bar1" class="button-bar">
+            <button id="seleccionarParte-button13" class="button button-positive  button-block">1</button>
+            <a ui-sref="menu.registrarFalla" id="seleccionarParte-button14" class="button button-positive  button-block button-outline">2</a>
         </div>
     </ion-content>
 </ion-view>
