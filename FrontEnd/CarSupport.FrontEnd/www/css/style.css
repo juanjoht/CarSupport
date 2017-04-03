@@ -13234,3 +13234,16 @@ a.dark {
     background: #cc0000;
     border-radius: 6px
 }
+
+.item-image {
+    position: relative;
+    height: 0px;
+    padding-bottom: 48%;
+    margin-bottom: 10px;
+}
+
+.item-description {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
