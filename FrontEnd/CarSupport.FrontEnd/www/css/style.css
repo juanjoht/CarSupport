@@ -4448,6 +4448,10 @@ ion-infinite-scroll:not(.active) .icon:before {
 
 /* If you change these, change platform.scss as well */
 
+.has-header-fq {
+    top: 1px !important;
+}
+
 .has-header {
     top: 44px;
 }

@@ -62,5 +62,6 @@ angular.module('app.routes', [])
         })
 
 
+
         $urlRouterProvider.otherwise('/main')
     });
