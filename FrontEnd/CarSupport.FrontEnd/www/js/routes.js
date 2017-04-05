@@ -40,22 +40,30 @@ angular.module('app.routes', [])
             }
         })
 
-        .state('selectPart', {
+        .state('menu.selectPart', {
             url: '/select-part',
-            templateUrl: 'templates/select-part.html',
-            controller: 'selectPartCtrl'
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/select-part.html',
+                    controller: 'selectPartCtrl'
+                }
+            }
         })
 
-        .state('tab', {
+        .state('menu.tabs', {
             url: '/frequent-faults',
-            templateUrl: 'templates/frequent-faults.html',
-            controller: 'frecuentFaultsCtrl'
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/frequent-faults.html',
+                    controller: 'frecuentFaultsCtrl'
+                }
+            }
         })
 
-        .state('tab.music', {
+        .state('menu.readPossibleFailures', {
             url: '/tab-music',
             views: {
-                'tabMusic': {
+                'tab-content': {
                     templateUrl: 'templates/tab-music.html',
                     controller: 'MusicCtrl'
                 }
