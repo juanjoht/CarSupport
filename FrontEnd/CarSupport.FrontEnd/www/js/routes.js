@@ -41,7 +41,7 @@ angular.module('app.routes', [])
         })
 
         .state('menu.selectPart', {
-            url: '/select-part ',
+            url: '/select-part',
             views: {
                 'side-menu-content': {
                     templateUrl: 'templates/select-part.html',
@@ -50,8 +50,7 @@ angular.module('app.routes', [])
             }
         })
 
-
-        .state('menu.frecuentFaults', {
+        .state('menu.tabs', {
             url: '/frequent-faults',
             views: {
                 'side-menu-content': {
@@ -60,6 +59,17 @@ angular.module('app.routes', [])
                 }
             }
         })
+
+        .state('menu.readPossibleFailures', {
+            url: '/tab-music',
+            views: {
+                'tab-content': {
+                    templateUrl: 'templates/tab-music.html',
+                    controller: 'MusicCtrl'
+                }
+            }
+        })
+
 
 
         $urlRouterProvider.otherwise('/main')

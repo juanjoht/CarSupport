@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['app.services'])
+angular.module('app.controllers', ['ionic-audio', 'app.services', ])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -105,12 +105,12 @@ angular.module('app.controllers', ['app.services'])
     }
 ])
 
-.controller('selectPartCtrl', ['$scope', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('selectPartCtrl', ['$scope', '$stateParams', '$state', '$ionicSideMenuDelegate', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $stateParams, $state) {
+    function($scope, $stateParams, $state, $ionicSideMenuDelegate) {
 
-
+        $ionicSideMenuDelegate.canDragContent(false);
 
         function blink_hotspot() {
             $('.redhotspot').animate({ "opacity": '0.3' }, 'slow').animate({ 'opacity': '0.8' }, 'fast', function() { blink_hotspot(); });
@@ -126,7 +126,7 @@ angular.module('app.controllers', ['app.services'])
             templatename: "BostonBlue",
             title: '<div class="template">' +
                 '<p style="padding: 5px; font-size: 11px; line-height: 20px;">' +
-                '<img onclick=goto("menu.frecuentFaults") src="img/allow.jpg" class="image-left" style="max-width: 75px; width: 100%;" />' +
+                '<img onclick=goto("menu.tabs") src="img/allow.jpg" class="image-left" style="max-width: 75px; width: 100%;" />' +
                 '</p>' +
                 '</div>'
         });
@@ -137,7 +137,7 @@ angular.module('app.controllers', ['app.services'])
             templatename: "BostonBlue",
             title: '<div class="template">' +
                 '<p style="padding: 5px; font-size: 11px; line-height: 20px;">' +
-                '<img onclick=goto("menu.frecuentFaults") src="img/interior-ford.jpg" class="image-left" style="max-width: 200px; width: 100%;" />' +
+                '<img onclick=goto("menu.tabs") src="img/interior-ford.jpg" class="image-left" style="max-width: 200px; width: 100%;" />' +
                 '</p>' +
                 '</div>'
         });
@@ -148,16 +148,37 @@ angular.module('app.controllers', ['app.services'])
     }
 ])
 
-.controller('frecuentFaultsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('frecuentFaultsCtrl', ['$scope', '$stateParams', 'MediaManager', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $stateParams) {
+    function($scope, $stateParams, MediaManager) {
+        var urlprefix = '/android_asset/www/audio/';
 
+        $scope.dynamicTrack = {};
+
+        $scope.tracks = [{
+                url: urlprefix + '03 - Land Of Confusion.mp3',
+                artist: 'Genesis',
+                title: 'Land of Confusion'
+            },
+            {
+                url: urlprefix + '02 - Tonight. Tonight. Tonight.mp3',
+                artist: 'Genesis',
+                title: 'Tonight. Tonight. Tonight'
+            }
+        ];
+
+        $scope.stopPlayback = function() {
+            MediaManager.stop();
+        };
+        $scope.playTrack = function(index) {
+            $scope.dynamicTrack = $scope.tracks[index];
+
+            $scope.togglePlayback = !$scope.togglePlayback;
+        };
 
     }
 ])
-
-
 
 .controller('PlaylistsCtrl', function($scope) {
     $scope.playlists = [
