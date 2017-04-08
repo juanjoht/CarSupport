@@ -42,8 +42,14 @@ module.exports.routes = {
     'post /login': {
         controller: 'auth',
         action: 'process'
-    }
-
+    },
+    '/index': {
+        view: 'static/index'
+    },
+  '/user':{
+      view: 'user/master'
+   // controller: 'userController', action: "new"
+  }
 
     /***************************************************************************
      *                                                                          *

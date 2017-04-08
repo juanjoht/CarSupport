@@ -18,7 +18,7 @@ var UserController = {
         });
     },
     'new': function(req,res) {
-        res.view();
+        res.view('/user/master');
     }
 }
 

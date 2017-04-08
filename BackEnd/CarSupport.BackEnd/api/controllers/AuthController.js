@@ -12,7 +12,7 @@ module.exports = {
      * `AuthController.login()`
      */
     login: function(req, res) {
-        res.view();
+        res.view('');
     },
 
 
