@@ -12,18 +12,43 @@ var UserController = {
             if (err) {
                 return res.serverError(err);
             }
-            //sails.log('Wow, there are %d users named Finn.  Check it out:', usersNamedFinn.length, usersNamedFinn);
             return res.json(users);
         });
     },
     add: function(req, res) {
-        var paramater1 = req.allParams();
-        var paramater2 = req.body;
-        User.create({ name: 'Finn' }).exec(function(err, finn) {
+        var paramaters = req.allParams();
+        User.create(paramaters).exec(function(err, user) {
             if (err) { return res.serverError(err); }
-
-            sails.log('Finn\'s id is:', finn.id);
-            return res.ok();
+            return res.json(user);
+        });
+    },
+    edit: function(req, res) {
+        var parameters = req.allParams();
+        User.find({ Id: parameters.Id }).exec(function(err, userOriginal) {
+            if (err) { return res.serverError(err); }
+            userOr = {
+                FullName: userOriginal[0].FullName,
+                Email: userOriginal[0].Email,
+                Phone: userOriginal[0].Phone,
+                CellPhone: userOriginal[0].CellPhone,
+                Username: userOriginal[0].Username,
+                Password: userOriginal[0].Password,
+            }
+            User.update(userOr, parameters).exec(function afterwards(err, updated) {
+                if (err) { return res.serverError(err); }
+                return req.json(updated[0]);
+            });
+        });
+    },
+    delete: function(req, res) {
+        var Id = req.param('Id');
+        User.destroy({
+            id: Id
+        }).exec(function(err, user) {
+            if (err) {
+                return res.negotiate(err);
+            }
+            return res.json(user[0].Id);
         });
     }
 

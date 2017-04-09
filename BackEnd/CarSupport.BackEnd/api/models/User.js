@@ -6,50 +6,50 @@
  */
 
 module.exports = {
+    autoPK: false,
+    attributes: {
+        Id: {
+            type: 'integer',
+            primaryKey: true,
+            autoIncrement: true,
+            required: true,
+            columnName: 'Id'
 
-  attributes: {
-      Id:{
-          type: 'integer',
-          primaryKey: true,
-          autoIncrement: true,
-          required:true
-      },
-      IdentificationNumber:
-      {
-          type: 'string',
-          required: true,
-          size: 45
-      },
-      FullName: {
-          type: 'string',
-          required: true,
-          size: 150
-      },
-      Email: {
-          type: 'string',
-          required: true,
-          size: 45
-          
-      },
-      Phone: {
-          type: 'string',
-          size: 45
-      },
-      CellPhone: {
-          type: 'string',
-          size: 45
-      },
-      Username: {
-          type: 'string',
-          unique: true,
-          size: 45
         },
-      Password: {
-       type: 'string',
-       required: true,
-        size: 45  
-      }
-      
-  }
-};
+        IdentificationNumber: {
+            type: 'string',
+            required: true,
+            size: 45
+        },
+        FullName: {
+            type: 'string',
+            required: true,
+            size: 150
+        },
+        Email: {
+            type: 'string',
+            required: true,
+            size: 45
 
+        },
+        Phone: {
+            type: 'string',
+            size: 45
+        },
+        CellPhone: {
+            type: 'string',
+            size: 45
+        },
+        Username: {
+            type: 'string',
+            unique: true,
+            size: 45
+        },
+        Password: {
+            type: 'string',
+            required: true,
+            size: 45
+        }
+
+    }
+};
