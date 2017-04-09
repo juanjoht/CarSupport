@@ -35,7 +35,7 @@ module.exports.routes = {
     '/': {
         view: 'homepage'
     },
-    'get /login': {
+    'get/login': {
         controller: 'auth',
         action: 'login'
     },
@@ -46,10 +46,12 @@ module.exports.routes = {
     '/index': {
         view: 'static/index'
     },
-  '/user':{
-      view: 'user/master'
-   // controller: 'userController', action: "new"
-  }
+    '/user/master': {
+        view: 'user/master'
+    },
+    '/user': {
+        controller: 'UserController'
+    }
 
     /***************************************************************************
      *                                                                          *
