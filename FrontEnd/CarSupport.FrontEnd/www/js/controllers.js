@@ -180,6 +180,40 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', ])
     }
 ])
 
+
+.controller('questionCtrl', ['$scope', '$stateParams', 'MediaManager', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+        var urlprefix = '/android_asset/www/audio/';
+
+        $scope.dynamicTrack = {};
+
+        $scope.tracks = [{
+                url: urlprefix + '03 - Land Of Confusion.mp3',
+                artist: 'Genesis',
+                title: 'Land of Confusion'
+            },
+            {
+                url: urlprefix + '02 - Tonight. Tonight. Tonight.mp3',
+                artist: 'Genesis',
+                title: 'Tonight. Tonight. Tonight'
+            }
+        ];
+
+        $scope.stopPlayback = function() {
+            MediaManager.stop();
+        };
+        $scope.playTrack = function(index) {
+            $scope.dynamicTrack = $scope.tracks[index];
+
+            $scope.togglePlayback = !$scope.togglePlayback;
+        };
+
+    }
+])
+
+
 .controller('PlaylistsCtrl', function($scope) {
     $scope.playlists = [
         { title: 'Reggae', id: 1 },
