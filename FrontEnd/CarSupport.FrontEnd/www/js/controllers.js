@@ -210,6 +210,16 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', ])
             $scope.togglePlayback = !$scope.togglePlayback;
         };
 
+        $scope.data = {
+            isLoading: false
+        };
+
+        $scope.active = true;
+        $scope.showContent = function(control) {
+
+            var s = $(control).attr('data-id="two"')
+        }
+
     }
 ])
 

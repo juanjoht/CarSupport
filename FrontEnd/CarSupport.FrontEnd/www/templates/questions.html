@@ -1,21 +1,24 @@
 <ion-view title="Preguntas">
     <ion-content padding="true" class="has-header">
-        <button class="button button-assertive" ng-click="stopPlayback()">Stop all</button>
-        <ion-audio-track ng-repeat="track in tracks" track="track">
-            <div class="card">
-                <div class="item">
-                    <h2>{{track.title}}</h2>
-
-                    <p>{{track.artist}}</p>
-                    <ion-audio-controls>
-                        <a class="button button-icon icon" ion-audio-play></a>
-                        <ion-spinner icon="ios" style="position: relative; top: 8px; left: 4px"></ion-spinner>
-                    </ion-audio-controls>
-                </div>
-                <div class="item item-divider">
-                    <ion-audio-progress-bar track="track" display-time></ion-audio-progress-bar>
-                </div>
-            </div>
-        </ion-audio-track>
+        <div class="button-bar">
+            <ion-scroll direction="x" class="wide-as-needed">
+                <a class="button inline-button button-positive">1</a>
+                <a class="button button-positive button-outline" data-id="two" ng-click="showContent(this)">2</a>
+                <a class="button button-positive button-outline">3</a>
+                <a class="button button-positive button-outline">4</a>
+                <a class="button button-positive button-outline">5</a>
+                <a class="button button-positive button-outline">6</a>
+                <a class="button button-positive button-outline">7</a>
+                <a class="button button-positive button-outline">8</a>
+                <a class="button button-positive button-outline">9</a>
+                <a class="button button-positive button-outline">10</a>
+            </ion-scroll>
+        </div>
+        <div id="firts" ng-show="{{active}}">
+            pregunta 1
+        </div>
+        <div id="two" ng-show="{{!active}}>
+            pregunta 2
+        </div>
     </ion-content>
 </ion-view>

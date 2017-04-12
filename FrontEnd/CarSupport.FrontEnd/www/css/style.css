@@ -13251,3 +13251,12 @@ a.dark {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.wide-as-needed {
+    overflow: scroll !important;
+    white-space: nowrap !important;
+}
+
+.scroll {
+    min-width: 100% !important;
+}
