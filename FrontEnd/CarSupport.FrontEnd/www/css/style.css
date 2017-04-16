@@ -13226,11 +13226,11 @@ a.dark {
 
 .btn-prev-question {
     margin: auto;
-    left: 13%;
+    left: 23%;
 }
 
 .btn-next-question {
-    left: 22%;
+    left: 40%;
 }
 
 .redhotspot {
@@ -13259,4 +13259,10 @@ a.dark {
 
 .scroll {
     min-width: 100% !important;
+}
+
+.active {
+    background-color: red;
+    height: 500px;
+    width: 500px;
 }

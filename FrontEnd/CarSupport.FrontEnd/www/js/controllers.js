@@ -181,23 +181,33 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', ])
 ])
 
 
-.controller('questionCtrl', ['$scope', '$stateParams', 'MediaManager', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('questionCtrl', ['$scope', '$filter', '$stateParams', 'MediaManager', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $stateParams) {
+    function($scope, $filter, $stateParams, MediaManager) {
         var urlprefix = '/android_asset/www/audio/';
 
         $scope.dynamicTrack = {};
 
         $scope.tracks = [{
-                url: urlprefix + '03 - Land Of Confusion.mp3',
-                artist: 'Genesis',
-                title: 'Land of Confusion'
+                url: urlprefix + 'Encendido1.mp3',
+                artist: 'Admin',
+                title: 'Encendido 1'
             },
             {
-                url: urlprefix + '02 - Tonight. Tonight. Tonight.mp3',
-                artist: 'Genesis',
-                title: 'Tonight. Tonight. Tonight'
+                url: urlprefix + 'Encendido2.mp3',
+                artist: 'Admin',
+                title: 'Encendido 2'
+            },
+            {
+                url: urlprefix + 'Encendido3.mp3',
+                artist: 'Admin',
+                title: 'Encendido 3'
+            },
+            {
+                url: urlprefix + 'Encendido4.mp3',
+                artist: 'Admin',
+                title: 'Encendido 4'
             }
         ];
 
@@ -213,13 +223,38 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', ])
         $scope.data = {
             isLoading: false
         };
-
-        $scope.active = true;
-        $scope.showContent = function(control) {
-
-            var s = $(control).attr('data-id="two"')
+        $scope.currentTpl = '/tp1.html';
+        $scope.cClass = 1;
+        $scope.showContent = function(event, index, isnext) {
+            var tmpPrev = $filter("filter")($scope.questionNumbers, { text: $scope.cClass.toString() }, true)
+            tmpPrev[0].outline = true;
+            var e = event.currentTarget.innerText;
+            if (isnext) {
+                e = index.toString();
+            }
+            var tmpCurrent = $filter("filter")($scope.questionNumbers, { text: e }, true)
+            tmpCurrent[0].outline = false;
+            $scope.cClass = index;
+            $scope.currentTpl = '/tp' + index.toString() + '.html';
         }
 
+        $scope.questionNumbers = [
+            { text: '1', button: true, positive: true, inline: true, outline: false },
+            { text: '2', button: true, positive: true, inline: true, outline: true },
+            { text: '3', button: true, positive: true, inline: true, outline: true },
+            { text: '4', button: true, positive: true, inline: true, outline: true },
+            { text: '5', button: true, positive: true, inline: true, outline: true },
+            { text: '6', button: true, positive: true, inline: true, outline: true },
+            { text: '7', button: true, positive: true, inline: true, outline: true },
+            { text: '8', button: true, positive: true, inline: true, outline: true },
+            { text: '9', button: true, positive: true, inline: true, outline: true },
+            { text: '10', button: true, positive: true, inline: true, outline: true }
+        ];
+        $scope.test = 'juanjo'
+        $scope.questionContent = [
+            { title: 'pregunta 1', },
+            { title: 'pregunta 2', }
+        ]
     }
 ])
 

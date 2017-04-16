@@ -2,23 +2,105 @@
     <ion-content padding="true" class="has-header">
         <div class="button-bar">
             <ion-scroll direction="x" class="wide-as-needed">
-                <a class="button inline-button button-positive">1</a>
-                <a class="button button-positive button-outline" data-id="two" ng-click="showContent(this)">2</a>
-                <a class="button button-positive button-outline">3</a>
-                <a class="button button-positive button-outline">4</a>
-                <a class="button button-positive button-outline">5</a>
-                <a class="button button-positive button-outline">6</a>
-                <a class="button button-positive button-outline">7</a>
-                <a class="button button-positive button-outline">8</a>
-                <a class="button button-positive button-outline">9</a>
-                <a class="button button-positive button-outline">10</a>
+                <a ng-repeat="item in questionNumbers" ng-class="{'button':item.button,'button-positive':item.positive,'inline-button':item.inline,'button-outline':item.outline}" ng-click="showContent($event,$index+1,false)">{{item.text}}</a>
             </ion-scroll>
         </div>
-        <div id="firts" ng-show="{{active}}">
-            pregunta 1
-        </div>
-        <div id="two" ng-show="{{!active}}>
-            pregunta 2
-        </div>
+        <div id="tpl-content" ng-include src="currentTpl"></div>
     </ion-content>
 </ion-view>
+
+<script type="text/ng-template" id="/tp1.html">
+    <div class="spacer" style="width: 300px; height: 30px;"></div>
+    <div class="item item-body" id="inicioOrientacion-list-item-container17">
+        <div id="inicioOrientacion-markdown23" class="show-list-numbers-and-dots">
+            <p style="margin-top:0px;color:#000000;">
+                <strong>1.</strong> ¿Cuando fue su último cambio de batería?</p>
+        </div>
+    </div>
+    <form id="inicioOrientacion-form11" class="list">
+        <div class="spacer" style="width: 300px; height: 30px;"></div>
+        <ion-radio id="inicioOrientacion-radio1">Mas de 12 meses</ion-radio>
+        <ion-radio id="inicioOrientacion-radio2">Entre 6 y 12 meses</ion-radio>
+        <ion-radio id="inicioOrientacion-radio3">Entre 3 y 6 meses</ion-radio>
+        <ion-radio id="inicioOrientacion-radio4">Menos de 3 meses</ion-radio>
+    </form>
+    <a id="inicioOrientacion-button18" ng-click="showContent($event,cClass+1,true)" class="button button-positive  button-block">&gt;</a>
+    <div class="spacer" style="width: 300px; height: 30px;"></div>
+</script>
+<script type="text/ng-template" id="/tp2.html">
+    <div class="spacer" style="width: 300px; height: 30px;"></div>
+    <div class="item item-body" id="inicioOrientacion-list-item-container17">
+        <div id="inicioOrientacion-markdown23" class="show-list-numbers-and-dots">
+            <p style="margin-top:0px;color:#000000;">
+                <strong>2.</strong> ¿Al encender su automovil el sonido es parecido a alguno de los siguientes?</p>
+        </div>
+    </div>
+    <ion-audio-track ng-repeat="track in tracks" track="track">
+        <div class="card">
+            <div class="item">
+                <ion-radio id="inicioOrientacion-radio1">{{track.title}}</ion-radio>
+                <p>{{track.artist}}</p>
+                <ion-audio-controls>
+                    <a class="button button-icon icon" ion-audio-play></a>
+                    <ion-spinner icon="ios" style="position: relative; top: 8px; left: 4px"></ion-spinner>
+                </ion-audio-controls>
+            </div>
+            <div class="item item-divider">
+                <ion-audio-progress-bar track="track" display-time></ion-audio-progress-bar>
+            </div>
+        </div>
+    </ion-audio-track>
+    <div class="spacer" style="width: 300px; height: 27px;"></div>
+    <a ng-click="showContent($event,cClass-1,true)" id="orientacion2-button19" class="button button-positive  btn-prev-question">&lt;</a>
+    <a ng-click="showContent($event,cClass+1,true)" id="orientacion2-button21" class="button button-positive  btn-next-question">&gt;</a>
+    <div class="spacer" style="width: 300px; height: 30px;"></div>
+</script>
+<script type="text/ng-template" id="/tp3.html">
+    <div class="spacer" style="width: 300px; height: 30px;"></div>
+    <div class="item item-body" id="finalizarOrientacion-list-item-container19">
+        <div id="finalizarOrientacion-markdown42" class="show-list-numbers-and-dots">
+            <p style="margin-top:0px;color:#000000;">
+                <strong>3.</strong> ¿Al revisar su aceite de motor, el aspecto es parecido a alguno de las siguientes imágenes?</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item">
+            <ion-radio id="imgRatio1">Opcion 1</ion-radio>
+            <div class="spacer" style="height: 18px;"></div>
+            <div>
+                <img src="img/Question_Img/aceite1.jpg" style="display: block; width: 100%; height: 120px; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item">
+            <ion-radio id="imgRatio2">Opcion 2</ion-radio>
+            <div class="spacer" style="height: 18px;"></div>
+            <div>
+                <img src="img/Question_Img/aceite2.jpg" style="display: block; width: 100%; height: 120px; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item">
+            <ion-radio id="imgRatio3">Opcion 3</ion-radio>
+            <div class="spacer" style="height: 18px;"></div>
+            <div>
+                <img src="img/Question_Img/aceite3.jpg" style="display: block; width: 100%; height: 120px; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="item">
+            <ion-radio id="imgRatio4">Opcion 4 </ion-radio>
+            <div class="spacer" style="height: 18px;"></div>
+            <div>
+                <img src="img/Question_Img/aceite4.jpg" style="display: block; width: 100%; height: 120px; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+    </div>
+    <div class="spacer" style="height: 18px;"></div>
+    <a ng-click="showContent($event,cClass-1,true)" id="orientacion2-button19" class="button button-positive  btn-prev-question">&lt;</a>
+    <a ng-click="showContent($event,cClass+1,true)" id="orientacion2-button21" class="button button-positive  btn-next-question">&gt;</a>
+    <div class="spacer" style="width: 300px; height: 30px;"></div>
+</script>
