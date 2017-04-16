@@ -1,70 +1,68 @@
- manageUser = {
+ manageBreakdown = {
      abount: {
-         author: 'Juan Hincapie',
-         description: 'logica encargada de la administración de usuarios',
-         date: '8 de abril del 2017'
+         author: 'Jhovany Gallego',
+         description: 'logica encargada de la administración de las fallas',
+         date: '11 de abril del 2017'
      },
      global: {
-         crudServiceBaseUrl: "/user",
+         crudServiceBaseUrl: "/breakdown",
          dataSource: ''
      },
      fn: {
          init: function() {
-             manageUser.fn.getDataSource();
-             manageUser.fn.setGrid();
+             manageBreakdown.fn.getDataSource();
+             manageBreakdown.fn.setGrid();
          },
          getDataSource: function() {
-             manageUser.global.dataSource = new kendo.data.DataSource({
+             manageBreakdown.global.dataSource = new kendo.data.DataSource({
                  transport: {
                      read: {
-                         url: manageUser.global.crudServiceBaseUrl + "/index",
+                         url: manageBreakdown.global.crudServiceBaseUrl + "/index",
                          dataType: "json"
                      },
                      create: {
-                         url: manageUser.global.crudServiceBaseUrl + "/add",
+                         url: manageBreakdown.global.crudServiceBaseUrl + "/add",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      update: {
-                         url: manageUser.global.crudServiceBaseUrl + "/edit",
+                         url: manageBreakdown.global.crudServiceBaseUrl + "/edit",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      destroy: {
-                         url: manageUser.global.crudServiceBaseUrl + "/delete",
+                         url: manageBreakdown.global.crudServiceBaseUrl + "/delete",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      parameterMap: function(data, operation) {
-                         var userParameter = {
+                         var breakdownParameter = {
                              Id: 0,
-                             IdentificationNumber: data.IdentificationNumber,
-                             FullName: data.FullName,
-                             Email: data.Email,
-                             Phone: data.Phone,
-                             CellPhone: data.CellPhone,
-                             Username: data.Username,
-                             Password: data.Password
+                             Description: data.Description,
+                             Causes: data.Causes,
+                             Consequences: data.Consequences,
+                             Solutions: data.Solutions,
+                             Rating: data.Rating,
+                             Part: data.Part
                          }
                          if (operation == 'create') {
-                             return JSON.stringify(userParameter);
+                             return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'update') {
-                             userParameter.Id = data.Id;
-                             userParameter.IdentificationNumber = data.IdentificationNumber;
-                             userParameter.FullName = data.FullName;
-                             userParameter.Email = data.Email;
-                             userParameter.Phone = data.Phone;
-                             userParameter.CellPhone = data.CellPhone;
-                             userParameter.Username = data.Username;
-                             userParameter.Password = data.Password;
-                             return JSON.stringify(userParameter);
+                             breakdownParameter.Id = data.Id;
+                             breakdownParameter.Description = data.Description;
+                             breakdownParameter.Causes = data.Causes;
+                             breakdownParameter.Consequences = data.Consequences;
+                             breakdownParameter.Solutions = data.Solutions;
+                             breakdownParameter.Rating = data.Rating;
+                             breakdownParameter.Part = data.Part;
+                             return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'destroy') {
                              return JSON.stringify({ Id: data.Id });
@@ -80,33 +78,23 @@
                              Id: {
                                  type: "number"
                              },
-                             IdentificationNumber: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Description: {
+                                 type: "string"
                              },
-                             FullName: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Causes: {
+                                 type: "string"
                              },
-                             Email: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Consequences: {
+                                 type: "string"
                              },
-                             Phone: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Solutions: {
+                                 type: "string"
                              },
-                             CellPhone: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Rating: {
+                                 type: "float"
                              },
-                             Username: {
-                                 type: "string",
-                                 validation: { required: true }
-                             },
-                             Password: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Part: {
+                                 type: "number"
                              }
                          }
                      }
@@ -133,39 +121,39 @@
          },
          setGrid: function() {
              $("#grid").kendoGrid({
-                 dataSource: manageUser.global.dataSource,
+                 dataSource: manageBreakdown.global.dataSource,
                  pageable: true,
                  height: 400,
                  toolbar: [{
                      name: "create",
-                     text: "Crear Usuario"
+                     text: "Crear falla"
                  }],
                  columns: [{
                      field: "Id",
                      title: "Id"
                  }, {
-                     field: "IdentificationNumber",
-                     title: "Identificación",
+                     field: "Description",
+                     title: "Descripción",
                      width: "150px"
                  }, {
-                     field: "FullName",
-                     title: "Nombre Completo",
+                     field: "Causes",
+                     title: "Causas",
                      width: "150px"
                  }, {
-                     field: "Email",
-                     title: "Correo electronico",
+                     field: "Consequences",
+                     title: "Consecuencias",
                      width: "100px"
                  }, {
-                     field: "Phone",
-                     title: "Telefono",
+                     field: "Solutions",
+                     title: "Soluciones",
                      width: "100px"
                  }, {
-                     field: "CellPhone",
-                     title: "Celular",
+                     field: "Rating",
+                     title: "Clasificación",
                      width: "100px"
                  }, {
-                     field: "Username",
-                     title: "Usuario",
+                     field: "Part",
+                     title: "Parte",
                      width: "100px"
                  }, {
                      command: ["edit", "destroy"],
@@ -175,14 +163,14 @@
                  editable: {
                      template: kendo.template($("#template").html()),
                      mode: "popup",
-                     confirmation: "¿Está seguro que desea eliminar el usuario?"
+                     confirmation: "¿Está seguro que desea eliminar la falla?"
                  },
                  edit: function(e) {
-                     e.container.data("kendoWindow").title('Editar Usuario');
+                     e.container.data("kendoWindow").title('Editar Falla');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
                      if (e.model.isNew()) {
-                         editWindow.title('Crear Usuario');
+                         editWindow.title('Crear Falla');
                      }
                  }
              }).data("kendoGrid");

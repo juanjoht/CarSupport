@@ -33,21 +33,66 @@ module.exports.routes = {
      ***************************************************************************/
 
     '/': {
-        view: 'homepage'
+        view: 'static/index'
     },
-    'get/login': {
+    /*'get/login': {
         controller: 'auth',
         action: 'login'
     },
-    'post /login': {
+    'post/login': {
         controller: 'auth',
         action: 'process'
-    },
+    },*/
     '/index': {
         view: 'static/index'
     },
-    '/user/master': {
-        view: 'user/master'
+   /* '/login': {
+        view: 'auth/login'
+    },*/
+    '/user/masteru': {
+        view: 'user/masteru'
+    },
+    '/maintenance/masterm': {
+        view: 'maintenance/masterm'
+    },
+     '/breakdown/masterbr': {
+        view: 'breakdown/masterbr'
+    },
+    '/car/masterc': {
+        view: 'car/masterc'
+    },
+    '/model/mastermo': {
+        view: 'model/mastermo'
+    },
+    '/brand/masterbra': {
+        view: 'brand/masterbra'
+    },
+    '/question/masterq': {
+        view: 'question/masterq'
+    },
+    '/suggestion/masters': {
+        view: 'suggestion/masters'
+    },
+    '/maintenance': {
+        controller: 'MaintenanceController'
+    },
+    '/breakdown': {
+        controller: 'BreakdownController'
+    },
+    '/car': {
+        controller: 'CarController'
+    },
+    '/question': {
+        controller: 'QuestionController'
+    },
+    '/model': {
+        controller: 'ModelController'
+    },
+    '/brand': {
+        controller: 'BrandController'
+    },
+    '/suggestion': {
+        controller: 'SuggestionController'
     },
     '/user': {
         controller: 'UserController'

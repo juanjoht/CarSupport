@@ -1,70 +1,70 @@
- manageUser = {
+ manageCar = {
      abount: {
-         author: 'Juan Hincapie',
-         description: 'logica encargada de la administración de usuarios',
-         date: '8 de abril del 2017'
+         author: 'Jhovany Gallego',
+         description: 'logica encargada de la administración de los carros',
+         date: '11 de abril del 2017'
      },
      global: {
-         crudServiceBaseUrl: "/user",
+         crudServiceBaseUrl: "/car",
          dataSource: ''
      },
      fn: {
          init: function() {
-             manageUser.fn.getDataSource();
-             manageUser.fn.setGrid();
+             manageCar.fn.getDataSource();
+             manageCar.fn.setGrid();
          },
          getDataSource: function() {
-             manageUser.global.dataSource = new kendo.data.DataSource({
+             manageCar.global.dataSource = new kendo.data.DataSource({
                  transport: {
                      read: {
-                         url: manageUser.global.crudServiceBaseUrl + "/index",
+                         url: manageCar.global.crudServiceBaseUrl + "/index",
                          dataType: "json"
                      },
                      create: {
-                         url: manageUser.global.crudServiceBaseUrl + "/add",
+                         url: manageCar.global.crudServiceBaseUrl + "/add",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      update: {
-                         url: manageUser.global.crudServiceBaseUrl + "/edit",
+                         url: manageCar.global.crudServiceBaseUrl + "/edit",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      destroy: {
-                         url: manageUser.global.crudServiceBaseUrl + "/delete",
+                         url: manageCar.global.crudServiceBaseUrl + "/delete",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      parameterMap: function(data, operation) {
-                         var userParameter = {
+                         var carParameter = {
                              Id: 0,
-                             IdentificationNumber: data.IdentificationNumber,
-                             FullName: data.FullName,
-                             Email: data.Email,
-                             Phone: data.Phone,
-                             CellPhone: data.CellPhone,
-                             Username: data.Username,
-                             Password: data.Password
+                             LicensePlate: data.LicensePlate,
+                             Year: data.Year,
+                             CurrentMileage: data.CurrentMileage,
+                             FuelType: data.FuelType,
+                             Class: data.Class,
+                             Model: data.Model,
+                             User: data.User
                          }
                          if (operation == 'create') {
-                             return JSON.stringify(userParameter);
+                             return JSON.stringify(carParameter);
                          }
                          if (operation == 'update') {
-                             userParameter.Id = data.Id;
-                             userParameter.IdentificationNumber = data.IdentificationNumber;
-                             userParameter.FullName = data.FullName;
-                             userParameter.Email = data.Email;
-                             userParameter.Phone = data.Phone;
-                             userParameter.CellPhone = data.CellPhone;
-                             userParameter.Username = data.Username;
-                             userParameter.Password = data.Password;
-                             return JSON.stringify(userParameter);
+                             carParameter.Id = data.Id;
+                             carParameter.LicensePlate = data.LicensePlate;
+                             carParameter.Year = data.Year;
+                             carParameter.CurrentMileage = data.CurrentMileage;
+                             carParameter.FuelType = data.FuelType;
+                             carParameter.Class = data.Class;
+                             carParameter.Model = data.Model;
+                             carParameter.User = data.User;
+                             return JSON.stringify(carParameter);
                          }
                          if (operation == 'destroy') {
                              return JSON.stringify({ Id: data.Id });
@@ -80,33 +80,26 @@
                              Id: {
                                  type: "number"
                              },
-                             IdentificationNumber: {
-                                 type: "string",
-                                 validation: { required: true }
+                             LicensePlate: {
+                                 type: "string"
                              },
-                             FullName: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Year: {
+                                 type: "string"
                              },
-                             Email: {
-                                 type: "string",
-                                 validation: { required: true }
+                             CurrentMileage: {
+                                 type: "string"
                              },
-                             Phone: {
-                                 type: "string",
-                                 validation: { required: true }
+                             FuelType: {
+                                 type: "string"
                              },
-                             CellPhone: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Class: {
+                                 type: "string"
                              },
-                             Username: {
-                                 type: "string",
-                                 validation: { required: true }
+                             Model: {
+                                 type: "number"
                              },
-                             Password: {
-                                 type: "string",
-                                 validation: { required: true }
+                             User: {
+                                 type: "number"
                              }
                          }
                      }
@@ -133,38 +126,42 @@
          },
          setGrid: function() {
              $("#grid").kendoGrid({
-                 dataSource: manageUser.global.dataSource,
+                 dataSource: manageCar.global.dataSource,
                  pageable: true,
                  height: 400,
                  toolbar: [{
                      name: "create",
-                     text: "Crear Usuario"
+                     text: "Crear carro"
                  }],
                  columns: [{
                      field: "Id",
                      title: "Id"
                  }, {
-                     field: "IdentificationNumber",
-                     title: "Identificación",
+                     field: "LicensePlate",
+                     title: "Placa",
                      width: "150px"
                  }, {
-                     field: "FullName",
-                     title: "Nombre Completo",
+                     field: "Year",
+                     title: "Año",
                      width: "150px"
                  }, {
-                     field: "Email",
-                     title: "Correo electronico",
+                     field: "CurrentMileage",
+                     title: "Kilometraje actual",
                      width: "100px"
                  }, {
-                     field: "Phone",
-                     title: "Telefono",
+                     field: "FuelType",
+                     title: "Tipo de combustible",
                      width: "100px"
                  }, {
-                     field: "CellPhone",
-                     title: "Celular",
+                     field: "Class",
+                     title: "Clase",
                      width: "100px"
                  }, {
-                     field: "Username",
+                     field: "Model",
+                     title: "Modelo",
+                     width: "100px"
+                 }, {
+                     field: "User",
                      title: "Usuario",
                      width: "100px"
                  }, {
@@ -175,14 +172,14 @@
                  editable: {
                      template: kendo.template($("#template").html()),
                      mode: "popup",
-                     confirmation: "¿Está seguro que desea eliminar el usuario?"
+                     confirmation: "¿Está seguro que desea eliminar el carro?"
                  },
                  edit: function(e) {
-                     e.container.data("kendoWindow").title('Editar Usuario');
+                     e.container.data("kendoWindow").title('Editar Carro');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
                      if (e.model.isNew()) {
-                         editWindow.title('Crear Usuario');
+                         editWindow.title('Crear Carro');
                      }
                  }
              }).data("kendoGrid");
