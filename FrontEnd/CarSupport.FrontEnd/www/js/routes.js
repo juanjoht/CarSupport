@@ -60,15 +60,18 @@ angular.module('app.routes', [])
             }
         })
 
-        .state('menu.readPossibleFailures', {
-            url: '/tab-music',
+
+        .state('menu.question', {
+            url: '/questions',
             views: {
-                'tab-content': {
-                    templateUrl: 'templates/tab-music.html',
-                    controller: 'MusicCtrl'
+                'side-menu-content': {
+                    templateUrl: 'templates/questions.html',
+                    controller: 'questionCtrl'
                 }
             }
         })
+
+
 
 
 

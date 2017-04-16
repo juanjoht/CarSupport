@@ -35,23 +35,15 @@
             <ion-tab title="Consultar posibles Fallas" icon="ion-help">
                 <ion-view>
                     <ion-content>
-                        <button class="button button-assertive" ng-click="stopPlayback()">Stop all</button>
-                        <ion-audio-track ng-repeat="track in tracks" track="track">
-                            <div class="card">
-                                <div class="item">
-                                    <h2>{{track.title}}</h2>
-
-                                    <p>{{track.artist}}</p>
-                                    <ion-audio-controls>
-                                        <a class="button button-icon icon" ion-audio-play></a>
-                                        <ion-spinner icon="ios" style="position: relative; top: 8px; left: 4px"></ion-spinner>
-                                    </ion-audio-controls>
-                                </div>
-                                <div class="item item-divider">
-                                    <ion-audio-progress-bar track="track" display-time></ion-audio-progress-bar>
-                                </div>
-                            </div>
-                        </ion-audio-track>
+                        <div class="spacer" style="width: 300px; height: 30px;"></div>
+                        <div class="info-possible-failures">
+                            <p class="desc-fail" style="margin-left: 10px;margin-right: 10px;padding:5px">
+                                A continuación la aplicación realizara una serie de preguntas para determinar las posibles fallas presentadas en su automóvil, Por favor haga clic en la siguiente opción para iniciar la asesoría </p>
+                        </div>
+                        <div class="spacer" style="width: 300px; height: 30px;"></div>
+                        <div class="start-possible-failures">
+                            <a class="button button-block button-dark" ui-sref="menu.question">Iniciar</a>
+                        </div>
                     </ion-content>
                 </ion-view>
             </ion-tab>
