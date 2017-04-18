@@ -6,7 +6,9 @@
      },
      global: {
          crudServiceBaseUrl: "/question",
-         dataSource: ''
+         urlGetPart: "/Part/index",
+         dataSource: '',
+         dataSourcePart: ''
      },
      fn: {
          init: function() {
@@ -54,7 +56,7 @@
                              questionParameter.Id = data.Id;
                              questionParameter.Description = data.Description;
                              questionParameter.Part = data.Part;
-                             
+
                              return JSON.stringify(questionParameter);
                          }
                          if (operation == 'destroy') {
@@ -134,11 +136,54 @@
                      e.container.data("kendoWindow").title('Editar Pregunta');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     manageQuestion.fn.setDdlPart();
+                     manageQuestion.fn.setComboResponseType();
+                     manageQuestion.fn.setKendoUpload();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Pregunta');
                      }
                  }
              }).data("kendoGrid");
+         },
+         setDdlPart: function() {
+             $("#part").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Description",
+                 dataValueField: "Id",
+                 dataSource: {
+                     transport: {
+                         read: {
+                             dataType: "json",
+                             url: manageQuestion.global.urlGetPart,
+                         }
+                     }
+                 }
+             });
+         },
+         setComboResponseType: function() {
+             $("#responseType").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "text",
+                 dataValueField: "value",
+                 change: function(e) {
+                     var value = this.value();
+                     if (value == '1') {
+                         $('#containerOptionText').show();
+                         $('#containerOptionImage').hide();
+                     } else if (value == '3') {
+                         $('#containerOptionText').hide();
+                         $('#containerOptionImage').show();
+                     }
+                 },
+                 dataSource: [
+                     { text: "Texto", value: "1" },
+                     { text: "Audio", value: "2" },
+                     { text: "Imagen", value: "3" }
+                 ]
+             });
+         },
+         setKendoUpload: function() {
+             $("#files").kendoUpload();
          }
      }
 

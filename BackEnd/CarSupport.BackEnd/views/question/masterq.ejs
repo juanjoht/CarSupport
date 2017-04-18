@@ -1,30 +1,61 @@
 <br/>
 <br/>
 <br/>
-<script src="/js/jquery.min.js"></script>
 <% include ../../assets/templates/barraestatica.ejs %>
-<link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common.min.css" rel="stylesheet" type="text/css">
-<link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.default.min.css" rel="stylesheet" type="text/css">
-<script src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
-<br/>
-<br/>
-<br/>
-<div id="grid"></div>
-<script id="template" type="text/x-kendo-template">
-    <div>
-        <span>Descripción:</span>
-        <input type="text" name="description" data-bind="value:Description" class="k-textbox" />
-    </div>
-    <div>
-        <span>Parte:</span>
-        <input type="text" name="part" data-bind="value:Part" class="k-textbox" />
-    </div>
-    
-</script>
+    <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common.min.css" rel="stylesheet" type="text/css">
+    <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.default.min.css" rel="stylesheet" type="text/css">
+    <script src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
+    <br/>
+    <br/>
+    <br/>
+    <div id="grid"></div>
+    <script id="template" type="text/x-kendo-template">
+        <div>
+            <span>Parte:</span>
+            <input type="text" name="part" id="part" />
+        </div>
+        <div>
+            <span>Descripción:</span>
+            <textarea type="text" name="description" data-bind="value:Description" class="k-textbox"></textarea>
+        </div>
+        <h3>Opciones de respuesta</h3>
+        <div>
+            <input type="text" name="responseType" id="responseType" />
+        </div>
+        <div id="containerOptionText" style="display:none;">
+            <div>
+                <span>Opción 1:</span>
+                <textarea type="text" name="opcion1" data-bind="value:opcion1" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opción 2:</span>
+                <textarea type="text" name="opcion2" data-bind="value:opcion3" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opción 3:</span>
+                <textarea type="text" name="opcion3" data-bind="value:opcion3" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opción 4:</span>
+                <textarea type="text" name="opcion4" data-bind="value:opcion4" class="k-textbox"></textarea>
+            </div>
+        </div>
+        <div id="containerOptionImage" style="display:none;">
+            <div>
+                <span>Opción 1:</span>
+                <form method="post" action="/question/upload" enctype="multipart/form-data">
+                    <input type="file" name="avatar" id="files" multiple="multiple"><br>
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
 
-<script src="/scripts_business/manage_question.js"></script>
-<script>
-    $(document).ready(function() {
-        manageQuestion.fn.init();
-    });
-</script>
+        </div>
+
+    </script>
+
+    <script src="/scripts_business/manage_question.js"></script>
+    <script>
+        $(document).ready(function() {
+            manageQuestion.fn.init();
+        });
+    </script>

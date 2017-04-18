@@ -12,7 +12,7 @@ var QuestionController = {
             if (err) {
                 return res.serverError(err);
             }
-            return res.json(users);
+            return res.json(questions);
         });
     },
     add: function(req, res) {
@@ -24,9 +24,9 @@ var QuestionController = {
     },
     edit: function(req, res) {
         var parameters = req.allParams();
-        User.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
+        Question.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
             if (err) { return res.serverError(err); }
-            userOr = {
+            QuestionOr = {
                 Description: questionOriginal[0].Description,
                 Part: questionOriginal[0].Part,
             }
@@ -46,10 +46,19 @@ var QuestionController = {
             }
             return res.json(question[0].Id);
         });
-    }
+    },
+    upload: function(req, res) {
+        req.file('avatar').upload(function(err, files) {
+            if (err)
+                return res.serverError(err);
 
+            return res.json({
+                message: files.length + ' file(s) uploaded successfully!',
+                files: files
+            });
+        });
+    }
 }
 
 
 module.exports = QuestionController;
-
