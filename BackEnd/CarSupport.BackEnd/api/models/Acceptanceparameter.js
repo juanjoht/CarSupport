@@ -12,11 +12,15 @@ module.exports = {
             type: 'integer',
             primaryKey: true,
             autoIncrement: true,
-            required:true
+            required: true
         },
         Breakdown: {
             model: "Breakdown",
             columnName: "BreakdownId"
+        },
+        Question: {
+            model: "Question",
+            columnName: "QuestionId"
         },
         Responseoption: {
             model: "Responseoption",
@@ -24,4 +28,3 @@ module.exports = {
         }
     }
 };
-

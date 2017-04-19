@@ -47,17 +47,51 @@ var QuestionController = {
             return res.json(question[0].Id);
         });
     },
-    upload: function(req, res) {
-        req.file('avatar').upload(function(err, files) {
-            if (err)
-                return res.serverError(err);
+    uploadImage1: function(req, res) {
+        req.file('UploadImage1').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
 
             return res.json({
-                message: files.length + ' file(s) uploaded successfully!',
-                files: files
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadImage2: function(req, res) {
+        req.file('UploadImage2').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadImage3: function(req, res) {
+        req.file('UploadImage3').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadImage4: function(req, res) {
+        req.file('UploadImage4').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
             });
         });
     }
+
 }
 
 

@@ -12,16 +12,16 @@ module.exports = {
             type: 'integer',
             primaryKey: true,
             autoIncrement: true,
-            required:true
+            required: true
         },
-        Description:  {
+        Description: {
             type: 'string',
             required: true,
             size: 45
         },
-        Optiontype: {
-            model: "Optiontype",
-            columnName: "OptionTypeId"
+        OptionType: {
+            type: 'integer',
+            required: true
         },
         Question: {
             model: "Question",
@@ -29,4 +29,3 @@ module.exports = {
         }
     }
 };
-

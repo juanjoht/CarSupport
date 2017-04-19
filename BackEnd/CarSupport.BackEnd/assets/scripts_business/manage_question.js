@@ -7,6 +7,10 @@
      global: {
          crudServiceBaseUrl: "/question",
          urlGetPart: "/Part/index",
+         urlUploadImage1: "/question/uploadImage1",
+         urlUploadImage2: "/question/uploadImage2",
+         urlUploadImage3: "/question/uploadImage3",
+         urlUploadImage4: "/question/uploadImage4",
          dataSource: '',
          dataSourcePart: ''
      },
@@ -138,7 +142,11 @@
                      editWindow.center();
                      manageQuestion.fn.setDdlPart();
                      manageQuestion.fn.setComboResponseType();
-                     manageQuestion.fn.setKendoUpload();
+                     manageQuestion.fn.setKendoUploadImage1();
+                     manageQuestion.fn.setKendoUploadImage2();
+                     manageQuestion.fn.setKendoUploadImage3();
+                     manageQuestion.fn.setKendoUploadImage4();
+
                      if (e.model.isNew()) {
                          editWindow.title('Crear Pregunta');
                      }
@@ -169,10 +177,16 @@
                      var value = this.value();
                      if (value == '1') {
                          $('#containerOptionText').show();
+                         $('#containerOptionAudio').hide();
+                         $('#containerOptionImage').hide();
+                     } else if (value == '2') {
+                         $('#containerOptionAudio').show();
+                         $('#containerOptionText').hide();
                          $('#containerOptionImage').hide();
                      } else if (value == '3') {
-                         $('#containerOptionText').hide();
                          $('#containerOptionImage').show();
+                         $('#containerOptionText').hide();
+                         $('#containerOptionAudio').hide();
                      }
                  },
                  dataSource: [
@@ -182,8 +196,69 @@
                  ]
              });
          },
-         setKendoUpload: function() {
-             $("#files").kendoUpload();
+         setKendoUploadImage1: function() {
+             $("#UploadImage1").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage1,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadImage2: function() {
+             $("#UploadImage2").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage2,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadImage3: function() {
+             $("#UploadImage3").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage3,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadImage4: function() {
+             $("#UploadImage4").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage4,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
          }
      }
 

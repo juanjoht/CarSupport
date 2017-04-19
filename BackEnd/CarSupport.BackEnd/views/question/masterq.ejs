@@ -20,35 +20,74 @@
         </div>
         <h3>Opciones de respuesta</h3>
         <div>
+            <span>Tipo de respuesta:</span>
             <input type="text" name="responseType" id="responseType" />
         </div>
         <div id="containerOptionText" style="display:none;">
             <div>
                 <span>Opción 1:</span>
-                <textarea type="text" name="opcion1" data-bind="value:opcion1" class="k-textbox"></textarea>
+                <textarea type="text" name="option1" class="k-textbox"></textarea>
             </div>
             <div>
                 <span>Opción 2:</span>
-                <textarea type="text" name="opcion2" data-bind="value:opcion3" class="k-textbox"></textarea>
+                <textarea type="text" name="option2" class="k-textbox"></textarea>
             </div>
             <div>
                 <span>Opción 3:</span>
-                <textarea type="text" name="opcion3" data-bind="value:opcion3" class="k-textbox"></textarea>
+                <textarea type="text" name="option3" class="k-textbox"></textarea>
             </div>
             <div>
                 <span>Opción 4:</span>
-                <textarea type="text" name="opcion4" data-bind="value:opcion4" class="k-textbox"></textarea>
+                <textarea type="text" name="option4" class="k-textbox"></textarea>
+            </div>
+        </div>
+        <div id="containerOptionAudio" style="display:none;">
+            <div>
+                <span>Opcion 1:</span>
+                <input type="file" name="UploadAudio1" id="UploadAudio1">
+                <textarea type="text" name="DescriptionAudioOption1" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 2:</span>
+                <input type="file" name="UploadAudio2" id="UploadAudio2">
+                <textarea type="text" name="DescriptionAudioOption2" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 3:</span>
+                <input type="file" name="UploadAudio3" id="UploadAudio3">
+                <textarea type="text" name="DescriptionAudioOption3" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 4:</span>
+                <input type="file" name="UploadAudio4" id="UploadAudio4">
+                <textarea type="text" name="DescriptionAudioOption4" class="k-textbox"></textarea>
             </div>
         </div>
         <div id="containerOptionImage" style="display:none;">
             <div>
-                <span>Opción 1:</span>
-                <form method="post" action="/question/upload" enctype="multipart/form-data">
-                    <input type="file" name="avatar" id="files" multiple="multiple"><br>
-                    <input type="submit" value="Upload">
-                </form>
+                <span>Opcion 1:</span>
+                <input type="file" name="UploadImage1" id="UploadImage1">
+                <span>Descripción:</span>
+                <textarea type="text" name="DescriptionImageOption1" class="k-textbox"></textarea>
             </div>
-
+            <div>
+                <span>Opcion 2:</span>
+                <input type="file" name="UploadImage2" id="UploadImage2">
+                <span>Descripción:</span>
+                <textarea type="text" name="DescriptionImageOption2" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 3:</span>
+                <input type="file" name="UploadImage3" id="UploadImage3">
+                <span>Descripción:</span>
+                <textarea type="text" name="DescriptionImageOption3" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 4:</span>
+                <input type="file" name="UploadImage4" id="UploadImage4">
+                <span>Descripción:</span>
+                <textarea type="text" name="DescriptionImageOption4" class="k-textbox"></textarea>
+            </div>
         </div>
 
     </script>
