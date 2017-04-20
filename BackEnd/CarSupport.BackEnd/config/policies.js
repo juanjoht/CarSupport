@@ -37,14 +37,14 @@ module.exports.policies = {
     'Model':{
         '*':true
     },
-    'part':{
-        '*':true
-    },
     'Question':{
         '*':true
     },
     'Suggestion':{
         '*':true
+    },
+    'Part': {
+        '*': true
     }
 
     /***************************************************************************

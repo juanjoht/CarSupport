@@ -24,9 +24,13 @@ var QuestionController = {
     },
     edit: function(req, res) {
         var parameters = req.allParams();
-        User.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
+        Question.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
             if (err) { return res.serverError(err); }
+<<<<<<< HEAD
             questionrOr = {
+=======
+            QuestionOr = {
+>>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
                 Description: questionOriginal[0].Description,
                 Part: questionOriginal[0].Part,
             }
@@ -46,10 +50,53 @@ var QuestionController = {
             }
             return res.json(question[0].Id);
         });
+    },
+    uploadImage1: function(req, res) {
+        req.file('UploadImage1').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadImage2: function(req, res) {
+        req.file('UploadImage2').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadImage3: function(req, res) {
+        req.file('UploadImage3').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadImage4: function(req, res) {
+        req.file('UploadImage4').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
     }
 
 }
 
 
 module.exports = QuestionController;
-

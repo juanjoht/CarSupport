@@ -6,7 +6,13 @@
      },
      global: {
          crudServiceBaseUrl: "/question",
-         dataSource: ''
+         urlGetPart: "/Part/index",
+         urlUploadImage1: "/question/uploadImage1",
+         urlUploadImage2: "/question/uploadImage2",
+         urlUploadImage3: "/question/uploadImage3",
+         urlUploadImage4: "/question/uploadImage4",
+         dataSource: '',
+         dataSourcePart: ''
      },
      fn: {
          init: function() {
@@ -54,7 +60,7 @@
                              questionParameter.Id = data.Id;
                              questionParameter.Description = data.Description;
                              questionParameter.Part = data.Part;
-                             
+
                              return JSON.stringify(questionParameter);
                          }
                          if (operation == 'destroy') {
@@ -134,11 +140,125 @@
                      e.container.data("kendoWindow").title('Editar Pregunta');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     manageQuestion.fn.setDdlPart();
+                     manageQuestion.fn.setComboResponseType();
+                     manageQuestion.fn.setKendoUploadImage1();
+                     manageQuestion.fn.setKendoUploadImage2();
+                     manageQuestion.fn.setKendoUploadImage3();
+                     manageQuestion.fn.setKendoUploadImage4();
+
                      if (e.model.isNew()) {
                          editWindow.title('Crear Pregunta');
                      }
                  }
              }).data("kendoGrid");
+         },
+         setDdlPart: function() {
+             $("#part").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Description",
+                 dataValueField: "Id",
+                 dataSource: {
+                     transport: {
+                         read: {
+                             dataType: "json",
+                             url: manageQuestion.global.urlGetPart,
+                         }
+                     }
+                 }
+             });
+         },
+         setComboResponseType: function() {
+             $("#responseType").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "text",
+                 dataValueField: "value",
+                 change: function(e) {
+                     var value = this.value();
+                     if (value == '1') {
+                         $('#containerOptionText').show();
+                         $('#containerOptionAudio').hide();
+                         $('#containerOptionImage').hide();
+                     } else if (value == '2') {
+                         $('#containerOptionAudio').show();
+                         $('#containerOptionText').hide();
+                         $('#containerOptionImage').hide();
+                     } else if (value == '3') {
+                         $('#containerOptionImage').show();
+                         $('#containerOptionText').hide();
+                         $('#containerOptionAudio').hide();
+                     }
+                 },
+                 dataSource: [
+                     { text: "Texto", value: "1" },
+                     { text: "Audio", value: "2" },
+                     { text: "Imagen", value: "3" }
+                 ]
+             });
+         },
+         setKendoUploadImage1: function() {
+             $("#UploadImage1").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage1,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadImage2: function() {
+             $("#UploadImage2").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage2,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadImage3: function() {
+             $("#UploadImage3").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage3,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadImage4: function() {
+             $("#UploadImage4").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadImage4,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
          }
      }
 
