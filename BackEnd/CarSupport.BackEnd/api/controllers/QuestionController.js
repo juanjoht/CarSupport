@@ -30,7 +30,11 @@ var QuestionController = {
         var parameters = req.allParams();
         Question.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
             if (err) { return res.serverError(err); }
+<<<<<<< HEAD
+            questionrOr = {
+=======
             QuestionOr = {
+>>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
                 Description: questionOriginal[0].Description,
                 Part: questionOriginal[0].Part,
             }

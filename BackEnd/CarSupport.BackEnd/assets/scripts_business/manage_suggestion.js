@@ -130,7 +130,7 @@
                      title: "Proceso",
                      width: "100px"
                  }, {
-                     command: ["edit", "destroy"],
+                     command: [{ name: "edit", text: "Editar" }, { name: "destroy", text: "Eliminar" }],
                      title: "&nbsp;",
                      width: "210px"
                  }],

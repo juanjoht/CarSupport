@@ -29,7 +29,7 @@ var MaintenanceController = {
             maintenanceOr = {
                 Description: maintenanceOriginal[0].Description,
             }
-            Maintenance.update(userOr, parameters).exec(function afterwards(err, updated) {
+            Maintenance.update(maintenanceOr, parameters).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
                 return req.json(updated[0]);
             });

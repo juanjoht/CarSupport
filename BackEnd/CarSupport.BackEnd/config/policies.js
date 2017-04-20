@@ -28,8 +28,20 @@ module.exports.policies = {
     'Maintenance': {
         '*': true
     },
-    'Question': {
-        '*': true
+    'Breakdown':{
+        '*':true
+    },
+    'Brand':{
+        '*':true
+    },
+    'Model':{
+        '*':true
+    },
+    'Question':{
+        '*':true
+    },
+    'Suggestion':{
+        '*':true
     },
     'Part': {
         '*': true

@@ -1,70 +1,61 @@
- manageCar = {
+ managePart = {
      abount: {
          author: 'Jhovany Gallego',
-         description: 'logica encargada de la administración de los carros',
-         date: '11 de abril del 2017'
+         description: 'logica encargada de la administración de las partes',
+         date: '16 de abril del 2017'
      },
      global: {
-         crudServiceBaseUrl: "/car",
+         crudServiceBaseUrl: "/part",
          dataSource: ''
      },
      fn: {
          init: function() {
-             manageCar.fn.getDataSource();
-             manageCar.fn.setGrid();
+             managePart.fn.getDataSource();
+             managePart.fn.setGrid();
          },
          getDataSource: function() {
-             manageCar.global.dataSource = new kendo.data.DataSource({
+             managePart.global.dataSource = new kendo.data.DataSource({
                  transport: {
                      read: {
-                         url: manageCar.global.crudServiceBaseUrl + "/index",
+                         url: managePart.global.crudServiceBaseUrl + "/index",
                          dataType: "json"
                      },
                      create: {
-                         url: manageCar.global.crudServiceBaseUrl + "/add",
+                         url: managePart.global.crudServiceBaseUrl + "/add",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      update: {
-                         url: manageCar.global.crudServiceBaseUrl + "/edit",
+                         url: managePart.global.crudServiceBaseUrl + "/edit",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      destroy: {
-                         url: manageCar.global.crudServiceBaseUrl + "/delete",
+                         url: managePart.global.crudServiceBaseUrl + "/delete",
                          dataType: "json",
                          contentType: "application/json; charset=utf-8",
                          type: 'POST',
                          complete: function(e) { $("#grid").data("kendoGrid").dataSource.read(); }
                      },
                      parameterMap: function(data, operation) {
-                         var carParameter = {
+                         var partParameter = {
                              Id: 0,
-                             LicensePlate: data.LicensePlate,
-                             Year: data.Year,
-                             CurrentMileage: data.CurrentMileage,
-                             FuelType: data.FuelType,
-                             Class: data.Class,
-                             Model: data.Model,
-                             User: data.User
+                             Description: data.Description,
+                             ShowScheme: data.ShowScheme
                          }
                          if (operation == 'create') {
-                             return JSON.stringify(carParameter);
+                             return JSON.stringify(partParameter);
                          }
                          if (operation == 'update') {
-                             carParameter.Id = data.Id;
-                             carParameter.LicensePlate = data.LicensePlate;
-                             carParameter.Year = data.Year;
-                             carParameter.CurrentMileage = data.CurrentMileage;
-                             carParameter.FuelType = data.FuelType;
-                             carParameter.Class = data.Class;
-                             carParameter.Model = data.Model;
-                             carParameter.User = data.User;
-                             return JSON.stringify(carParameter);
+                             partParameter.Id = data.Id;
+                             partParameter.Description = data.description;
+                             partParameter.ShowScheme = data.ShowScheme;
+                             
+                             return JSON.stringify(partParameter);
                          }
                          if (operation == 'destroy') {
                              return JSON.stringify({ Id: data.Id });
@@ -80,26 +71,11 @@
                              Id: {
                                  type: "number"
                              },
-                             LicensePlate: {
+                             Description: {
                                  type: "string"
                              },
-                             Year: {
-                                 type: "string"
-                             },
-                             CurrentMileage: {
-                                 type: "string"
-                             },
-                             FuelType: {
-                                 type: "string"
-                             },
-                             Class: {
-                                 type: "string"
-                             },
-                             Model: {
-                                 type: "number"
-                             },
-                             User: {
-                                 type: "number"
+                             ShowScheme: {
+                                 type: "boolean"
                              }
                          }
                      }
@@ -126,60 +102,41 @@
          },
          setGrid: function() {
              $("#grid").kendoGrid({
-                 dataSource: manageCar.global.dataSource,
+                 dataSource: managePart.global.dataSource,
                  pageable: true,
                  height: 400,
                  toolbar: [{
                      name: "create",
-                     text: "Crear carro"
+                     text: "Crear Parte"
                  }],
                  columns: [{
                      field: "Id",
-                     title: "Id"
-                 }, {
-                     field: "LicensePlate",
-                     title: "Placa",
+                     title: "Id",
                      width: "150px"
                  }, {
-                     field: "Year",
-                     title: "Año",
+                     field: "Description",
+                     title: "Descripción",
                      width: "150px"
                  }, {
-                     field: "CurrentMileage",
-                     title: "Kilometraje actual",
-                     width: "100px"
-                 }, {
-                     field: "FuelType",
-                     title: "Tipo de combustible",
-                     width: "100px"
-                 }, {
-                     field: "Class",
-                     title: "Clase",
-                     width: "100px"
-                 }, {
-                     field: "Model",
-                     title: "Modelo",
-                     width: "100px"
-                 }, {
-                     field: "User",
-                     title: "Usuario",
-                     width: "100px"
-                 }, {
-                     command: ["edit", "destroy"],
+                     field: "ShowScheme",
+                     title: "Mostrar Esquema",
+                     width: "150px"
+                 },  {
+                     command: [{ name: "edit", text: "Editar" }, { name: "destroy", text: "Eliminar" }],
                      title: "&nbsp;",
                      width: "210px"
                  }],
                  editable: {
                      template: kendo.template($("#template").html()),
                      mode: "popup",
-                     confirmation: "¿Está seguro que desea eliminar el carro?"
+                     confirmation: "¿Está seguro que desea eliminar la parte?"
                  },
                  edit: function(e) {
-                     e.container.data("kendoWindow").title('Editar Carro');
+                     e.container.data("kendoWindow").title('Editar Parte');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
                      if (e.model.isNew()) {
-                         editWindow.title('Crear Carro');
+                         editWindow.title('Crear Parte');
                      }
                  }
              }).data("kendoGrid");
