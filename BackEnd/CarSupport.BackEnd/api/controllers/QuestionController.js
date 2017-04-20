@@ -12,7 +12,7 @@ var QuestionController = {
             if (err) {
                 return res.serverError(err);
             }
-            return res.json(users);
+            return res.json(questions);
         });
     },
     add: function(req, res) {
@@ -26,7 +26,7 @@ var QuestionController = {
         var parameters = req.allParams();
         User.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
             if (err) { return res.serverError(err); }
-            userOr = {
+            questionrOr = {
                 Description: questionOriginal[0].Description,
                 Part: questionOriginal[0].Part,
             }

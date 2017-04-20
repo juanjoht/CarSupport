@@ -121,7 +121,7 @@
                      title: "Parte",
                      width: "150px"
                  }, {
-                     command: ["edit", "destroy"],
+                     command: [{ name: "edit", text: "Editar" }, { name: "destroy", text: "Eliminar" }],
                      title: "&nbsp;",
                      width: "210px"
                  }],

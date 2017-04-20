@@ -4,7 +4,7 @@
 <% include ../../assets/templates/barraestatica.ejs %>
 <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common.min.css" rel="stylesheet" type="text/css">
 <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.default.min.css" rel="stylesheet" type="text/css">
-<script src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
+
 <br/>
 <br/>
 <br/>
@@ -12,16 +12,20 @@
 <div id="grid"></div>
 <script id="template" type="text/x-kendo-template">
     <div>
-        <span>Descripción:</span>
-        <input type="text" name="description" data-bind="value:Description" class="k-textbox" />
+        <tr>
+            <td width="70%"><span>Descripción:</span></td>
+            <td width="50%"><textarea type="text" name="description" data-bind="value:Description" class="k-textbox" /></td>
+        </tr>
     </div>
     <div>
-        <span>Url:</span>
-        <input type="text" name="url" data-bind="value:Url" class="k-textbox" />
+        <tr>
+            <td width="70%"><span width="70%">Url:</span></td>
+            <td width="50%"><input type="text" name="url" data-bind="value:Url" class="k-textbox" /></td>
+            </tr>
     </div>
     <div>
         <span>Proceso</span>
-        <input type="text" name="proccess" data-bind="value:Proccess" class="k-textbox" />
+        <textarea type="text" name="proccess" data-bind="value:Proccess" class="k-textbox" />
     </div>    
 </script>
 

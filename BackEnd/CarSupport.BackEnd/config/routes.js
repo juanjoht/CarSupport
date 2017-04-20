@@ -33,22 +33,22 @@ module.exports.routes = {
      ***************************************************************************/
 
     '/': {
-        view: 'static/index'
+        view: 'auth/login'
     },
-    /*'get/login': {
+    'get/login': {
         controller: 'auth',
         action: 'login'
     },
     'post/login': {
         controller: 'auth',
         action: 'process'
-    },*/
+    },
     '/index': {
         view: 'static/index'
     },
-   /* '/login': {
+    '/login': {
         view: 'auth/login'
-    },*/
+    },
     '/user/masteru': {
         view: 'user/masteru'
     },
@@ -58,8 +58,8 @@ module.exports.routes = {
      '/breakdown/masterbr': {
         view: 'breakdown/masterbr'
     },
-    '/car/masterc': {
-        view: 'car/masterc'
+    '/part/masterp': {
+        view: 'part/masterp'
     },
     '/model/mastermo': {
         view: 'model/mastermo'
@@ -81,6 +81,9 @@ module.exports.routes = {
     },
     '/car': {
         controller: 'CarController'
+    },
+    '/part': {
+        controller: 'PartController'
     },
     '/question': {
         controller: 'QuestionController'

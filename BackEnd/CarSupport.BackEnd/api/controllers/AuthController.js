@@ -36,17 +36,17 @@ module.exports = {
         } else {
             passport.authenticate('local', function(err, user, info) {
                 if ((err) || (!user)) {
-                    res.redirect('/login');
+                    res.redirect('/');
                     return;
                 }
 
                 req.logIn(user, function(err) {
                     if (err) {
-                        res.redirect('/login');
+                        res.redirect('/index');
                         return;
                     }
 
-                    res.redirect('/');
+                    res.redirect('/index');
                     return;
                 });
             })(req, res);

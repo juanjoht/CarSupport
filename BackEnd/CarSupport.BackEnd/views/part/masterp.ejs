@@ -1,5 +1,6 @@
 <br/>
 <br/>
+<br/>
 <script src="/js/jquery.min.js"></script>
 <% include ../../assets/templates/barraestatica.ejs %>
 <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common.min.css" rel="stylesheet" type="text/css">
@@ -8,18 +9,22 @@
 <br/>
 <br/>
 <br/>
-<br/>
 <div id="grid"></div>
 <script id="template" type="text/x-kendo-template">
     <div>
-        <span>Descripción:</span>
+        <span>Descripcion:</span>
         <textarea type="text" name="description" data-bind="value:Description" class="k-textbox" />
     </div>
+    <div>
+        <span>Mostrar esquema:</span>
+        <input type="text" name="showScheme" data-bind="value:ShowScheme" class="k-textbox" />
+    </div>
+    
 </script>
 
-<script src="/scripts_business/manage_brand.js"></script>
+<script src="/scripts_business/manage_part.js"></script>
 <script>
     $(document).ready(function() {
-        manageBrand.fn.init();
+        managePart.fn.init();
     });
 </script>

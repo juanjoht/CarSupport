@@ -130,7 +130,8 @@
                  }],
                  columns: [{
                      field: "Id",
-                     title: "Id"
+                     title: "Id",
+                     width: "50px"
                  }, {
                      field: "Description",
                      title: "Descripción",
@@ -138,15 +139,15 @@
                  }, {
                      field: "Causes",
                      title: "Causas",
-                     width: "150px"
+                     width: "200px"
                  }, {
                      field: "Consequences",
                      title: "Consecuencias",
-                     width: "100px"
+                     width: "200px"
                  }, {
                      field: "Solutions",
                      title: "Soluciones",
-                     width: "100px"
+                     width: "200px"
                  }, {
                      field: "Rating",
                      title: "Clasificación",
@@ -156,7 +157,8 @@
                      title: "Parte",
                      width: "100px"
                  }, {
-                     command: ["edit", "destroy"],
+                    // command: ["edit", "destroy"],
+                     command: [{ name: "edit", text: "Editar" }, { name: "destroy", text: "Eliminar" }],
                      title: "&nbsp;",
                      width: "210px"
                  }],
@@ -174,6 +176,7 @@
                      }
                  }
              }).data("kendoGrid");
+             
          }
      }
 
