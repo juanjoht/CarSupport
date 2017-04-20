@@ -11,6 +11,10 @@
          urlUploadImage2: "/question/uploadImage2",
          urlUploadImage3: "/question/uploadImage3",
          urlUploadImage4: "/question/uploadImage4",
+         urlUploadAudio1: "/question/uploadAudio1",
+         urlUploadAudio2: "/question/uploadAudio2",
+         urlUploadAudio3: "/question/uploadAudio3",
+         urlUploadAudio4: "/question/uploadAudio4",
          dataSource: '',
          dataSourcePart: ''
      },
@@ -51,15 +55,23 @@
                          var questionParameter = {
                              Id: 0,
                              Description: data.Description,
-                             Part: data.Part
+                             responseList: []
                          }
+
                          if (operation == 'create') {
+                             questionParameter.PartId = data.part.Id;
+                             if (data.responseType.value == '1') {
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option1 });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option2 });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option3 });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option4 });
+                             }
                              return JSON.stringify(questionParameter);
                          }
                          if (operation == 'update') {
                              questionParameter.Id = data.Id;
                              questionParameter.Description = data.Description;
-                             questionParameter.Part = data.Part;
+                             questionParameter.PartId = data.part[0].Id;
 
                              return JSON.stringify(questionParameter);
                          }
@@ -80,7 +92,7 @@
                              Description: {
                                  type: "string"
                              },
-                             Part: {
+                             PartId: {
                                  type: "number"
                              }
                          }
@@ -134,6 +146,9 @@
                  editable: {
                      template: kendo.template($("#template").html()),
                      mode: "popup",
+                     window: {
+                         resizable: true
+                     },
                      confirmation: "¿Está seguro que desea eliminar la pregunta?"
                  },
                  edit: function(e) {
@@ -146,7 +161,10 @@
                      manageQuestion.fn.setKendoUploadImage2();
                      manageQuestion.fn.setKendoUploadImage3();
                      manageQuestion.fn.setKendoUploadImage4();
-
+                     manageQuestion.fn.setKendoUploadAudio1();
+                     manageQuestion.fn.setKendoUploadAudio2();
+                     manageQuestion.fn.setKendoUploadAudio3();
+                     manageQuestion.fn.setKendoUploadAudio4();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Pregunta');
                      }
@@ -209,7 +227,8 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage1,
              });
          },
          setKendoUploadImage2: function() {
@@ -259,7 +278,98 @@
                      headerStatusUploading: "Cargando"
                  }
              });
+         },
+         setKendoUploadAudio1: function() {
+             $("#UploadAudio1").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio1,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadAudio2: function() {
+             $("#UploadAudio2").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio2,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadAudio3: function() {
+             $("#UploadAudio3").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio3,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         setKendoUploadAudio4: function() {
+             $("#UploadAudio4").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio4,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 }
+             });
+         },
+         objetoRevista: function(file) {
+             return file;
+         },
+         onUploadImage1: function(e) {
+             // Array with information about the uploaded files
+
+             var files = e.files;
+
+
+
+             switch (files[0].extension) {
+                 case ".jpg":
+                 case ".png":
+                     var t = "";
+                     break;
+                 default:
+                     // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                     e.preventDefault();
+                     break;
+             }
+
+
+             e.data = { name: files[0].name };
+
+
          }
+
      }
 
  }

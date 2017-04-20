@@ -18,7 +18,11 @@ var QuestionController = {
     add: function(req, res) {
         var paramaters = req.allParams();
         Question.create(paramaters).exec(function(err, question) {
-            if (err) { return res.serverError(err); }
+            if (err) { return res.serverError(err); } else {
+                factors.forEach(function(factor, index) {
+                    //Crear response
+                });
+            }
             return res.json(question);
         });
     },
@@ -83,6 +87,50 @@ var QuestionController = {
     uploadImage4: function(req, res) {
         req.file('UploadImage4').upload({
             dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadAudio1: function(req, res) {
+        req.file('UploadAudio1').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadAudio2: function(req, res) {
+        req.file('UploadAudio2').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadAudio3: function(req, res) {
+        req.file('UploadAudio3').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+
+            return res.json({
+                message: uploadedFiles.length + ' file(s) uploaded successfully!'
+            });
+        });
+    },
+    uploadAudio4: function(req, res) {
+        req.file('UploadAudio4').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
 
