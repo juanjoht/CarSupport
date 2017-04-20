@@ -6,16 +6,11 @@
  */
 
 var PartController = {
-<<<<<<< HEAD
-
-=======
->>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
     index: function(req, res) {
         Part.find().exec(function(err, parts) {
             if (err) {
                 return res.serverError(err);
             }
-<<<<<<< HEAD
             return res.jsonp(parts);
         });
     },
@@ -54,15 +49,5 @@ var PartController = {
 
 }
 
-
-module.exports = PartController;
-
-
-=======
-            return res.json(parts);
-        });
-    }
-}
->>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
 
 module.exports = PartController;
