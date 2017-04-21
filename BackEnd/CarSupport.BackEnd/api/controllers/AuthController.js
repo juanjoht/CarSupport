@@ -12,7 +12,7 @@ module.exports = {
      * `AuthController.login()`
      */
     login: function(req, res) {
-        res.view('');
+        res.view();
     },
 
 
@@ -29,7 +29,7 @@ module.exports = {
                     if (err) {
                         return res.json({ error: info.message });
                     }
-                    return res.json({ account: user});
+                    return res.json({ account: user });
 
                 });
             })(req, res);
@@ -52,8 +52,6 @@ module.exports = {
             })(req, res);
         }
     },
-
-
     /**
      * `AuthController.logout()`
      */

@@ -44,7 +44,7 @@ module.exports.connections = {
         adapter: 'sails-mysql',
         host: '127.0.0.1',
         user: 'root', //optional
-        //password: 'carsupport123', //optional
+        password: 'carsupport123', //optional
         database: 'Carsupportdb',
         port: 3306 //optional
     }

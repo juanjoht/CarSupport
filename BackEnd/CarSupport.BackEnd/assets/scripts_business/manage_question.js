@@ -16,7 +16,17 @@
          urlUploadAudio3: "/question/uploadAudio3",
          urlUploadAudio4: "/question/uploadAudio4",
          dataSource: '',
-         dataSourcePart: ''
+         dataSourcePart: '',
+         pathImages: '/images/',
+         imageName1: '',
+         imageName2: '',
+         imageName3: '',
+         imageName4: '',
+         pathAudio: '/audio/',
+         audioName1: '',
+         audioName2: '',
+         audioName3: '',
+         audioName4: ''
      },
      fn: {
          init: function() {
@@ -61,10 +71,20 @@
                          if (operation == 'create') {
                              questionParameter.PartId = data.part.Id;
                              if (data.responseType.value == '1') {
-                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option1 });
-                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option2 });
-                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option3 });
-                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option4 });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option1, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option2, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option3, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option4, QuestionId: '' });
+                             } else if (data.responseType.value == '2') {
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName1, Description: data.DescriptionAudioOption1, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName2, Description: data.DescriptionAudioOption2, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName3, Description: data.DescriptionAudioOption3, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName4, Description: data.DescriptionAudioOption4, QuestionId: '' });
+                             } else if (data.responseType.value == '3') {
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName1, Description: data.DescriptionImageOption1, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName2, Description: data.DescriptionImageOption2, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName3, Description: data.DescriptionImageOption3, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName4, Description: data.DescriptionImageOption4, QuestionId: '' });
                              }
                              return JSON.stringify(questionParameter);
                          }
@@ -228,7 +248,8 @@
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
                  },
-                 upload: manageQuestion.fn.onUploadImage1,
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadImage2: function() {
@@ -244,7 +265,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadImage3: function() {
@@ -260,7 +283,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadImage4: function() {
@@ -276,7 +301,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadAudio1: function() {
@@ -292,7 +319,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
              });
          },
          setKendoUploadAudio2: function() {
@@ -308,7 +337,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
              });
          },
          setKendoUploadAudio3: function() {
@@ -324,7 +355,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
              });
          },
          setKendoUploadAudio4: function() {
@@ -340,21 +373,42 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
              });
          },
-         objetoRevista: function(file) {
-             return file;
+         onSuccessImage: function(e) {
+             if (e.operation == "upload") {
+                 var valueOption = e.sender.element["0"].attributes[3].nodeValue
+                 var splitname = e.response[0].fd.split("\\");
+                 var filename = splitname[splitname.length - 1];
+                 switch (valueOption) {
+                     case "image1":
+                         manageQuestion.global.imagenName1 = filename;
+                         break;
+                     case "image2":
+                         manageQuestion.global.imagenName2 = filename;
+                         break;
+                     case "image3":
+                         manageQuestion.global.imagenName3 = filename;
+                         break;
+                     case "image4":
+                         manageQuestion.global.imagenName4 = filename;
+                         break;
+                     default:
+                         // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                         e.preventDefault();
+                         break;
+                 }
+             }
          },
-         onUploadImage1: function(e) {
+         onUploadImage: function(e) {
              // Array with information about the uploaded files
-
              var files = e.files;
-
-
-
              switch (files[0].extension) {
                  case ".jpg":
+                     break;
                  case ".png":
                      var t = "";
                      break;
@@ -363,13 +417,44 @@
                      e.preventDefault();
                      break;
              }
-
-
-             e.data = { name: files[0].name };
-
-
+         },
+         onSuccessAudio: function(e) {
+             if (e.operation == "upload") {
+                 var valueOption = e.sender.element["0"].attributes[3].nodeValue;
+                 var splitname = e.response[0].fd.split("\\");
+                 var filename = splitname[splitname.length - 1];
+                 switch (valueOption) {
+                     case "audio1":
+                         manageQuestion.global.audioName1 = filename;
+                         break;
+                     case "audio2":
+                         manageQuestion.global.audioName2 = filename;
+                         break;
+                     case "audio3":
+                         manageQuestion.global.audioName3 = filename;
+                         break;
+                     case "audio4":
+                         manageQuestion.global.audioName4 = filename;
+                         break;
+                     default:
+                         // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                         e.preventDefault();
+                         break;
+                 }
+             }
+         },
+         onUploadAudio: function(e) {
+             // Array with information about the uploaded files
+             var files = e.files;
+             switch (files[0].extension) {
+                 case ".mp3":
+                     break;
+                 default:
+                     // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                     e.preventDefault();
+                     break;
+             }
          }
-
      }
 
  }

@@ -19,8 +19,12 @@ var QuestionController = {
         var paramaters = req.allParams();
         Question.create(paramaters).exec(function(err, question) {
             if (err) { return res.serverError(err); } else {
-                factors.forEach(function(factor, index) {
-                    //Crear response
+                paramaters.responseList.forEach(function(factor, index) {
+                    //Create responses
+                    factor.QuestionId = question.Id;
+                    Responseoption.create(factor).exec(function(errR, responses) {
+                        if (errR) { return res.serverError(errR); }
+                    });
                 });
             }
             return res.json(question);
@@ -56,10 +60,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/images')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadImage2: function(req, res) {
@@ -67,10 +68,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/images')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadImage3: function(req, res) {
@@ -78,10 +76,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/images')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadImage4: function(req, res) {
@@ -89,10 +84,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/images')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadAudio1: function(req, res) {
@@ -100,10 +92,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadAudio2: function(req, res) {
@@ -111,10 +100,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadAudio3: function(req, res) {
@@ -122,10 +108,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     },
     uploadAudio4: function(req, res) {
@@ -133,10 +116,7 @@ var QuestionController = {
             dirname: require('path').resolve(sails.config.appPath, 'assets/audio')
         }, function(err, uploadedFiles) {
             if (err) return res.negotiate(err);
-
-            return res.json({
-                message: uploadedFiles.length + ' file(s) uploaded successfully!'
-            });
+            return res.json(uploadedFiles);
         });
     }
 

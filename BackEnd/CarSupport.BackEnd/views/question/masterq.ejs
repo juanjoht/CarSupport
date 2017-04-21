@@ -2,26 +2,6 @@
 <br/>
 <br/>
 <% include ../../assets/templates/barraestatica.ejs %>
-<<<<<<< HEAD
-<link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common.min.css" rel="stylesheet" type="text/css">
-<link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.default.min.css" rel="stylesheet" type="text/css">
-
-<br/>
-<br/>
-<br/>
-<div id="grid"></div>
-<script id="template" type="text/x-kendo-template">
-    <div>
-        <span>Descripción:</span>
-        <textarea type="text" name="description" data-bind="value:Description" class="k-textbox" />
-    </div>
-    <div>
-        <span>Parte:</span>
-        <input type="text" name="part" data-bind="value:Part" class="k-textbox" />
-    </div>
-    
-</script>
-=======
     <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common.min.css" rel="stylesheet" type="text/css">
     <link href="http://kendo.cdn.telerik.com/2017.1.118/styles/kendo.default.min.css" rel="stylesheet" type="text/css">
     <script src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
@@ -61,59 +41,58 @@
                 <textarea type="text" name="option4" class="k-textbox"></textarea>
             </div>
         </div>
-        <div id="containerOptionAudio" style="display:none;">
-            <div>
-                <span>Opcion 1:</span>
-                <input type="file" name="UploadAudio1" id="UploadAudio1">
-                <textarea type="text" name="DescriptionAudioOption1" class="k-textbox"></textarea>
-            </div>
-            <div>
-                <span>Opcion 2:</span>
-                <input type="file" name="UploadAudio2" id="UploadAudio2">
-                <textarea type="text" name="DescriptionAudioOption2" class="k-textbox"></textarea>
-            </div>
-            <div>
-                <span>Opcion 3:</span>
-                <input type="file" name="UploadAudio3" id="UploadAudio3">
-                <textarea type="text" name="DescriptionAudioOption3" class="k-textbox"></textarea>
-            </div>
-            <div>
-                <span>Opcion 4:</span>
-                <input type="file" name="UploadAudio4" id="UploadAudio4">
-                <textarea type="text" name="DescriptionAudioOption4" class="k-textbox"></textarea>
-            </div>
-        </div>
         <div id="containerOptionImage" style="display:none;">
             <div>
                 <span>Opcion 1:</span>
-                <input type="file" name="UploadImage1" id="UploadImage1">
+                <input type="file" name="UploadImage1" id="UploadImage1" data-option="image1" />
                 <span>Descripción:</span>
                 <textarea type="text" name="DescriptionImageOption1" class="k-textbox"></textarea>
             </div>
             <div>
                 <span>Opcion 2:</span>
-                <input type="file" name="UploadImage2" id="UploadImage2">
+                <input type="file" name="UploadImage2" id="UploadImage2" data-option="image2" />
                 <span>Descripción:</span>
-                <textarea type="text" name="DescriptionImageOption2" class="k-textbox"></textarea>
+                <textarea type="text " name="DescriptionImageOption2 " class="k-textbox "></textarea>
             </div>
             <div>
                 <span>Opcion 3:</span>
-                <input type="file" name="UploadImage3" id="UploadImage3">
+                <input type="file" name="UploadImage3" id="UploadImage3" data-option="image3" />
                 <span>Descripción:</span>
-                <textarea type="text" name="DescriptionImageOption3" class="k-textbox"></textarea>
+                <textarea type="text " name="DescriptionImageOption3 " class="k-textbox "></textarea>
             </div>
             <div>
                 <span>Opcion 4:</span>
-                <input type="file" name="UploadImage4" id="UploadImage4">
+                <input type="file" name="UploadImage4" id="UploadImage4" data-option="image4" />
                 <span>Descripción:</span>
-                <textarea type="text" name="DescriptionImageOption4" class="k-textbox"></textarea>
+                <textarea type="text " name="DescriptionImageOption4 " class="k-textbox "></textarea>
+            </div>
+        </div>
+        <div id="containerOptionAudio" style="display:none;">
+            <div>
+                <span>Opcion 1:</span>
+                <input type="file" name="UploadAudio1" id="UploadAudio1" data-option="audio1" />
+                <textarea type="text" name="DescriptionAudioOption1" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 2:</span>
+                <input type="file" name="UploadAudio2" id="UploadAudio2" data-option="audio2" />
+                <textarea type="text" name="DescriptionAudioOption2" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 3:</span>
+                <input type="file" name="UploadAudio3" id="UploadAudio3" data-option="audio3" />
+                <textarea type="text" name="DescriptionAudioOption3" class="k-textbox"></textarea>
+            </div>
+            <div>
+                <span>Opcion 4:</span>
+                <input type="file" name="UploadAudio4" id="UploadAudio4" data-option="audio4" />
+                <textarea type="text" name="DescriptionAudioOption4" class="k-textbox"></textarea>
             </div>
         </div>
 
     </script>
->>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
 
-    <script src="/scripts_business/manage_question.js"></script>
+    <script src="/scripts_business/manage_question.js "></script>
     <script>
         $(document).ready(function() {
             manageQuestion.fn.init();
