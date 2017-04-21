@@ -26,17 +26,13 @@ var QuestionController = {
         var parameters = req.allParams();
         Question.find({ Id: parameters.Id }).exec(function(err, questionOriginal) {
             if (err) { return res.serverError(err); }
-<<<<<<< HEAD
-            questionrOr = {
-=======
-            QuestionOr = {
->>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
-                Description: questionOriginal[0].Description,
-                Part: questionOriginal[0].Part,
+            questionOr = {
+                Description: parameters.Description,
+                Part: parameters.Part,
             }
-            Question.update(questionOr, parameters).exec(function afterwards(err, updated) {
+            Question.update({ Id: parameters.Id } ,questionOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },

@@ -61,7 +61,7 @@
                          return null;
                      }
                  },
-                 pageSize: 30,
+                 pageSize: 7,
                  schema: {
                      model: {
                          id: "Id",
@@ -108,11 +108,12 @@
                  }],
                  columns: [{
                      field: "Id",
-                     title: "Id"
+                     title: "Id",
+                     width: "50px"
                  }, {
                      field: "Description",
                      title: "Descripcion",
-                     width: "150px"
+                     width: "500px"
                  }, {
                      command: [{ name: "edit", text: "Editar" }, { name: "destroy", text: "Eliminar" }],
                      title: "&nbsp;",

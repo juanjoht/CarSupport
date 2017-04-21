@@ -27,16 +27,16 @@ var BreakdownController = {
         Breakdown.find({ Id: parameters.Id }).exec(function(err, breakdownOriginal) {
             if (err) { return res.serverError(err); }
             breakdownOr = {
-                Description: breakdownOriginal[0].Description,
-                Causes: breakdownOriginal[0].Causes,
-                Consequences: breakdownOriginal[0].Consequences,
-                Solutions: breakdownOriginal[0].Solutions,
-                Rating: breakdownOriginal[0].Rating,
-                Part: breakdownOriginal[0].Part,
+                Description: parameters.Description,
+                Causes: parameters.Causes,
+                Consequences: parameters.Consequences,
+                Solutions: parameters.Solutions,
+                Rating: parameters.Rating,
+                Part: parameters.Part,
             }
-            Breakdown.update(breakdownOr, parameters).exec(function afterwards(err, updated) {
+            Breakdown.update({ Id: parameters.Id }, breakdownOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },
@@ -44,7 +44,7 @@ var BreakdownController = {
         var Id = req.param('Id');
         Breakdown.destroy({
             id: Id
-        }).exec(function(err, user) {
+        }).exec(function(err, breakdown) {
             if (err) {
                 return res.negotiate(err);
             }

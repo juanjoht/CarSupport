@@ -6,16 +6,11 @@
  */
 
 var PartController = {
-<<<<<<< HEAD
-
-=======
->>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
     index: function(req, res) {
         Part.find().exec(function(err, parts) {
             if (err) {
                 return res.serverError(err);
             }
-<<<<<<< HEAD
             return res.jsonp(parts);
         });
     },
@@ -28,15 +23,17 @@ var PartController = {
     },
     edit: function(req, res) {
         var parameters = req.allParams();
+       console.log("body ", parameters)
         Part.find({ Id: parameters.Id }).exec(function(err, partOriginal) {
             if (err) { return res.serverError(err); }
             partOr = {
-                Description: partOriginal[0].Description,
-                ShowScheme: partOriginal[0].ShowScheme,
+                Description: parameters.Description,
+                ShowScheme: parameters.ShowScheme,
             }
-            Part.update(partOr, parameters).exec(function afterwards(err, updated) {
+            
+            Part.update({ Id: parameters.Id }, partOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },
@@ -57,12 +54,3 @@ var PartController = {
 
 module.exports = PartController;
 
-
-=======
-            return res.json(parts);
-        });
-    }
-}
->>>>>>> a086e9436c9e558608427e02508dd51dc87be4c8
-
-module.exports = PartController;

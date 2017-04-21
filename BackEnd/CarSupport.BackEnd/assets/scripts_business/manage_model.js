@@ -6,7 +6,9 @@ manageModel = {
      },
      global: {
          crudServiceBaseUrl: "/model",
-         dataSource: ''
+         urlGetBrand:"/brand/index",
+         dataSource: '',
+         dataSourceBrand:''
      },
      fn: {
          init: function() {
@@ -134,11 +136,27 @@ manageModel = {
                      e.container.data("kendoWindow").title('Editar modelo');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     manageModel.fn.setDdlBrand();
                      if (e.model.isNew()) {
                          editWindow.title('Crear modelo');
                      }
                  }
              }).data("kendoGrid");
+         },
+         setDdlBrand: function() {
+             $("#brand").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Description",
+                 dataValueField: "Id",
+                 dataSource: {
+                     transport: {
+                         read: {
+                             dataType: "json",
+                             url: manageModel.global.urlGetBrand,
+                         }
+                     }
+                 }
+             });
          }
      }
 

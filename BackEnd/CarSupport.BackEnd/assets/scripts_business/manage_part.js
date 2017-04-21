@@ -52,7 +52,7 @@
                          }
                          if (operation == 'update') {
                              partParameter.Id = data.Id;
-                             partParameter.Description = data.description;
+                             partParameter.Description = data.Description;
                              partParameter.ShowScheme = data.ShowScheme;
                              
                              return JSON.stringify(partParameter);
@@ -135,11 +135,23 @@
                      e.container.data("kendoWindow").title('Editar Parte');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     managePart.fn.setDatMostrar();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Parte');
                      }
                  }
              }).data("kendoGrid");
+         },
+         setDatMostrar: function() {
+             $("#showScheme").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Desicioname",
+                 dataValueField: "ShowScheme",
+                 dataSource: [
+                    { Desicioname: "NO", ShowScheme: 0 },
+                    { Desicioname: "SI", ShowScheme: 1 }
+                 ]
+             });
          }
      }
 

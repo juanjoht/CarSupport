@@ -6,7 +6,9 @@
      },
      global: {
          crudServiceBaseUrl: "/breakdown",
-         dataSource: ''
+         urlGetPart: "/Part/index",
+         dataSource: '',
+         dataSourcePart: ''
      },
      fn: {
          init: function() {
@@ -70,7 +72,7 @@
                          return null;
                      }
                  },
-                 pageSize: 30,
+                 pageSize: 7,
                  schema: {
                      model: {
                          id: "Id",
@@ -171,12 +173,28 @@
                      e.container.data("kendoWindow").title('Editar Falla');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     manageBreakdown.fn.setDdlPart();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Falla');
                      }
                  }
              }).data("kendoGrid");
              
+         },
+         setDdlPart: function() {
+             $("#part").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Description",
+                 dataValueField: "Id",
+                 dataSource: {
+                     transport: {
+                         read: {
+                             dataType: "json",
+                             url: manageBreakdown.global.urlGetPart,
+                         }
+                     }
+                 }
+             });
          }
      }
 
