@@ -12,14 +12,23 @@ module.exports = {
             type: 'integer',
             primaryKey: true,
             autoIncrement: true,
-            required:true
+            required: true
         },
-        Description :  {
+        Name: {
             type: 'string',
             required: true,
             size: 45
         },
+        Description: {
+            type: 'string',
+            required: true,
+            size: 500
+        },
+        Path: {
+            type: 'string',
+            required: true,
+            size: 80
+        },
         ShowScheme: 'boolean'
     }
 };
-

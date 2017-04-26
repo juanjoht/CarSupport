@@ -6,9 +6,18 @@
  */
 
 var QuestionController = {
-
     index: function(req, res) {
         Question.find().exec(function(err, questions) {
+            if (err) {
+                return res.serverError(err);
+            }
+            return res.json(questions);
+        });
+    },
+    findBy: function(req, res) {
+        var paramaters = req.allParams();
+        var id = parseInt(paramaters.id)
+        Question.find({ Part: id }).exec(function(err, questions) {
             if (err) {
                 return res.serverError(err);
             }
