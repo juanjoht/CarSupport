@@ -35,11 +35,11 @@ module.exports.routes = {
     '/': {
         view: 'auth/login'
     },
-    'get/login': {
+    'get /login': {
         controller: 'auth',
         action: 'login'
     },
-    'post/login': {
+    'post /login': {
         controller: 'auth',
         action: 'process'
     },
@@ -55,7 +55,7 @@ module.exports.routes = {
     '/maintenance/masterm': {
         view: 'maintenance/masterm'
     },
-     '/breakdown/masterbr': {
+    '/breakdown/masterbr': {
         view: 'breakdown/masterbr'
     },
     '/part/masterp': {

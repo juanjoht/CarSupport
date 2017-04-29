@@ -16,11 +16,14 @@ module.exports = {
         },
         Description: {
             type: 'string',
-            required: true,
             size: 45
         },
+        Path: {
+            type: 'string',
+            size: 80
+        },
         OptionType: {
-            type: 'integer',
+            type: 'string',
             required: true
         },
         Question: {

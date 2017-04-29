@@ -51,9 +51,10 @@
                              Consequences: data.Consequences,
                              Solutions: data.Solutions,
                              Rating: data.Rating,
-                             Part: data.Part
+                             PartId: data.PartId
                          }
                          if (operation == 'create') {
+                             breakdownParameter.PartId = data.part.Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'update') {
@@ -63,7 +64,7 @@
                              breakdownParameter.Consequences = data.Consequences;
                              breakdownParameter.Solutions = data.Solutions;
                              breakdownParameter.Rating = data.Rating;
-                             breakdownParameter.Part = data.Part;
+                             breakdownParameter.PartId = data.part[0].Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'destroy') {
@@ -95,7 +96,7 @@
                              Rating: {
                                  type: "float"
                              },
-                             Part: {
+                             PartId: {
                                  type: "number"
                              }
                          }

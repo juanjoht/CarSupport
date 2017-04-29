@@ -50,7 +50,4 @@ var PartController = {
     }
 
 }
-
-
 module.exports = PartController;
-

@@ -13231,6 +13231,11 @@ a.dark {
 
 .btn-next-question {
     left: 40%;
+    top: -1px;
+}
+
+.btn-generic-positive {
+    font-size: 16px
 }
 
 .redhotspot {

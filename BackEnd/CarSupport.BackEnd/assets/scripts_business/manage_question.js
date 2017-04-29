@@ -11,8 +11,22 @@
          urlUploadImage2: "/question/uploadImage2",
          urlUploadImage3: "/question/uploadImage3",
          urlUploadImage4: "/question/uploadImage4",
+         urlUploadAudio1: "/question/uploadAudio1",
+         urlUploadAudio2: "/question/uploadAudio2",
+         urlUploadAudio3: "/question/uploadAudio3",
+         urlUploadAudio4: "/question/uploadAudio4",
          dataSource: '',
-         dataSourcePart: ''
+         dataSourcePart: '',
+         pathImages: '/images/',
+         imageName1: '',
+         imageName2: '',
+         imageName3: '',
+         imageName4: '',
+         pathAudio: '/audio/',
+         audioName1: '',
+         audioName2: '',
+         audioName3: '',
+         audioName4: ''
      },
      fn: {
          init: function() {
@@ -51,15 +65,33 @@
                          var questionParameter = {
                              Id: 0,
                              Description: data.Description,
-                             Part: data.Part
+                             responseList: []
                          }
+
                          if (operation == 'create') {
+                             questionParameter.PartId = data.part.Id;
+                             if (data.responseType.value == '1') {
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option1, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option2, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option3, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: null, Description: data.option4, QuestionId: '' });
+                             } else if (data.responseType.value == '2') {
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName1, Description: data.DescriptionAudioOption1, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName2, Description: data.DescriptionAudioOption2, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName3, Description: data.DescriptionAudioOption3, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathAudio + manageQuestion.global.audioName4, Description: data.DescriptionAudioOption4, QuestionId: '' });
+                             } else if (data.responseType.value == '3') {
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName1, Description: data.DescriptionImageOption1, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName2, Description: data.DescriptionImageOption2, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName3, Description: data.DescriptionImageOption3, QuestionId: '' });
+                                 questionParameter.responseList.push({ Id: 0, OptionType: data.responseType.value, Path: manageQuestion.global.pathImages + manageQuestion.global.imagenName4, Description: data.DescriptionImageOption4, QuestionId: '' });
+                             }
                              return JSON.stringify(questionParameter);
                          }
                          if (operation == 'update') {
                              questionParameter.Id = data.Id;
                              questionParameter.Description = data.Description;
-                             questionParameter.Part = data.Part;
+                             questionParameter.PartId = data.part[0].Id;
 
                              return JSON.stringify(questionParameter);
                          }
@@ -80,7 +112,7 @@
                              Description: {
                                  type: "string"
                              },
-                             Part: {
+                             PartId: {
                                  type: "number"
                              }
                          }
@@ -134,6 +166,9 @@
                  editable: {
                      template: kendo.template($("#template").html()),
                      mode: "popup",
+                     window: {
+                         resizable: true
+                     },
                      confirmation: "¿Está seguro que desea eliminar la pregunta?"
                  },
                  edit: function(e) {
@@ -146,7 +181,10 @@
                      manageQuestion.fn.setKendoUploadImage2();
                      manageQuestion.fn.setKendoUploadImage3();
                      manageQuestion.fn.setKendoUploadImage4();
-
+                     manageQuestion.fn.setKendoUploadAudio1();
+                     manageQuestion.fn.setKendoUploadAudio2();
+                     manageQuestion.fn.setKendoUploadAudio3();
+                     manageQuestion.fn.setKendoUploadAudio4();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Pregunta');
                      }
@@ -209,7 +247,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadImage2: function() {
@@ -225,7 +265,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadImage3: function() {
@@ -241,7 +283,9 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
          },
          setKendoUploadImage4: function() {
@@ -257,8 +301,159 @@
                      uploadSelectedFiles: "Cargar Archivo",
                      headerStatusUploaded: "Finalizado",
                      headerStatusUploading: "Cargando"
-                 }
+                 },
+                 upload: manageQuestion.fn.onUploadImage,
+                 success: manageQuestion.fn.onSuccessImage
              });
+         },
+         setKendoUploadAudio1: function() {
+             $("#UploadAudio1").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio1,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
+             });
+         },
+         setKendoUploadAudio2: function() {
+             $("#UploadAudio2").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio2,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
+             });
+         },
+         setKendoUploadAudio3: function() {
+             $("#UploadAudio3").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio3,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
+             });
+         },
+         setKendoUploadAudio4: function() {
+             $("#UploadAudio4").kendoUpload({
+                 async: {
+                     saveUrl: manageQuestion.global.urlUploadAudio4,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 },
+                 upload: manageQuestion.fn.onUploadAudio,
+                 success: manageQuestion.fn.onSuccessAudio
+             });
+         },
+         onSuccessImage: function(e) {
+             if (e.operation == "upload") {
+                 var valueOption = e.sender.element["0"].attributes[3].nodeValue
+                 var splitname = e.response[0].fd.split("\\");
+                 var filename = splitname[splitname.length - 1];
+                 switch (valueOption) {
+                     case "image1":
+                         manageQuestion.global.imagenName1 = filename;
+                         break;
+                     case "image2":
+                         manageQuestion.global.imagenName2 = filename;
+                         break;
+                     case "image3":
+                         manageQuestion.global.imagenName3 = filename;
+                         break;
+                     case "image4":
+                         manageQuestion.global.imagenName4 = filename;
+                         break;
+                     default:
+                         // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                         e.preventDefault();
+                         break;
+                 }
+             }
+         },
+         onUploadImage: function(e) {
+             // Array with information about the uploaded files
+             var files = e.files;
+             switch (files[0].extension) {
+                 case ".jpg":
+                     break;
+                 case ".png":
+                     var t = "";
+                     break;
+                 default:
+                     // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                     e.preventDefault();
+                     break;
+             }
+         },
+         onSuccessAudio: function(e) {
+             if (e.operation == "upload") {
+                 var valueOption = e.sender.element["0"].attributes[3].nodeValue;
+                 var splitname = e.response[0].fd.split("\\");
+                 var filename = splitname[splitname.length - 1];
+                 switch (valueOption) {
+                     case "audio1":
+                         manageQuestion.global.audioName1 = filename;
+                         break;
+                     case "audio2":
+                         manageQuestion.global.audioName2 = filename;
+                         break;
+                     case "audio3":
+                         manageQuestion.global.audioName3 = filename;
+                         break;
+                     case "audio4":
+                         manageQuestion.global.audioName4 = filename;
+                         break;
+                     default:
+                         // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                         e.preventDefault();
+                         break;
+                 }
+             }
+         },
+         onUploadAudio: function(e) {
+             // Array with information about the uploaded files
+             var files = e.files;
+             switch (files[0].extension) {
+                 case ".mp3":
+                     break;
+                 default:
+                     // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                     e.preventDefault();
+                     break;
+             }
          }
      }
 
