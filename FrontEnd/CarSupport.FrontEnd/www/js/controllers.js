@@ -399,6 +399,7 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
         $scope.urlprefix = "https://carsupportadmintest.azurewebsites.net/";
         $scope.name = '';
         $scope.cause = '';
+        juan
         $scope.consequenses = '';
         $scope.solutions = '';
         $scope.PathImage = '';

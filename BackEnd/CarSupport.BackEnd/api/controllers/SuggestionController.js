@@ -27,13 +27,13 @@ var SuggestionController = {
         Suggestion.find({ Id: parameters.Id }).exec(function(err, suggestionOriginal) {
             if (err) { return res.serverError(err); }
             suggestionOr = {
-                Description: suggestionOriginal[0].Description,
-                Url: suggestionOriginal[0].Url,
-                Proccess: suggestionOriginal[0].Proccess,
+                Description: parameters.Description,
+                Url: parameters.Url,
+                Proccess: parameters.Proccess,
             }
-            Suggestion.update(suggestionOr, parameters).exec(function afterwards(err, updated) {
+            Suggestion.update({ Id: parameters.Id }, suggestionOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },

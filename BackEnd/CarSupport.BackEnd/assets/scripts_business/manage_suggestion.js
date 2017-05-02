@@ -64,7 +64,7 @@
                          return null;
                      }
                  },
-                 pageSize: 30,
+                 pageSize: 7,
                  schema: {
                      model: {
                          id: "Id",

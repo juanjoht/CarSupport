@@ -27,16 +27,16 @@ var UserController = {
         User.find({ Id: parameters.Id }).exec(function(err, userOriginal) {
             if (err) { return res.serverError(err); }
             userOr = {
-                FullName: userOriginal[0].FullName,
-                Email: userOriginal[0].Email,
-                Phone: userOriginal[0].Phone,
-                CellPhone: userOriginal[0].CellPhone,
-                Username: userOriginal[0].Username,
-                Password: userOriginal[0].Password,
+                FullName: parameters.FullName,
+                Email: parameters.Email,
+                Phone: parameters.Phone,
+                CellPhone: parameters.CellPhone,
+                Username: parameters.Username,
+                Password: parameters.Password,
             }
-            User.update(userOr, parameters).exec(function afterwards(err, updated) {
+            User.update({ Id: parameters.Id }, userOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },

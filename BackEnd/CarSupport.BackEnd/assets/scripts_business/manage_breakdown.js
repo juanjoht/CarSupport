@@ -6,7 +6,9 @@
      },
      global: {
          crudServiceBaseUrl: "/breakdown",
-         dataSource: ''
+         urlGetPart: "/Part/index",
+         dataSource: '',
+         dataSourcePart: ''
      },
      fn: {
          init: function() {
@@ -49,9 +51,10 @@
                              Consequences: data.Consequences,
                              Solutions: data.Solutions,
                              Rating: data.Rating,
-                             Part: data.Part
+                             PartId: data.PartId
                          }
                          if (operation == 'create') {
+                             breakdownParameter.PartId = data.part.Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'update') {
@@ -61,7 +64,7 @@
                              breakdownParameter.Consequences = data.Consequences;
                              breakdownParameter.Solutions = data.Solutions;
                              breakdownParameter.Rating = data.Rating;
-                             breakdownParameter.Part = data.Part;
+                             breakdownParameter.PartId = data.part[0].Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'destroy') {
@@ -70,7 +73,7 @@
                          return null;
                      }
                  },
-                 pageSize: 30,
+                 pageSize: 7,
                  schema: {
                      model: {
                          id: "Id",
@@ -93,7 +96,7 @@
                              Rating: {
                                  type: "float"
                              },
-                             Part: {
+                             PartId: {
                                  type: "number"
                              }
                          }
@@ -171,12 +174,28 @@
                      e.container.data("kendoWindow").title('Editar Falla');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     manageBreakdown.fn.setDdlPart();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Falla');
                      }
                  }
              }).data("kendoGrid");
              
+         },
+         setDdlPart: function() {
+             $("#part").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Description",
+                 dataValueField: "Id",
+                 dataSource: {
+                     transport: {
+                         read: {
+                             dataType: "json",
+                             url: manageBreakdown.global.urlGetPart,
+                         }
+                     }
+                 }
+             });
          }
      }
 

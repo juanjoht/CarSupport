@@ -27,11 +27,11 @@ var BrandController = {
         Brand.find({ Id: parameters.Id }).exec(function(err, brandOriginal) {
             if (err) { return res.serverError(err); }
             brandOr = {
-                Description: brandOriginal[0].Description,
+                Description: parameters.Description,
             }
-            Brand.update(brandOr, parameters).exec(function afterwards(err, updated) {
+            Brand.update({ Id: parameters.Id }, brandOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },

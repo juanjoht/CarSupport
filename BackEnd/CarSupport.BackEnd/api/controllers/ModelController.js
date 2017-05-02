@@ -27,13 +27,13 @@ var ModelController = {
         Model.find({ Id: parameters.Id }).exec(function(err, modelOriginal) {
             if (err) { return res.serverError(err); }
             modelOr = {
-                Description: modelOriginal[0].Description,
-                Brand: modelOriginal[0].Brand,
+                Description: parameters.Description,
+                Brand: parameters.Brand,
                
             }
-            Model.update(modelOr, parameters).exec(function afterwards(err, updated) {
+            Model.update({ Id: parameters.Id }, modelOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
-                return req.json(updated[0]);
+                return res.json(updated[0]);
             });
         });
     },
