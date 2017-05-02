@@ -101,6 +101,48 @@ angular.module('app.routes', [])
             }
         })
 
+        .state('menu.historyMaintenance', {
+            url: '/history-maintenance/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/history-maintenance.html',
+                    controller: 'historyMaintenanceCtrl'
+                }
+            }
+        })
+
+        .state('menu.registerMaintenance', {
+            url: '/register-maintenance/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/register-history.html',
+                    controller: 'registerMaintenanceCtrl'
+                }
+            }
+        })
+
+        .state('menu.detailMaintenance', {
+            url: '/detail-maintenance/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/detail-maintenance.html',
+                    controller: 'detailMaintenanceCtrl'
+                }
+            }
+        })
+
+        .state('menu.settingNotifications', {
+            url: '/setting-notifications/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/setting-notifications.html',
+                    controller: 'settingnotificationCtrl'
+                }
+            }
+        })
+
+
+
 
 
 

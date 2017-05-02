@@ -2,8 +2,8 @@ angular.module('app.services', [])
 
 .factory('AppFactory', ["$http", '$q', function($http, $q) {
 
-    // var appContext = "https://carsupportadmintest.azurewebsites.net/";
-    var appContext = "http://localhost:1337";
+    var appContext = "https://carsupportadmintest.azurewebsites.net/";
+    //var appContext = "http://localhost:1337";
     var loginLocal = function(entity) {
         var result = $http({
             method: "POST",

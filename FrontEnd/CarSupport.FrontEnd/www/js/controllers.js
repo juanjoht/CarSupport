@@ -434,6 +434,41 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
+.controller('historyMaintenanceCtrl', ['$scope', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams, $state) {
+        $scope.goto = function(toState, idFault) {
+            $state.go(toState, {});
+        }
+    }
+])
+
+.controller('registerMaintenanceCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+    }
+])
+
+.controller('detailMaintenanceCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+    }
+])
+
+.controller('settingnotificationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+    }
+])
+
+
 
 
 

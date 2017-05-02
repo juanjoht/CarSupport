@@ -1,13 +1,24 @@
 <ion-view title="Historial de Fallas" id="page23">
     <ion-content padding="true" class="has-header">
+        <div id="listaFallas-markdown32" class="show-list-numbers-and-dots">
+            <p style="color:#000000;">Seleccione una falla del historial para ver el detalle o el botón (+) para registrar una falla:</p>
+        </div>
+        <div class="spacer" style="width: 300px; height: 20px;"></div>
         <ion-list id="historialDeFallas-list11">
             <ion-item class="item-icon-left" id="historialDeFallas-list-item62">
                 <i class="icon ion-alert-circled"></i>Fallas:</ion-item>
         </ion-list>
         <div class="spacer" style="width: 300px; height: 20px;"></div>
-        <ion-list id="historialDeFallas-list16">
-            <ion-item id="historialDeFallas-list-item69" ng-click="goto('menu.detailFaults',item.Breakdown.Id,false)" ng-repeat="item in bdownUser">{{item.Breakdown.Name}}</ion-item>
-        </ion-list>
-        <a ui-sref="menu.selectPart" id="historialDeFallas-button17" class="button button-positive button-large btn-add-fail">+</a>
+        <div class="list">
+            <a class="item item-icon-left" ng-click="goto('menu.detailFaults',item.Breakdown.Id,false)" ng-repeat="item in bdownUser">
+                <i class="icon ion-settings"></i> {{item.Breakdown.Name}}
+            </a>
+        </div>
+
+        <div class="section-add-fail">
+            <button ng-click="goto('menu.selectPart')" class="button button-positive  button-large btn-add-fail">
+                    +
+            </button>
+        </div>
     </ion-content>
 </ion-view>

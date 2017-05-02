@@ -13217,13 +13217,6 @@ a.dark {
     top: -10px;
 }
 
-.btn-add-fail {
-    border-radius: 50%;
-    left: 78%;
-    bottom: -327px;
-    z-index: 10001;
-}
-
 .btn-prev-question {
     margin: auto;
     left: 23%;
@@ -13270,4 +13263,32 @@ a.dark {
     background-color: #908888;
     height: 500px;
     width: 500px;
+}
+
+.section-add-maintenance {
+    width: 100%;
+    position: fixed;
+    z-index: 1001;
+    bottom: 30px;
+    left: -14px;
+}
+
+.section-add-fail {
+    width: 100%;
+    position: fixed;
+    z-index: 1001;
+    top: 480px;
+}
+
+.btn-add-fail {
+    border-radius: 50%;
+    left: -6%;
+    float: right;
+    padding-bottom: 5px;
+}
+
+.btn-add-maintenance {
+    border-radius: 50%;
+    float: right;
+    padding-bottom: 9px;
 }
