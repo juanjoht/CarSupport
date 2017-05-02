@@ -5,7 +5,6 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-<<<<<<< HEAD
 
 var AcceptanceparameterController = {
     index: function(req, res) {
@@ -30,8 +29,9 @@ var AcceptanceparameterController = {
 }
 
 
-module.exports = AcceptanceparameterController;
-=======
+module.exports = AcceptanceparameterController; ===
+===
+=
 var AcceptanceparameterController = {
 
     index: function(req, res) {
@@ -57,7 +57,7 @@ var AcceptanceparameterController = {
                 Breakdown: parameters.Breakdown,
                 Question: parameters.Question,
                 Responseoption: parameters.Responseoption,
-                
+
             }
             Acceptanceparameter.update({ Id: parameters.Id }, acceptanceparameterOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }
@@ -81,4 +81,3 @@ var AcceptanceparameterController = {
 
 
 module.exports = AcceptanceparameterController;
->>>>>>> a7c7ee99f5fd778e104674bd7c82a8e9596e9a74
