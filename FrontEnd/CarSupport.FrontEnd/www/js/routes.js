@@ -50,8 +50,18 @@ angular.module('app.routes', [])
             }
         })
 
+        .state('menu.registerFault', {
+            url: '/register-fault',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/register-fault.html',
+                    controller: 'registerFaultCtrl'
+                }
+            }
+        })
+
         .state('menu.tabs', {
-            url: '/frequent-faults',
+            url: '/frequent-faults/:partId',
             views: {
                 'side-menu-content': {
                     templateUrl: 'templates/frequent-faults.html',
@@ -62,7 +72,7 @@ angular.module('app.routes', [])
 
 
         .state('menu.question', {
-            url: '/questions',
+            url: '/questions/:partId',
             views: {
                 'side-menu-content': {
                     templateUrl: 'templates/questions.html',
@@ -70,6 +80,27 @@ angular.module('app.routes', [])
                 }
             }
         })
+
+        .state('menu.resultPossibleFailures', {
+            url: '/result-possible-faults/:responses',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/result-possible-faults.html',
+                    controller: 'resultPossibleFailuresCtrl'
+                }
+            }
+        })
+
+        .state('menu.detailFaults', {
+            url: '/detail-fault/:breakdownId/:History',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/detail-fault.html',
+                    controller: 'detailFaultsCtrl'
+                }
+            }
+        })
+
 
 
 

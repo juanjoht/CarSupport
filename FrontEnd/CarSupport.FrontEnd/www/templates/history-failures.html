@@ -6,10 +6,7 @@
         </ion-list>
         <div class="spacer" style="width: 300px; height: 20px;"></div>
         <ion-list id="historialDeFallas-list16">
-            <ion-item id="historialDeFallas-list-item69" ui-sref="menu.detalleMantenimiento">Bateria descargada</ion-item>
-            <ion-item id="historialDeFallas-list-item66">Problemas con los discos de los frenos</ion-item>
-            <ion-item id="historialDeFallas-list-item67">Problemas buges de la suspención</ion-item>
-            <ion-item id="historialDeFallas-list-item68">Problemas con los discos del embrague</ion-item>
+            <ion-item id="historialDeFallas-list-item69" ng-click="goto('menu.detailFaults',item.Breakdown.Id,false)" ng-repeat="item in bdownUser">{{item.Breakdown.Name}}</ion-item>
         </ion-list>
         <a ui-sref="menu.selectPart" id="historialDeFallas-button17" class="button button-positive button-large btn-add-fail">+</a>
     </ion-content>

@@ -4,29 +4,17 @@
             <ion-tab title="Fallas Frecuentes" icon="ion-settings">
                 <ion-view>
                     <ion-content>
-                        <div class="list card">
-                            <div class="item item-avatar">
-                                <img src="img/allow.jpg">
-                                <h2>Impactos contra elementos extraños</h2>
-                                <p>Llantas</p>
+                        <div class="list card" ng-repeat="fault in breakdown | filter:{ FrecuentFault: true }">
+                            <div class="item item-avatar" ng-click="goto('menu.detailFaults',fault.Id)">
+                                <img src="{{urlBack}}{{fault.Part.Path}}" />
+                                <h2>{{fault.Name}}</h2>
+                                <p>{{fault.Part.Name}}</p>
                             </div>
                             <div class="item item-image">
-                                <img style="position: absolute; top: 0px; left: 0px; z-index: 102;" alt="" src="img/golpe.jpg" />
+                                <img style="position: absolute; top: 0px; left: 0px; z-index: 102;" alt="" src="{{urlBack}}{{fault.PathImage}}" />
                             </div>
                             <div class="item-description">
-                                Esta es una de las causas más frecuentes de daños en la llanta, debido a que la llanta está expuesta a todas las condiciones del terreno y a juzgar por el estado de las vías en nuestro país, es una de las variables que juega en contra de la durabilidad
-                                de la llanta. Aquí les relacionamos las principales averías ocasionadas por impactos.
-                            </div>
-                            <div class="item item-avatar">
-                                <img src="img/allow.jpg">
-                                <h2>Cortes en la banda de rodamiento</h2>
-                                <p>Llantas</p>
-                            </div>
-                            <div class="item item-image" style="position: relative; height: 0px; padding-bottom: 48%; ">
-                                <img style="position: absolute; top: 0px; left: 0px; z-index: 102;" alt="" src="img/neumatico-pinchado.jpg" />
-                            </div>
-                            <div class="item-description">
-                                Son los cortes que se producen por objetos que pisamos con la llanta tales como: puntillas, varillas, tornillos y todo tipo de objeto punzante o filoso.
+                                {{fault.Description}}
                             </div>
                         </div>
                     </ion-content>
@@ -42,7 +30,7 @@
                         </div>
                         <div class="spacer" style="width: 300px; height: 30px;"></div>
                         <div class="start-possible-failures">
-                            <a class="button button-block button-dark" ui-sref="menu.question">Iniciar</a>
+                            <a class="button button-block button-dark" ng-click="goto('menu.question')">Iniciar</a>
                         </div>
                     </ion-content>
                 </ion-view>

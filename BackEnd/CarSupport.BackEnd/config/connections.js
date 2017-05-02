@@ -42,10 +42,10 @@ module.exports.connections = {
      ***************************************************************************/
     LocalMysqlServer: {
         adapter: 'sails-mysql',
-        host: '127.0.0.1',
-        user: 'root', //optional
-        password: 'carsupport123', //optional
-        database: 'Carsupportdb',
+        host: 'br-cdbr-azure-south-b.cloudapp.net',
+        user: 'b4c365770234c1', //optional
+        password: 'a1e186a3', //optional
+        database: 'carsupportdbcloud',
         port: 3306 //optional
     }
 

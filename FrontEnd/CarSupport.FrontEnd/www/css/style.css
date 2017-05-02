@@ -13218,10 +13218,10 @@ a.dark {
 }
 
 .btn-add-fail {
-    margin: auto;
     border-radius: 50%;
-    left: 73%;
-    bottom: -192px;
+    left: 78%;
+    bottom: -327px;
+    z-index: 10001;
 }
 
 .btn-prev-question {
@@ -13235,7 +13235,7 @@ a.dark {
 }
 
 .btn-generic-positive {
-    font-size: 16px
+    font-size: 16px !important;
 }
 
 .redhotspot {
@@ -13267,7 +13267,7 @@ a.dark {
 }
 
 .active {
-    background-color: red;
+    background-color: #908888;
     height: 500px;
     width: 500px;
 }
