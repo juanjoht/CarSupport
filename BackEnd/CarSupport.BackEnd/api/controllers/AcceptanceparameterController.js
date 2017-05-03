@@ -7,7 +7,7 @@
 
 
 var AcceptanceparameterController = {
-    index: function(req, res) {
+    indexSP: function(req, res) {
         var responses = req.param('param');
         Acceptanceparameter.query('CALL Sp_getBreakdownResponses("' + responses + '") ', function(err, result) {
             if (err) {
@@ -25,15 +25,7 @@ var AcceptanceparameterController = {
             }
             return res.json(accept);
         });
-    }
-}
-
-
-module.exports = AcceptanceparameterController; ===
-===
-=
-var AcceptanceparameterController = {
-
+    },
     index: function(req, res) {
         Acceptanceparameter.find().exec(function(err, acceptanceparameters) {
             if (err) {
