@@ -24,6 +24,7 @@ var BreakdownController = {
     },
     edit: function(req, res) {
         var parameters = req.allParams();
+        console.log("body ", parameters)
         Breakdown.find({ Id: parameters.Id }).exec(function(err, breakdownOriginal) {
             if (err) { return res.serverError(err); }
             breakdownOr = {

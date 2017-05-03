@@ -1,6 +1,6 @@
  manageQuestion = {
      abount: {
-         author: 'Jhovany Gallego',
+         author: 'Juan Jose Hincapie',
          description: 'logica encargada de la administración de las preguntas',
          date: '12 de abril del 2017'
      },

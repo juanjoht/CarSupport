@@ -50,12 +50,13 @@ manageModel = {
                              Brand: data.Brand
                          }
                          if (operation == 'create') {
+                             modelParameter.Brand =data.brand.Id;
                              return JSON.stringify(modelParameter);
                          }
                          if (operation == 'update') {
                              modelParameter.Id = data.Id;
                              modelParameter.Description = data.Description;
-                             modelParameter.Brand = data.Brand;
+                             modelParameter.Brand = data.brand.Id;
                              return JSON.stringify(modelParameter);
                          }
                          if (operation == 'destroy') {

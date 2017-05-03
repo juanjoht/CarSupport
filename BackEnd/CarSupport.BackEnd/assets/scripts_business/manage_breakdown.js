@@ -55,6 +55,7 @@
                          }
                          if (operation == 'create') {
                              breakdownParameter.PartId = data.part.Id;
+                             breakdownParameter.Rating = data.rating.Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'update') {
@@ -63,8 +64,8 @@
                              breakdownParameter.Causes = data.Causes;
                              breakdownParameter.Consequences = data.Consequences;
                              breakdownParameter.Solutions = data.Solutions;
-                             breakdownParameter.Rating = data.Rating;
-                             breakdownParameter.PartId = data.part[0].Id;
+                             breakdownParameter.Rating = data.rating.Id;
+                             breakdownParameter.PartId = data.part.Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'destroy') {
@@ -175,6 +176,7 @@
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
                      manageBreakdown.fn.setDdlPart();
+                     manageBreakdown.fn.setDatRating();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Falla');
                      }
@@ -195,6 +197,17 @@
                          }
                      }
                  }
+             });
+         },
+         setDatRating: function() {
+             $("#rating").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Desicioname",
+                 dataValueField: "Id",
+                 dataSource: [
+                    { Desicioname: "Baja", Id: 0 },
+                    { Desicioname: "Alta", Id: 1 }
+                 ]
              });
          }
      }

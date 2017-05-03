@@ -23,7 +23,7 @@ var PartController = {
     },
     edit: function(req, res) {
         var parameters = req.allParams();
-       console.log("body ", parameters)
+       //console.log("body ", parameters)
         Part.find({ Id: parameters.Id }).exec(function(err, partOriginal) {
             if (err) { return res.serverError(err); }
             partOr = {
