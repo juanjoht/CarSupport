@@ -6,9 +6,18 @@
  */
 
 var BreakdownController = {
-
     index: function(req, res) {
-        Breakdown.find().exec(function(err, breakdowns) {
+        Breakdown.find().populate('Part').exec(function(err, breakdowns) {
+            if (err) {
+                return res.serverError(err);
+            }
+            return res.json(breakdowns);
+        });
+    },
+    findBy: function(req, res) {
+        var paramaters = req.allParams();
+        var id = parseInt(paramaters.id)
+        Breakdown.find({ Part: id }).populate('Part').exec(function(err, breakdowns) {
             if (err) {
                 return res.serverError(err);
             }

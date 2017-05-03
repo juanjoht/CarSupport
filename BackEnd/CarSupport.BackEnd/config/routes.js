@@ -99,7 +99,14 @@ module.exports.routes = {
     },
     '/user': {
         controller: 'UserController'
+    },
+    '/Responseoption': {
+        controller: 'ResponseoptionController'
+    },
+    '/Acceptanceparameter': {
+        controller: 'Acceptanceparameter'
     }
+
 
     /***************************************************************************
      *                                                                          *

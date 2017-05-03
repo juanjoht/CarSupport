@@ -50,8 +50,18 @@ angular.module('app.routes', [])
             }
         })
 
+        .state('menu.registerFault', {
+            url: '/register-fault',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/register-fault.html',
+                    controller: 'registerFaultCtrl'
+                }
+            }
+        })
+
         .state('menu.tabs', {
-            url: '/frequent-faults',
+            url: '/frequent-faults/:partId',
             views: {
                 'side-menu-content': {
                     templateUrl: 'templates/frequent-faults.html',
@@ -62,7 +72,7 @@ angular.module('app.routes', [])
 
 
         .state('menu.question', {
-            url: '/questions',
+            url: '/questions/:partId',
             views: {
                 'side-menu-content': {
                     templateUrl: 'templates/questions.html',
@@ -70,6 +80,69 @@ angular.module('app.routes', [])
                 }
             }
         })
+
+        .state('menu.resultPossibleFailures', {
+            url: '/result-possible-faults/:responses',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/result-possible-faults.html',
+                    controller: 'resultPossibleFailuresCtrl'
+                }
+            }
+        })
+
+        .state('menu.detailFaults', {
+            url: '/detail-fault/:breakdownId/:History',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/detail-fault.html',
+                    controller: 'detailFaultsCtrl'
+                }
+            }
+        })
+
+        .state('menu.historyMaintenance', {
+            url: '/history-maintenance/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/history-maintenance.html',
+                    controller: 'historyMaintenanceCtrl'
+                }
+            }
+        })
+
+        .state('menu.registerMaintenance', {
+            url: '/register-maintenance/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/register-history.html',
+                    controller: 'registerMaintenanceCtrl'
+                }
+            }
+        })
+
+        .state('menu.detailMaintenance', {
+            url: '/detail-maintenance/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/detail-maintenance.html',
+                    controller: 'detailMaintenanceCtrl'
+                }
+            }
+        })
+
+        .state('menu.settingNotifications', {
+            url: '/setting-notifications/',
+            views: {
+                'side-menu-content': {
+                    templateUrl: 'templates/setting-notifications.html',
+                    controller: 'settingnotificationCtrl'
+                }
+            }
+        })
+
+
+
 
 
 

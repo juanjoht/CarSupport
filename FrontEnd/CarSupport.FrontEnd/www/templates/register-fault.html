@@ -1,0 +1,11 @@
+<ion-view title="Registrar Falla" id="page11">
+    <ion-content padding="true" class="has-header">
+        <div class="list" ng-repeat="part in Parts | filter:{ ShowScheme: false }">
+            <a class="item item-thumbnail-left" ng-click="goto('menu.question', part.Id)">
+                <img src="{{urlBack}}{{part.Path}}">
+                <h2>{{part.Name}}</h2>
+                <p>{{part.Description}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

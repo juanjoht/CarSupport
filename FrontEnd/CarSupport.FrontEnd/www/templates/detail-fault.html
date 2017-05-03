@@ -1,0 +1,51 @@
+<ion-view title="Detalle Falla" id="page13">
+    <ion-content padding="true" class="has-header">
+        <ion-list id="detalleFalla-list18">
+            <ion-item class="item-divider" id="detalleFalla-list-item-divider4">{{name}}</ion-item>
+        </ion-list>
+        <div>
+            <img src="{{urlprefix}}{{pathImage}}" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
+        </div>
+        <ion-list id="detalleFalla-list19">
+            <ion-item class="item-divider" id="detalleFalla-list-item-divider5">Causas</ion-item>
+        </ion-list>
+        <div class="item item-body" id="detalleFalla-list-item-container12">
+            <div id="detalleFalla-markdown37" class="show-list-numbers-and-dots">
+                <p style="margin-top:0px;color:#000000;">{{cause}}</p>
+            </div>
+        </div>
+        <ion-list id="detalleFalla-list20">
+            <ion-item class="item-divider" id="detalleFalla-list-item-divider6"> Riesgos y Consecuencias</ion-item>
+        </ion-list>
+        <div class="item item-body" id="detalleFalla-list-item-container13">
+            <div id="detalleFalla-markdown39" class="show-list-numbers-and-dots">
+                <p style="margin-top:0px;color:#000000;">{{consequenses}}</p>
+            </div>
+        </div>
+        <ion-list id="detalleFalla-list21">
+            <ion-item class="item-divider" id="detalleFalla-list-item-divider9"> Soluciones</ion-item>
+            <div class="item item-body" id="detalleFalla-list-item-container15">
+                <div id="detalleFalla-markdown43" class="show-list-numbers-and-dots">
+                    <p style="margin-top:0px;color:#000000;">{{solutions}}</p>
+                </div>
+            </div>
+            <ion-item class="item-divider" id="detalleFalla-list-item-divider7"> Talleres Especializados</ion-item>
+            <div class="item item-body" id="detalleFalla-list-item-container14">
+                <div id="detalleFalla-markdown41" class="show-list-numbers-and-dots" ng-repeat="item in autoRepairs">
+                    <a class="item item-icon-left" href="#">
+                        <i class="icon ion-wrench"></i> {{item.Name}}
+                        <span class="item-note">Dirección: {{item.Address}} -  Teléfono: {{item.Phone}}</span>
+                    </a>
+                </div>
+                <div class="item item-body" ng-show="paramHistory" id="detalleFalla-list-item-container6">
+                    <div id="detalleFalla-markdown16" class="show-list-numbers-and-dots">
+                        <p style="margin-top:0px;color:#000000;">¿Desea almacenar esta falla en su historial?</p>
+                    </div>
+                    <div class="spacer" style="width: 300px; height: 30px;"></div>
+                    <a id="detalleFalla-button9" ng-click="addBreakDownUser();" class="btn-generic-positive button button-positive  icon-left ion-checkmark-circled btn-si">SI</a>
+                    <a ui-sref="menu.remitirAForo" id="detalleFalla-button10" class="btn-generic-positive button button-positive  icon-left ion-android-cancel btn-no">No</a>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -5,8 +5,27 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var AcceptanceparameterController = {
 
+var AcceptanceparameterController = {
+    indexSP: function(req, res) {
+        var responses = req.param('param');
+        Acceptanceparameter.query('CALL Sp_getBreakdownResponses("' + responses + '") ', function(err, result) {
+            if (err) {
+                res.serverError(err);
+            } else {
+                res.json(result);
+            }
+        });
+    },
+    findBy: function(req, res) {
+        var id = req.allParams();
+        Acceptanceparameter.find({ Breakdown: id.param }).exec(function(err, accept) {
+            if (err) {
+                return res.serverError(err);
+            }
+            return res.json(accept);
+        });
+    },
     index: function(req, res) {
         Acceptanceparameter.find().exec(function(err, acceptanceparameters) {
             if (err) {
@@ -30,7 +49,7 @@ var AcceptanceparameterController = {
                 Breakdown: parameters.Breakdown,
                 Question: parameters.Question,
                 Responseoption: parameters.Responseoption,
-                
+
             }
             Acceptanceparameter.update({ Id: parameters.Id }, acceptanceparameterOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }

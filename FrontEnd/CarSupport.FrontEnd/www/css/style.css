@@ -13217,13 +13217,6 @@ a.dark {
     top: -10px;
 }
 
-.btn-add-fail {
-    margin: auto;
-    border-radius: 50%;
-    left: 73%;
-    bottom: -192px;
-}
-
 .btn-prev-question {
     margin: auto;
     left: 23%;
@@ -13235,7 +13228,7 @@ a.dark {
 }
 
 .btn-generic-positive {
-    font-size: 16px
+    font-size: 16px !important;
 }
 
 .redhotspot {
@@ -13267,7 +13260,35 @@ a.dark {
 }
 
 .active {
-    background-color: red;
+    background-color: #908888;
     height: 500px;
     width: 500px;
+}
+
+.section-add-maintenance {
+    width: 100%;
+    position: fixed;
+    z-index: 1001;
+    bottom: 30px;
+    left: -14px;
+}
+
+.section-add-fail {
+    width: 100%;
+    position: fixed;
+    z-index: 1001;
+    top: 480px;
+}
+
+.btn-add-fail {
+    border-radius: 50%;
+    left: -6%;
+    float: right;
+    padding-bottom: 5px;
+}
+
+.btn-add-maintenance {
+    border-radius: 50%;
+    float: right;
+    padding-bottom: 9px;
 }

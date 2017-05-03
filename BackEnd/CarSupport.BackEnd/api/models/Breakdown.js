@@ -12,19 +12,24 @@ module.exports = {
             type: 'integer',
             primaryKey: true,
             autoIncrement: true,
-            required:true
+            required: true
         },
-        Description:  {
+        Name: {
             type: 'string',
             required: true,
-            size: 45
+            size: 80
+        },
+        Description: {
+            type: 'string',
+            required: true,
+            size: 800
         },
         Causes: {
             type: 'string',
             required: true,
             size: 1000
         },
-        Consequences:  {
+        Consequences: {
             type: 'string',
             required: true,
             size: 1000
@@ -34,6 +39,12 @@ module.exports = {
             required: true,
             size: 1000
         },
+        FrecuentFault: 'boolean',
+        PathImage: {
+            type: 'string',
+            required: true,
+            size: 80
+        },
         Rating: 'float',
         Part: {
             model: "Part",
@@ -41,4 +52,3 @@ module.exports = {
         }
     }
 };
-
