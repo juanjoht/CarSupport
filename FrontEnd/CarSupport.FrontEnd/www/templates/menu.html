@@ -12,11 +12,11 @@
         <ion-header-bar class="bar-stable">
             <div class="title">Menu</div>
         </ion-header-bar>
-        <ion-content padding="false" class="side-menu-left has-header ">
+        <ion-content padding="false" class="side-menu-left has-header" ng-init="init()">
             <ion-list id="menu-list1">
                 <ion-item class="item-avatar" id="menu-list-item70">
-                    <img src="img/xRyc1WfrR7qOF7qkqYWE_16473468_10211622399216166_6899831508388822297_n.jpg">
-                    <h2>Juan Hincapie</h2>
+                    <img ng-src="{{profileData.picture.data.url}}">
+                    <h2>{{profileData.name}}</h2>
                 </ion-item>
                 <ion-item class="item-icon-right" id="menu-list-item1" ui-sref="menu.home" menu-close="">Home
                     <i class="icon ion-android-home"></i>
@@ -27,12 +27,37 @@
                 <ion-item class="item-icon-right" id="menu-list-item3" ui-sref="menu.historyMaintenance" menu-close="">Mantenimiento
                     <i class="icon ion-clipboard"></i>
                 </ion-item>
-                <ion-item class="item-icon-right" id="menu-list-item25" ui-sref="menu.recomendaciones" menu-close="">Tips
+                <ion-item class="item-icon-right" id="menu-list-item25" ui-sref="menu.tips" menu-close="">Tips
                     <i class="icon ion-ios-help"></i>
                 </ion-item>
-                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.remitirAForo" menu-close="">Foro
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">Foro
                     <i class="icon ion-android-contacts"></i>
                 </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    {{user.Id}}
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    {{user.IdentificationNumber}}
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    {{user.FullName}}
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    {{user.Email}}
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    {{user.Username}}
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    {{user.Password}}
+                </ion-item>
+                <ion-item class="item-icon-right" id="menu-list-item26" ui-sref="menu.initForum" menu-close="">
+                    <button value="save" ng-click="addUserFb({{profileData}})"></button>
+                </ion-item>
+
+
+
+
             </ion-list>
         </ion-content>
     </ion-side-menu>

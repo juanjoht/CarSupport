@@ -1,4 +1,4 @@
-<ion-view title="Historial de Mantenimientos" id="page20">
+<ion-view cache-view="false" title="Historial de Mantenimientos" id="page20">
     <ion-content padding="true" class="has-header">
         <div id="listaFallas-markdown32" class="show-list-numbers-and-dots">
             <p style="color:#000000;">Seleccione un mantenimiento del historial para ver el detalle o el botón (+) para registrar un mantenimiento:</p>
@@ -10,23 +10,11 @@
         </ion-list>
         <div class="spacer" style="width: 300px; height: 20px;"></div>
         <div class="list">
-            <a class="item item-icon-left" ng-click="goto('menu.detailMaintenance')">
-                <i class="icon ion-wrench"></i> Rotación de llantas - 17.000 Km
-            </a>
-            <a class="item item-icon-left">
-                <i class="icon ion-wrench"></i> Alineación y balanceo - 16000 Km
-            </a>
-            <a class="item item-icon-left">
-                <i class="icon ion-wrench"></i> Cambio de aceite - 20.000 Km
-            </a>
-            <a class="item item-icon-left">
-                <i class="icon ion-wrench"></i> Cambio de bateria - 30.000 Km
-            </a>
-            <a class="item item-icon-left">
-                <i class="icon ion-wrench"></i>Soat - 30-12-2017
-            </a>
-            <a class="item item-icon-left">
-                <i class="icon ion-wrench"></i> Impuestos- 30-06-2017
+            <a class="item item-icon-left" ng-repeat="item in MaintUser" ng-click="goto('menu.detailMaintenance',item.Maintenance.Id)">
+                <i class="icon ion-wrench"></i> {{item.Maintenance.Description}}
+                <span class="item-note">
+                Último Cambio: {{item.LastChangeDate | date:'dd MMM yyyy'}}
+                </span>
             </a>
         </div>
         <div class="section-add-maintenance">

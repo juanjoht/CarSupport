@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageModule'])
+angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageModule', 'ngCordova', 'ngStorage', 'ngMessages'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
     // With the new view caching in Ionic, Controllers are only called
@@ -49,11 +49,11 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
-.controller('loginCtrl', ['$scope', 'localStorageService', '$stateParams', '$location', '$state', '$ionicPopup', '$ionicLoading', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', 'localStorageService', '$stateParams', '$location', '$state', '$ionicPopup', '$ionicLoading', '$cordovaOauth', '$localStorage', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
 
-    function($scope, localStorageService, $stateParams, $location, $state, $ionicPopup, $ionicLoading, AppFactory) {
+    function($scope, localStorageService, $stateParams, $location, $state, $ionicPopup, $ionicLoading, $cordovaOauth, $localStorage, AppFactory) {
         $scope.data = {
             username: '',
             password: '',
@@ -86,27 +86,73 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
                 }
             });
         }
+
+        $scope.loginFacebook = function() {
+            $cordovaOauth.facebook("165019570694513", ["email", "user_posts", "user_website", "user_location", "user_relationships"]).then(function(result) {
+                $localStorage.accessToken = result.access_token;
+                $location.path("/menu");
+            }, function(error) {
+                alert("There was a problem signing in!  See the console for logs");
+                console.log(error);
+            });
+
+        }
     }
 ])
 
-.controller('homeCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('menuCtrl', ['$scope', '$rootScope', '$http', '$stateParams', '$location', '$localStorage', '$state', 'localStorageService', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $stateParams) {
+    function($scope, $rootScope, $http, $stateParams, $location, $localStorage, $state, localStorageService, AppFactory) {
+        $scope.init = function() {
+            if ($localStorage.hasOwnProperty("accessToken") === true) {
+                //alert($localStorage.accessToken);
+                $http.get("https://graph.facebook.com/v2.2/me", {
+                    params: {
+                        access_token: $localStorage.accessToken,
+                        fields: "id,name,gender,email,location,website,picture,relationship_status",
+                        format: "json"
+                    }
+                }).then(function(result) {
+                        $scope.profileData = result.data;
+                        $scope.addUserFb($scope.profileData);
+                        $state.go('menu.home');
+                    },
+                    function(error) {
+                        alert("There was a problem getting your profile.  Check the logs for details.");
+                    });
+            }
+        };
+
+        $scope.addUserFb = function(profile) {
+            $scope.user = {
+                Id: 0,
+                IdentificationNumber: profile.id,
+                FullName: profile.name,
+                Email: profile.email,
+                Username: profile.email,
+                Password: 'fb'
+            };
+            AppFactory.postUser($scope.user).then(function(response) {
+                $scope.response = response;
+                localStorageService.set("UserId", response.data.Id);
+            });
+        }
 
 
     }
 ])
 
-.controller('menuCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('homeCtrl', ['$scope', '$rootScope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $stateParams) {
+    function($scope, $rootScope, $stateParams) {
+
+
 
 
     }
 ])
-
 
 .controller('historyFailuressCtrl', ['$scope', '$stateParams', 'localStorageService', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
@@ -434,17 +480,124 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
-.controller('historyMaintenanceCtrl', ['$scope', '$stateParams', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('historyMaintenanceCtrl', ['$scope', 'localStorageService', '$stateParams', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $stateParams, $state) {
-        $scope.goto = function(toState, idFault) {
-            $state.go(toState, {});
+    function($scope, localStorageService, $stateParams, $state, AppFactory) {
+
+        $scope.MaintUser = [];
+        var Id = localStorageService.get("UserId");
+        AppFactory.getMaintenanceUserbyId(Id).then(function(response) {
+            $scope.MaintUser = response.data;
+        });
+
+
+        $scope.goto = function(toState, idMaintenance) {
+            $state.go(toState, { maintenanceId: idMaintenance });
         }
     }
 ])
 
-.controller('registerMaintenanceCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('registerMaintenanceCtrl', ['$scope', 'localStorageService', '$stateParams', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, localStorageService, $stateParams, $state, AppFactory) {
+        var Id = localStorageService.get("UserId");
+        $scope.Maintenances = '';
+        AppFactory.getMaintenances(Id).then(function(response) {
+            $scope.Maintenances = response.data;
+        });
+
+
+        $scope.goto = function(toState, idMaintenance) {
+            $state.go(toState, { maintenanceId: idMaintenance });
+        }
+    }
+])
+
+.controller('detailMaintenanceCtrl', ['$scope', '$stateParams', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams, $state, AppFactory) {
+        var param = parseInt($stateParams.maintenanceId);
+
+        $scope.name = '';
+        $scope.procedure = '';
+        $scope.lastChangeDate = '';
+        $scope.nextChangeDate = '';
+        $scope.place = '';
+        AppFactory.getDetailMaintenanceUserbyId(param).then(function(response) {
+            $scope.name = response.data[0].Maintenance.Description;
+            $scope.procedure = response.data[0].Maintenance.Procedure;
+            $scope.lastChangeDate = response.data[0].LastChangeDate;
+            $scope.nextChangeDate = response.data[0].NextChangeDate;
+            $scope.place = response.data[0].PlaceChange;
+        });
+    }
+])
+
+.controller('settingnotificationCtrl', ['$scope', 'localStorageService', '$stateParams', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, localStorageService, $stateParams, $state, AppFactory) {
+        var param = parseInt($stateParams.maintenanceId);
+        var userId = localStorageService.get("UserId");
+
+        $scope.dateValue = '';
+        $scope.newDate = ''
+        $scope.monthAdd = '';
+        $scope.Name = '';
+        AppFactory.getMaintenancebyId(param).then(function(response) {
+            $scope.Name = response.data[0].Description;
+            $scope.monthAdd = response.data[0].TimeChange;
+        });
+
+        addMonthsUTC = function(date, count) {
+            if (date && count) {
+                var m, d = (date = new Date(+date)).getUTCDate()
+
+                date.setUTCMonth(date.getUTCMonth() + count, 1)
+                m = date.getUTCMonth()
+                date.setUTCDate(d)
+                if (date.getUTCMonth() !== m) date.setUTCDate(0)
+            }
+            return date
+        }
+
+        convertUTCDateToLocalDate = function(date) {
+            var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+            return newDate;
+        }
+        var dateA = '';
+        var dateD = '';
+        $scope.selectDate = function() {
+            $scope.dateValue = new Date(document.getElementById("dateLastChange").value);
+
+            var d = addMonthsUTC($scope.dateValue, parseInt($scope.monthAdd));
+            var a = addMonthsUTC($scope.dateValue.setDate($scope.dateValue.getDate() - 1), parseInt($scope.monthAdd));
+            dateD = convertUTCDateToLocalDate(d);
+            $scope.newDate = dateD.toLocaleDateString();
+            dateA = convertUTCDateToLocalDate(a);
+
+        }
+        $scope.AddMaintenanceUser = function() {
+            var parameters = {
+                Id: 0,
+                notificationDate: dateA,
+                NextChangeDate: dateD,
+                LastChangeDate: $scope.dateValue,
+                PlaceChange: document.getElementById("txtPlace").value,
+                UserId: userId,
+                MaintenanceId: param
+            }
+            AppFactory.postmaintenanceUser(parameters).then(function(response) {
+                $state.go('menu.historyMaintenance');
+            });
+        }
+    }
+])
+
+.controller('detailTipsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function($scope, $stateParams) {
@@ -452,7 +605,7 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
-.controller('detailMaintenanceCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('tipsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function($scope, $stateParams) {
@@ -460,7 +613,7 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
-.controller('settingnotificationCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('initForumCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function($scope, $stateParams) {
@@ -468,19 +621,90 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
+.controller('forumCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+    }
+])
+
+.controller('detailForumCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+    }
+])
+
+.controller('registerUserCtrl', ['$scope', '$stateParams', '$state', 'localStorageService', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams, $state, localStorageService, AppFactory) {
+        $scope.user = {
+            Id: 0,
+            IdentificationNumber: '',
+            FullName: '',
+            Email: '',
+            Username: '',
+            Password: ''
+        };
+        $scope.AddUser = function(form) {
+            if (form.$valid) {
+                AppFactory.postUser($scope.user).then(function(response) {
+                    localStorageService.set("UserId", response.data.Id);
+                    $state.go('initRegisterAuto');
+                });
+
+            }
+        };
+    }
+])
+
+.controller('initAutoCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, $stateParams) {
+
+    }
+])
+
+.controller('registerAutoCtrl', ['$scope', 'localStorageService', '$stateParams', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    // You can include any angular dependencies as parameters for this function
+    // TIP: Access Route Parameters for your page via $stateParams.parameterName
+    function($scope, localStorageService, $stateParams, $state, AppFactory) {
+        var Brands = []
+        var Models = []
+
+        $scope.data = {
+            Id: 0,
+            LicensePlate: '',
+            Year: '',
+            CurrentMileage: '',
+            FuelType: '',
+            Class: '',
+            ModelId: 0,
+            UserId: localStorageService.get("UserId"),
+            brand: '',
+
+        }
+        AppFactory.getBrand().then(function(response) {
+            $scope.Brands = response.data;
+        });
+
+        $scope.getModels = function(IdBrand) {
+            AppFactory.getModelbyIdBrand(IdBrand).then(function(response) {
+                $scope.Models = response.data;
+            });
+        }
+
+        $scope.SaveCar = function() {
+            AppFactory.postCar($scope.data).then(function(response) {
+                $state.go('menu.home');
+            });
+        }
 
 
 
-
-.controller('PlaylistsCtrl', function($scope) {
-    $scope.playlists = [
-        { title: 'Reggae', id: 1 },
-        { title: 'Chill', id: 2 },
-        { title: 'Dubstep', id: 3 },
-        { title: 'Indie', id: 4 },
-        { title: 'Rap', id: 5 },
-        { title: 'Cowbell', id: 6 }
-    ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {});
+    }
+])

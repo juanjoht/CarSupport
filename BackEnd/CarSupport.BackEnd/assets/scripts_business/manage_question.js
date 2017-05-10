@@ -194,7 +194,7 @@
          setDdlPart: function() {
              $("#part").kendoComboBox({
                  placeholder: "Seleccione...",
-                 dataTextField: "Description",
+                 dataTextField: "Name",
                  dataValueField: "Id",
                  dataSource: {
                      transport: {

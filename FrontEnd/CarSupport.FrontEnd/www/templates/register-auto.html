@@ -1,0 +1,50 @@
+<ion-view cache-view="false" title="Registrar Autómovil" id="page8">
+    <ion-content padding="true" class="has-header">
+        <form id="registrarAutMovil-form6" class="list">
+            <label class="item item-select" id="registrarAutMovil-select1">
+        <span class="input-label">Marca:</span>
+        <select ng-change="getModels(data.brand)" ng-model="data.brand">
+          <option ng-repeat="item in Brands" ng-value="item.Id">{{item.Description}}</option>
+        </select>
+      </label>
+            <label class="item item-select" id="registrarAutMovil-select2">
+        <span class="input-label">Modelo:</span>
+        <select ng-model="data.ModelId">
+          <option ng-repeat="item in Models" ng-value="item.Id">{{item.Description}}</option>
+        </select>
+      </label>
+            <label class="item item-select" id="registrarAutMovil-select3">
+        <span class="input-label">Tipo de Combustible:</span>
+        <select ng-model="data.FuelType">
+          <option>Gasolina</option>
+          <option>Gas</option>
+          <option>Diesel</option>
+        </select>
+      </label>
+            <label class="item item-input" id="registrarAutMovil-input13">
+        <span class="input-label">Modelo (Año):</span>
+        <input type="text" placeholder="" ng-model="data.Year">
+      </label>
+            <label class="item item-input" id="registrarAutMovil-input14">
+        <span class="input-label">Kilometraje Actual:</span>
+        <input type="text" placeholder="" ng-model="data.CurrentMileage"  >
+      </label>
+            <label class="item item-select" id="registrarAutMovil-select4">
+        <span class="input-label">Clase:</span>
+        <select ng-model="data.Class">
+          <option>Sedan</option>
+          <option>hatchback</option>
+          <option>Campero</option>
+          <option>Pick Up</option>
+          <option>Coupé</option>
+        </select>
+      </label>
+            <label class="item item-input" id="registrarAutMovil-input15">
+        <span class="input-label">Placa</span>
+        <input type="text" placeholder="" ng-model="data.LicensePlate"  >
+      </label>
+            <div class="spacer" style="width: 300px; height: 22px;"></div>
+            <a ng-click="SaveCar();" id="registrarAutMovil-button20" class="button btn-generic-positive button-positive  icon ion-ios-checkmark-outline btn-login"> Aceptar</a>
+        </form>
+    </ion-content>
+</ion-view>

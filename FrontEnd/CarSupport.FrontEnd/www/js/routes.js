@@ -23,9 +23,9 @@ angular.module('app.routes', [])
         .state('menu.home', {
             url: '/home',
             views: {
-                'menu': {
+                'side-menu-content': {
                     templateUrl: 'templates/home.html',
-                    controller: 'loginCtrl'
+                    controller: 'homeCtrl'
                 }
             }
         })
@@ -122,7 +122,7 @@ angular.module('app.routes', [])
         })
 
         .state('menu.detailMaintenance', {
-            url: '/detail-maintenance/',
+            url: '/detail-maintenance/:maintenanceId',
             views: {
                 'side-menu-content': {
                     templateUrl: 'templates/detail-maintenance.html',
@@ -132,16 +132,80 @@ angular.module('app.routes', [])
         })
 
         .state('menu.settingNotifications', {
-            url: '/setting-notifications/',
-            views: {
-                'side-menu-content': {
-                    templateUrl: 'templates/setting-notifications.html',
-                    controller: 'settingnotificationCtrl'
+                url: '/setting-notifications/:maintenanceId',
+                views: {
+                    'side-menu-content': {
+                        templateUrl: 'templates/setting-notifications.html',
+                        controller: 'settingnotificationCtrl'
+                    }
                 }
-            }
+            })
+            .state('menu.detailTips', {
+                url: '/detail-tips/',
+                views: {
+                    'side-menu-content': {
+                        templateUrl: 'templates/detail-tips.html',
+                        controller: 'detailTipsCtrl'
+                    }
+                }
+            })
+            .state('menu.tips', {
+                url: '/tips/',
+                views: {
+                    'side-menu-content': {
+                        templateUrl: 'templates/tips.html',
+                        controller: 'tipsCtrl'
+                    }
+                }
+            })
+            .state('menu.initForum', {
+                url: '/init-forum/',
+                views: {
+                    'side-menu-content': {
+                        templateUrl: 'templates/init-forum.html',
+                        controller: 'initForumCtrl'
+                    }
+                }
+            })
+            .state('menu.forum', {
+                url: '/forum/',
+                views: {
+                    'side-menu-content': {
+                        templateUrl: 'templates/forum.html',
+                        controller: 'forumCtrl'
+                    }
+                }
+            })
+            .state('menu.detailForum', {
+                url: '/detail-forum/',
+                views: {
+                    'side-menu-content': {
+                        templateUrl: 'templates/detail-forum.html',
+                        controller: 'detailForumCtrl'
+                    }
+                }
+            })
+            .state('registerUser', {
+                url: '/register-user',
+                templateUrl: 'templates/register-user.html',
+                controller: 'registerUserCtrl'
+            })
+            .state('initRegisterAuto', {
+                url: '/init-reg-auto',
+                templateUrl: 'templates/init-auto.html',
+                controller: 'initAutoCtrl'
+            })
+            .state('registerAuto', {
+                url: '/register-auto',
+                templateUrl: 'templates/register-auto.html',
+                controller: 'registerAutoCtrl'
+            })
+
+        .state('profile', {
+            url: '/profile',
+            templateUrl: 'templates/Profile.html',
+            controller: 'ProfileController'
         })
-
-
 
 
 

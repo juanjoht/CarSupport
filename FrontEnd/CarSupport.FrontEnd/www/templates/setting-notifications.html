@@ -1,26 +1,42 @@
-<ion-view title="Configurar Notificaciones" id="page22">
+<ion-view cache-view="false" title="Configurar Notificaciones" id="page21">
     <ion-content padding="true" class="has-header">
-        <ion-list id="cambioFechas-list10">
-            <ion-item class="item-divider" id="cambioFechas-list-item-divider14"> Rotación de Llantas</ion-item>
+        <ion-list id="configurarNotificaciones-list14">
+            <ion-item class="item-divider" id="configurarNotificaciones-list-item-divider17">{{Name}}</ion-item>
         </ion-list>
-        <div class="item item-body" id="cambioFechas-list-item-container11">
-            <div id="cambioFechas-markdown27" class="show-list-numbers-and-dots">
-                <p style="margin-top:0px;color:#000000;">Seleccione la fecha que desea que el sistema le recuerde el mantenimiento seleccionado.</p>
+        <div class="item item-body" id="configurarNotificaciones-list-item-container9">
+            <div id="configurarNotificaciones-markdown34" class="show-list-numbers-and-dots">
+                <p style="margin-top:0px;color:#000000;">Kilometraje Actual:
+                    <strong>15.000 Km</strong>
+                </p>
             </div>
-            <form id="cambioFechas-form13" class="list">
-                <label class="item item-input" id="cambioFechas-input16">
-          <input type="date" placeholder="Seleccione...">
-        </label>
-            </form>
-            <div class="item item-body" id="detalleMantenimiento-list-item-container24">
-                <div id="detalleMantenimiento-markdown50" class="show-list-numbers-and-dots">
-                    <div id="cambioFechas-markdown27" class="show-list-numbers-and-dots">
-                        <p style="margin-top:0px;color:#000000;">Lugar</p>
-                    </div>
-                    <div> <input type="text" /></div>
-                </div>
-            </div>
-            <a ui-sref="menu.historyMaintenance" id="cambioFechas-button16" class="button button-positive btn-generic-positive  button-block icon-left ion-android-alarm-clock">Configurar Notificación</a>
         </div>
+        <div class="item item-body" id="configurarNotificaciones-list-item-container9">
+            <div id="configurarNotificaciones-markdown34" class="show-list-numbers-and-dots">
+                <p style="margin-top:0px;color:#000000;">Tiempo sugerido para el proximo mantenimiento:
+                    <strong>{{monthAdd}} Meses</strong>
+                </p>
+            </div>
+        </div>
+        <form id="configurarNotificaciones-form26" class="list">
+            <label class="item item-input item-stacked-label" id="configurarNotificaciones-input21">
+        <span class="input-label">Fecha Aproximada del último mantenimiento</span>
+        <input type="date" id="dateLastChange" ng-model="dateValue"  ng-change="selectDate();" placeholder="">
+      </label>
+        </form>
+        <div class="item item-body" id="configurarNotificaciones-list-item-container9">
+            <div id="configurarNotificaciones-markdown34" class="show-list-numbers-and-dots">
+                <p style="margin-top:0px;color:#000000;">Lugar donde realizara el mantenimiento:
+                    <input type="text" id="txtPlace" placeholder="Ingrese lugar del mantenimiento">
+                </p>
+            </div>
+        </div>
+        <div class="spacer" style="width: 300px; height: 30px;"></div>
+        <div id="configurarNotificaciones-markdown38" class="show-list-numbers-and-dots">
+            <p style="color:#000000;">El sistema le sugiere que realice el cambio el día:
+                <strong>{{newDate}}</strong>, ¿Desea configurar un recordatorio 1 día antes vía correo electrónico?</p>
+        </div>
+        <div class="spacer" style="width: 300px; height: 30px;"></div>
+        <a ng-click="AddMaintenanceUser();" id="configurarNotificaciones-button23" class="button btn-generic-positive button-positive  icon-left ion-android-alarm-clock btn-si">Si </a>
+        <a ui-sref="menu.home" id="configurarNotificaciones-button24" class="button btn-generic-positive button-positive  icon-left ion-android-cancel btn-no">No</a>
     </ion-content>
 </ion-view>

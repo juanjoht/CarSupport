@@ -1,0 +1,59 @@
+<ion-view cache-view="false" title="Registrar Usuario" id="page5">
+    <ion-content padding="true" class="has-header">
+        <form name="userForm" id="registrar-form4" class="list" novalidate="" ng-submit="AddUser(userForm)">
+            <label class="item item-input item-stacked-label" id="registrar-input9" ng-class="{ 'has-errors' : userForm.IdentificationNumber.$invalid, 'no-errors' : userForm.IdentificationNumber.$valid}">
+        <span class="input-label">Identificación *:</span>
+        <input type="text" placeholder="Ingresa tu número de identificación" name="IdentificationNumber" ng-model="user.IdentificationNumber" required>
+    </label>
+            <div class="error-container" ng-show="userForm.IdentificationNumber.$error" ng-messages="userForm.IdentificationNumber.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : userForm.Name.$invalid, 'no-errors' : userForm.Name.$valid}">
+            <span class="input-label">Nombre Completo *:</span>
+            <input type="text" name="Name" placeholder="Ingresa el tu nombre completo" ng-model="user.FullName" required />
+        </label>
+            <div class="error-container" ng-show="userForm.Name.$error" ng-messages="userForm.Name.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <label class="item item-input item-stacked-label" ng-class="{ 'has-errors' : userForm.Email.$invalid, 'no-errors' : userForm.Email.$valid}">
+            <span class="input-label">Email *:</span>
+            <input type="email" name="Email" placeholder="Ingresa tu correo electronico" ng-model="user.Email" required />
+        </label>
+            <div class="error-container" ng-show="userForm.Email.$error" ng-messages="userForm.Email.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+
+            <label class="item item-input item-stacked-label" id="registrar-input8" ng-class="{ 'has-errors' : userForm.userName.$invalid, 'no-errors' : userForm.userName.$valid}">
+        <span class="input-label">Nombre de Usuario *:</span>
+        <input type="text" name="userName" placeholder="Ingresa tu nombre de usuario" ng-model="user.Username" required />
+    </label>
+            <div class="error-container" ng-show="userForm.userName.$error" ng-messages="userForm.userName.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <label class="item item-input item-stacked-label " id="registrar-input10" ng-class="{ 'has-errors' : userForm.Pwd.$invalid, 'no-errors' : userForm.Pwd.$valid}">
+        <span class="input-label ">Contraseña *:</span>
+        <input type="password" name="Pwd" placeholder="Ingresa una contraseña" ng-model="user.Password" required>
+    </label>
+            <div class="error-container" ng-show="userForm.Pwd.$error" ng-messages="userForm.Pwd.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <div class="spacer" style="width: 300px; height: 39px; "></div>
+            <div class="padding">
+                <button class="button button-block btn-generic-positive button-positive" type="submit">
+                Guardar
+            </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
+<script id=" error-list.html " type="text/ng-template ">
+    <div class="error " ng-message="required ">
+        <i class="ion-information-circled "></i> This field is required!
+    </div>
+    <div class="error " ng-message="minlength ">
+        <i class="ion-information-circled "></i> Minimum length of this field is 5 characters!
+    </div>
+    <div class="error " ng-message="maxlength ">
+        <i class="ion-information-circled "></i> Maximum length of this field is 20 characters!
+    </div>
+</script>

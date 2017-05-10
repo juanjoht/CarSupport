@@ -1,22 +1,12 @@
-<ion-view title="Lista de Mantenimientos" id="page21">
+<ion-view cache-view="false" title="Lista de Mantenimientos" id="page21">
     <ion-content padding="true" class="has-header">
         <div id="listaMantenimientos-markdown32" class="show-list-numbers-and-dots">
             <p style="color:#000000;">Seleccione el mantenimiento que se desea registrar:</p>
         </div>
         <form id="listaMantenimientos-form15" class="list">
             <ion-item class="item-divider" id="listaMantenimientos-list-item-divider16"> Próximos Mantenimientos</ion-item>
-            <ion-item class="item-icon-left" id="listaMantenimientos-list-item55" ui-sref="menu.settingNotifications">
-                <i class="icon ion-wrench"></i>Rotación de llantas</ion-item>
-            <ion-item class="item-icon-left" id="listaMantenimientos-list-item57">
-                <i class="icon ion-wrench"></i>Alineación y balanceo</ion-item>
-            <ion-item class="item-icon-left" id="listaMantenimientos-list-item58">
-                <i class="icon ion-wrench"></i>Cambio de aceite</ion-item>
-            <ion-item class="item-icon-left" id="listaMantenimientos-list-item59">
-                <i class="icon ion-wrench"></i>Cambio de bateria</ion-item>
-            <ion-item class="item-icon-left" id="listaMantenimientos-list-item60">
-                <i class="icon ion-wrench"></i>Soat</ion-item>
-            <ion-item class="item-icon-left" id="listaMantenimientos-list-item61">
-                <i class="icon ion-wrench"></i>Impuestos</ion-item>
+            <ion-item class="item-icon-left" id="listaMantenimientos-list-item55" ng-repeat="item in Maintenances" ng-click="goto('menu.settingNotifications',item.Id)">
+                <i class="icon ion-wrench"></i>{{item.Description}}</ion-item>
             <div id="listaMantenimientos-button-bar5" class="button-bar"></div>
         </form>
     </ion-content>
