@@ -15,7 +15,7 @@
 <script id="template" type="text/x-kendo-template">
     <div>
         <span>Descripción:</span>
-        <input type="text" name="description" data-bind="value:Description" class="k-textbox" required/>
+        <textarea name="description" data-bind="value:Description" class="k-textbox" required/>
     </div>
     <div>
         <span>Causas:</span>
@@ -27,11 +27,11 @@
     </div>
     <div>
         <span>Soluciones</span>
-        <input type="text" name="solutions" data-bind="value:Solutions" class="k-textbox" required />
+        <textarea name="solutions" data-bind="value:Solutions" class="k-textbox" required />
     </div>
     <div>
         <span>Clasificación:</span>
-        <input type="text" name="rating" data-bind="value:Rating" class="k-textbox" required />
+        <input type="text" name="rating" id="rating" required />
     </div>
     <div>
         <span>Parte</span>

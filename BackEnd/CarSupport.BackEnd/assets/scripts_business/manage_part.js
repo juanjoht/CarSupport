@@ -48,12 +48,13 @@
                              ShowScheme: data.ShowScheme
                          }
                          if (operation == 'create') {
+                             partParameter.ShowScheme=data.showScheme.ShowScheme;
                              return JSON.stringify(partParameter);
                          }
                          if (operation == 'update') {
                              partParameter.Id = data.Id;
                              partParameter.Description = data.Description;
-                             partParameter.ShowScheme = data.ShowScheme;
+                             partParameter.ShowScheme = data.showScheme.ShowScheme;
                              
                              return JSON.stringify(partParameter);
                          }
