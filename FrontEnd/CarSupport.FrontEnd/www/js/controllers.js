@@ -62,7 +62,7 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
 
         $scope.show = function() {
             $ionicLoading.show({
-                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+                template: '<p>Cargando...</p><ion-spinner></ion-spinner>'
             });
         };
 
@@ -74,7 +74,9 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
             $scope.show($ionicLoading);
             AppFactory.loginLocal($scope.data).then(function(response) {
                 if (response.data.account) {
+                    localStorageService.set("Nombre", response.data.account.FullName);
                     localStorageService.set("UserId", response.data.account.Id);
+                    localStorageService.set("loginType", 'local');
                     $scope.hide($ionicLoading);
                     $state.go('menu.home');
                 } else {
@@ -90,13 +92,42 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
         $scope.loginFacebook = function() {
             $cordovaOauth.facebook("165019570694513", ["email", "user_posts", "user_website", "user_location", "user_relationships"]).then(function(result) {
                 $localStorage.accessToken = result.access_token;
+                $localStorage.rs = 'fb';
+                localStorageService.set("loginType", 'fb');
                 $location.path("/menu");
             }, function(error) {
                 alert("There was a problem signing in!  See the console for logs");
                 console.log(error);
             });
+        };
 
-        }
+        $scope.LoginwithGoogle = function() {
+            $ionicLoading.show({
+                template: 'Logging in...'
+            });
+
+            window.plugins.googleplus.login({},
+                function(user_data) {
+                    // For the purpose of this example I will store user data on local storage
+                    AppFactory.setUser({
+                        userID: user_data.userId,
+                        name: user_data.displayName,
+                        email: user_data.email,
+                        picture: user_data.imageUrl,
+                        accessToken: user_data.accessToken,
+                        idToken: user_data.idToken
+                    });
+
+                    $ionicLoading.hide();
+                    $state.go('home');
+                },
+                function(msg) {
+                    $ionicLoading.hide();
+                }
+            );
+        };
+
+
     }
 ])
 
@@ -105,8 +136,15 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
     function($scope, $rootScope, $http, $stateParams, $location, $localStorage, $state, localStorageService, AppFactory) {
         $scope.init = function() {
-            if ($localStorage.hasOwnProperty("accessToken") === true) {
-                //alert($localStorage.accessToken);
+            $scope.profileData = ''
+            var ty = localStorageService.get("loginType");
+
+            if (ty == 'local') {
+                $scope.profileData = {
+                    name: localStorageService.get("Nombre")
+                }
+                $scope.showImage = true;
+            } else if ($localStorage.hasOwnProperty("accessToken") === true) {
                 $http.get("https://graph.facebook.com/v2.2/me", {
                     params: {
                         access_token: $localStorage.accessToken,
@@ -115,7 +153,7 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
                     }
                 }).then(function(result) {
                         $scope.profileData = result.data;
-                        $scope.addUserFb($scope.profileData);
+                        $scope.addUserFb(result.data);
                         $state.go('menu.home');
                     },
                     function(error) {
@@ -124,31 +162,59 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
             }
         };
 
-        $scope.addUserFb = function(profile) {
-            $scope.user = {
-                Id: 0,
-                IdentificationNumber: profile.id,
-                FullName: profile.name,
-                Email: profile.email,
-                Username: profile.email,
-                Password: 'fb'
-            };
-            AppFactory.postUser($scope.user).then(function(response) {
-                $scope.response = response;
-                localStorageService.set("UserId", response.data.Id);
-            });
+        $scope.logout = function() {
+            var type = localStorageService.get("loginType");
+            if (type == 'local') {
+                AppFactory.logoutLocal().then(function(resp) {
+                    if (resp) {
+                        localStorageService.clearAll();
+                        $state.go('login');
+                    }
+                });
+            } else {
+                delete $localStorage.accessToken;
+                $location.path("/login");
+            }
         }
 
-
+        $scope.addUserFb = function(profile) {
+            AppFactory.getUserbyId(profile.id).then(function(resp) {
+                if (resp.data.length == 0) {
+                    $scope.user = {
+                        Id: 0,
+                        IdentificationNumber: profile.id,
+                        FullName: profile.name,
+                        Email: profile.email,
+                        Username: profile.email,
+                        Password: 'fb'
+                    };
+                    AppFactory.postUser($scope.user).then(function(response) {
+                        $scope.response = response;
+                        localStorageService.set("UserId", response.data.Id);
+                    });
+                } else {
+                    $scope.dt = resp.data[0].Id;
+                    localStorageService.set("UserId", resp.data[0].Id);
+                }
+            });
+        }
     }
 ])
 
-.controller('homeCtrl', ['$scope', '$rootScope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('homeCtrl', ['$scope', '$rootScope', '$stateParams', 'localStorageService', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, $rootScope, $stateParams) {
+    function($scope, $rootScope, $stateParams, localStorageService, $state, AppFactory) {
+        var Id = localStorageService.get("UserId");
+        $scope.urlBack = "https://carsupportadmintest.azurewebsites.net/";
+        $scope.Cars = [];
+        AppFactory.getCarbyId(Id).then(function(response) {
+            $scope.Cars = response.data;
+        });
 
-
+        $scope.goto = function(toState) {
+            $state.go(toState)
+        }
 
 
     }
@@ -434,10 +500,10 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     }
 ])
 
-.controller('detailFaultsCtrl', ['$scope', 'localStorageService', '$stateParams', '$state', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('detailFaultsCtrl', ['$scope', 'localStorageService', '$stateParams', '$state', '$ionicPopup', 'AppFactory', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
     // You can include any angular dependencies as parameters for this function
     // TIP: Access Route Parameters for your page via $stateParams.parameterName
-    function($scope, localStorageService, $stateParams, $state, AppFactory) {
+    function($scope, localStorageService, $stateParams, $state, $ionicPopup, AppFactory) {
         var param = $stateParams.breakdownId;
 
         $scope.paramHistory = eval($stateParams.History);
@@ -467,11 +533,25 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
                 Breakdown: parseInt($stateParams.breakdownId),
                 User: localStorageService.get("UserId")
             }
-            AppFactory.postBreakDownnUser(entity).then(function(response) {
-                if (response.data) {
+            AppFactory.getBreakdownbyUserFail(entity).then(function(response) {
+                if (response.data.length == 0) {
+                    AppFactory.postBreakDownnUser(entity).then(function(response) {
+                        if (response.data) {
+                            $state.go('menu.historyFailures');
+                        }
+                    });
+                } else {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Error',
+                        template: 'Ya se encuentra ingresada la falla en el historial del usuario'
+                    });
                     $state.go('menu.historyFailures');
                 }
             });
+
+
+
+
         }
 
 
@@ -675,7 +755,9 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
     function($scope, localStorageService, $stateParams, $state, AppFactory) {
         var Brands = []
         var Models = []
-
+        $scope.IdUser = localStorageService.get("UserId");
+        $scope.IdBrand = '';
+        $scope.IdModel = '';
         $scope.data = {
             Id: 0,
             LicensePlate: '',
@@ -684,9 +766,8 @@ angular.module('app.controllers', ['ionic-audio', 'app.services', 'LocalStorageM
             FuelType: '',
             Class: '',
             ModelId: 0,
-            UserId: localStorageService.get("UserId"),
-            brand: '',
-
+            UserId: $scope.IdUser,
+            BrandId: 0
         }
         AppFactory.getBrand().then(function(response) {
             $scope.Brands = response.data;

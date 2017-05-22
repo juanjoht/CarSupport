@@ -1,23 +1,33 @@
 <ion-view cache-view="false" title="Login" id="page7">
     <ion-content padding="true" class="has-header">
+        <div class="content-logo">
+            <img src="img/logo-carsupport.png" class="logo-app" />
+        </div>
+        <div class="spacer" style="height: 40px;"></div>
         <form id="login-form5" class="list">
             <ion-list id="login-list2">
                 <label class="item item-input" id="login-input11">
-          <span class="input-label">Username</span>
-          <input type="text" placeholder="" name="username" ng-model="data.username">
+          <span class="input-label">Usuario</span>
+          <i class="ion-person" style="margin-right:10px;"></i>
+          <input type="text"  placeholder="" name="username" ng-model="data.username">
         </label>
                 <label class="item item-input" id="login-input12">
           <span class="input-label">Contraseña</span>
+                    <i class="ion-key" style="margin-right:10px;"></i>
           <input type="password" placeholder="" name="password" ng-model="data.password" >
         </label>
             </ion-list>
             <div class="spacer" style="height: 40px;"></div>
-            <!--<a ui-sref="autenticar" id="login-button5" class="button button-positive  button-block">Iniciar Sección</a> !-->
-            <button class="button button-block button-dark" ng-click="login()">Login</button>
+            <button class="button button-block button-dark icon-right ion-log-in" ng-click="login()">Ingresar</button>
         </form>
-        <button ng-click="loginFacebook()" class="button button-block button-balanced">Oauth Sign In</button>
+        <a ng-click="loginFacebook()" id="login-button7" class="button button-login-facebook button-positive  button-block icon-right ion-social-facebook">Conectar con Facebook</a>
+        <a ng-click="LoginwithGoogle()" id="login-button8" class="button  button-assertive button-block icon-right ion-social-googleplus">Conectar con Google +</a>
 
-        <a ui-sref="menu.home" id="login-button7" class="button button-dark  button-block icon-right ion-social-facebook">Conectar con Facebook</a>
-        <a ui-sref="menu.home" id="login-button8" class="button button-dark  button-block icon-right ion-social-googleplus">Conectar con Google +</a>
+        <div class="spacer" style="height: 40px;"></div>
+        <div class="row row-center">
+            <div class="col col-center">
+                Aplicación móvil para la gestión de fallas y mantenimiento preventivo de su automóvil
+            </div>
+        </div>
     </ion-content>
 </ion-view>

@@ -14,11 +14,8 @@
                 <i class="icon ion-settings"></i> {{item.Breakdown.Name}}
             </a>
         </div>
-
-        <div class="section-add-fail">
-            <button ng-click="goto('menu.selectPart')" class="button button-positive  button-large btn-add-fail">
-                    +
-            </button>
-        </div>
     </ion-content>
+    <button class="button button-positive button-float" ng-click="goto('menu.selectPart')">
+        <i class="icon ion-plus"></i>
+    </button>
 </ion-view>

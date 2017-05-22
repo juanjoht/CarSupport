@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "126939426362",
+    "project_id": "carsupport-167802"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126939426362:android:a511446d07614024",
+        "android_client_info": {
+          "package_name": "com.ionicframework.carsupportfrontend962230"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126939426362-m45epc70o1nkhnierak1269c8rjqpli5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.carsupportfrontend962230",
+            "certificate_hash": "d70118f46ab87ea79d85c0b26a7f2a760b136c21"
+          }
+        },
+        {
+          "client_id": "126939426362-t6n6sd8i91b4uqc1im539b1vqag4n9tt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPe8pr5nPOgOTAwj7mZnu14DmmjS0Ph8s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

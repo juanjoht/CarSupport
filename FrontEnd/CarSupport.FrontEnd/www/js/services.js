@@ -2,8 +2,8 @@ angular.module('app.services', [])
 
 .factory('AppFactory', ["$http", '$q', function($http, $q) {
 
-    var appContext = "https://carsupportadmintest.azurewebsites.net/";
-    //var appContext = "http://localhost:1337";
+    // var appContext = "https://carsupportadmintest.azurewebsites.net/";
+    var appContext = "http://localhost:1337";
     var loginLocal = function(entity) {
         var result = $http({
             method: "POST",
@@ -159,6 +159,48 @@ angular.module('app.services', [])
         return sendRequest(result);
     }
 
+    var getUserbyId = function(param) {
+        var result = $http({
+            method: "GET",
+            url: appContext + "/User/findById/" + param
+        });
+        return sendRequest(result);
+    }
+
+    var getCarbyId = function(param) {
+        var result = $http({
+            method: "GET",
+            url: appContext + "/Car/findById/" + param
+        });
+        return sendRequest(result);
+    }
+    var logoutLocal = function() {
+        var result = $http({
+            method: "POST",
+            url: appContext + "/Auth/logout",
+        });
+        return sendRequest(result);
+
+    }
+
+    var setUser = function(user_data) {
+        window.localStorage.starter_google_user = JSON.stringify(user_data);
+    };
+
+    var getUser = function() {
+        return JSON.parse(window.localStorage.starter_google_user || '{}');
+    };
+
+    var getBreakdownbyUserFail = function(entity) {
+        var result = $http({
+            method: "POST",
+            url: appContext + "/Breakdownxuser/findbyId",
+            data: entity
+        });
+        return sendRequest(result);
+
+    }
+
 
 
     //Función encargada de resolver una operación con error en el consumo del servicio
@@ -211,7 +253,14 @@ angular.module('app.services', [])
         postUser: postUser,
         getBrand: getBrand,
         getModelbyIdBrand: getModelbyIdBrand,
-        postCar: postCar
+        postCar: postCar,
+        getUserbyId: getUserbyId,
+        getCarbyId: getCarbyId,
+        logoutLocal: logoutLocal,
+        setUser: setUser,
+        getUser: getUser,
+        getBreakdownbyUserFail: getBreakdownbyUserFail
+
     });
 }])
 

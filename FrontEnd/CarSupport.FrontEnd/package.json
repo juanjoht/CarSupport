@@ -1,5 +1,5 @@
 {
-    "name": "carsupport.frontend",
+    "name": "carsupport",
     "version": "1.1.1",
     "description": "CarSupport.FrontEnd: An Ionic project",
     "dependencies": {
