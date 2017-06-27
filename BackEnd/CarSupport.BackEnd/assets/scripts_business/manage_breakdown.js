@@ -7,6 +7,9 @@
      global: {
          crudServiceBaseUrl: "/breakdown",
          urlGetPart: "/Part/index",
+         urlUploadImage1: "/breakdown/uploadImage1",
+         pathImages: '/images/',
+         imageName1: '',
          dataSource: '',
          dataSourcePart: ''
      },
@@ -46,26 +49,34 @@
                      parameterMap: function(data, operation) {
                          var breakdownParameter = {
                              Id: 0,
+                             Name: data.Name,
                              Description: data.Description,
                              Causes: data.Causes,
                              Consequences: data.Consequences,
                              Solutions: data.Solutions,
-                             Rating: data.Rating,
-                             PartId: data.PartId
+                             FrecuentFault: data.FrecuentFault,
+                             PathImage: data.PathImage,
+                             Rating: data.Rating//,
+                             //PartId: data.PartId
                          }
                          if (operation == 'create') {
+                             breakdownParameter.FrecuentFault = data.frecuent.Id;
+                             breakdownParameter.PathImage= manageBreakdown.global.pathImages + manageBreakdown.global.imagenName1;
                              breakdownParameter.PartId = data.part.Id;
                              breakdownParameter.Rating = data.rating.Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'update') {
                              breakdownParameter.Id = data.Id;
+                             breakdownParameter.Name= data.Name;
                              breakdownParameter.Description = data.Description;
                              breakdownParameter.Causes = data.Causes;
                              breakdownParameter.Consequences = data.Consequences;
                              breakdownParameter.Solutions = data.Solutions;
+                             breakdownParameter.FrecuentFault = data.frecuent.Id;
+                             breakdownParameter.PathImage = manageBreakdown.global.pathImages + manageBreakdown.global.imagenName1;
                              breakdownParameter.Rating = data.rating.Id;
-                             breakdownParameter.PartId = data.part.Id;
+                             breakdownParameter.PartId = data.part[0].Id;
                              return JSON.stringify(breakdownParameter);
                          }
                          if (operation == 'destroy') {
@@ -82,6 +93,9 @@
                              Id: {
                                  type: "number"
                              },
+                             Name: {
+                                 type: "string"
+                             },
                              Description: {
                                  type: "string"
                              },
@@ -92,6 +106,12 @@
                                  type: "string"
                              },
                              Solutions: {
+                                 type: "string"
+                             },
+                             FrecuentFault: {
+                                 type: "float"
+                             },
+                             PathImage: {
                                  type: "string"
                              },
                              Rating: {
@@ -127,7 +147,7 @@
              $("#grid").kendoGrid({
                  dataSource: manageBreakdown.global.dataSource,
                  pageable: true,
-                 height: 400,
+                 height: 500,
                  toolbar: [{
                      name: "create",
                      text: "Crear falla"
@@ -137,25 +157,37 @@
                      title: "Id",
                      width: "50px"
                  }, {
+                     field: "Name",
+                     title: "Nombre",
+                     width: "100px"
+                 },{
                      field: "Description",
                      title: "Descripción",
-                     width: "150px"
+                     width: "200px"
                  }, {
                      field: "Causes",
                      title: "Causas",
-                     width: "200px"
+                     width: "100px"
                  }, {
                      field: "Consequences",
                      title: "Consecuencias",
-                     width: "200px"
+                     width: "100px"
                  }, {
                      field: "Solutions",
                      title: "Soluciones",
-                     width: "200px"
+                     width: "100px"
+                 },{
+                     field: "FrecuentFault",
+                     title: "Falla frecuente",
+                     width: "100px"
+                 },{
+                     field: "PathImage",
+                     title: "Imagen",
+                     width: "100px"
                  }, {
                      field: "Rating",
                      title: "Clasificación",
-                     width: "100px"
+                     width: "50px"
                  }, {
                      field: "Part",
                      title: "Parte",
@@ -176,7 +208,9 @@
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
                      manageBreakdown.fn.setDdlPart();
+                     manageBreakdown.fn.setKendoUploadImage1();
                      manageBreakdown.fn.setDatRating();
+                     manageBreakdown.fn.setDatFrecuent();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Falla');
                      }
@@ -187,7 +221,7 @@
          setDdlPart: function() {
              $("#part").kendoComboBox({
                  placeholder: "Seleccione...",
-                 dataTextField: "Description",
+                 dataTextField: "Name",
                  dataValueField: "Id",
                  dataSource: {
                      transport: {
@@ -207,6 +241,66 @@
                  dataSource: [
                     { Desicioname: "Baja", Id: 0 },
                     { Desicioname: "Alta", Id: 1 }
+                 ]
+             });
+         },
+         setKendoUploadImage1: function() {
+             $("#UploadImage1").kendoUpload({
+                 async: {
+                     saveUrl: manageBreakdown.global.urlUploadImage1,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 },
+                 upload: manageBreakdown.fn.onUploadImage,
+                 success: manageBreakdown.fn.onSuccessImage
+             });
+         },
+         onSuccessImage: function(e) {
+             if (e.operation == "upload") {
+                // var valueOption = e.sender.element["0"].attributes[3].nodeValue
+                 var splitname = e.response[0].fd.split("\\");
+                 var filename = splitname[splitname.length - 1];
+                // switch (valueOption) {
+                   //  case "image1":
+                         manageBreakdown.global.imagenName1 = filename;
+                      //   break;
+                    // default:
+                         // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                       //  e.preventDefault();
+                        // break;
+                 //}
+             }
+         },
+         onUploadImage: function(e) {
+             // Array with information about the uploaded files
+             var files = e.files;
+             switch (files[0].extension) {
+                 case ".jpg":
+                     break;
+                 case ".png":
+                     var t = "";
+                     break;
+                 default:
+                     // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                     e.preventDefault();
+                     break;
+             }
+         },
+         setDatFrecuent: function() {
+             $("#frecuent").kendoComboBox({
+                 placeholder: "Seleccione...",
+                 dataTextField: "Desicioname",
+                 dataValueField: "Id",
+                 dataSource: [
+                    { Desicioname: "SI", Id: 0 },
+                    { Desicioname: "NO", Id: 1 }
                  ]
              });
          }

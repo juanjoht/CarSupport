@@ -6,6 +6,9 @@
      },
      global: {
          crudServiceBaseUrl: "/part",
+         urlUploadImage1: "/part/uploadImage1",
+         pathImages: '/images/',
+         imageName1: '',
          dataSource: ''
      },
      fn: {
@@ -44,16 +47,21 @@
                      parameterMap: function(data, operation) {
                          var partParameter = {
                              Id: 0,
+                             Name: data.Name,
                              Description: data.Description,
+                             Path: data.Path,
                              ShowScheme: data.ShowScheme
                          }
                          if (operation == 'create') {
                              partParameter.ShowScheme=data.showScheme.ShowScheme;
+                             partParameter.Path = managePart.global.pathImages + managePart.global.imagenName1;
                              return JSON.stringify(partParameter);
                          }
                          if (operation == 'update') {
                              partParameter.Id = data.Id;
+                             partParameter.Name = data.Name;
                              partParameter.Description = data.Description;
+                             partParameter.Path = managePart.global.pathImages + managePart.global.imagenName1;
                              partParameter.ShowScheme = data.showScheme.ShowScheme;
                              
                              return JSON.stringify(partParameter);
@@ -72,7 +80,13 @@
                              Id: {
                                  type: "number"
                              },
+                             Name: {
+                                 type: "string"
+                             },
                              Description: {
+                                 type: "string"
+                             },
+                             Path: {
                                  type: "string"
                              },
                              ShowScheme: {
@@ -114,9 +128,17 @@
                      field: "Id",
                      title: "Id",
                      width: "150px"
+                 },{
+                     field: "Name",
+                     title: "Nombre parte",
+                     width: "150px"
                  }, {
                      field: "Description",
                      title: "Descripción",
+                     width: "150px"
+                 },{
+                     field: "Path",
+                     title: "Paquete",
                      width: "150px"
                  }, {
                      field: "ShowScheme",
@@ -137,6 +159,7 @@
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
                      managePart.fn.setDatMostrar();
+                     managePart.fn.setKendoUploadImage1();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Parte');
                      }
@@ -153,6 +176,55 @@
                     { Desicioname: "SI", ShowScheme: 1 }
                  ]
              });
+         },
+         setKendoUploadImage1: function() {
+             $("#UploadImage1").kendoUpload({
+                 async: {
+                     saveUrl: managePart.global.urlUploadImage1,
+                     removeUrl: '',
+                     autoUpload: false
+                 },
+                 multiple: false,
+                 localization: {
+                     select: "Seleccione",
+                     uploadSelectedFiles: "Cargar Archivo",
+                     headerStatusUploaded: "Finalizado",
+                     headerStatusUploading: "Cargando"
+                 },
+                 upload: managePart.fn.onUploadImage,
+                 success: managePart.fn.onSuccessImage
+             });
+         },
+         onSuccessImage: function(e) {
+             if (e.operation == "upload") {
+                // var valueOption = e.sender.element["0"].attributes[3].nodeValue
+                 var splitname = e.response[0].fd.split("\\");
+                 var filename = splitname[splitname.length - 1];
+                // switch (valueOption) {
+                   //  case "image1":
+                         managePart.global.imagenName1 = filename;
+                      //   break;
+                    // default:
+                         // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                       //  e.preventDefault();
+                        // break;
+                 //}
+             }
+         },
+         onUploadImage: function(e) {
+             // Array with information about the uploaded files
+             var files = e.files;
+             switch (files[0].extension) {
+                 case ".jpg":
+                     break;
+                 case ".png":
+                     var t = "";
+                     break;
+                 default:
+                     // window.radalert(revistaImagenExtension, 400, 200, 'Mensaje de Información', '');
+                     e.preventDefault();
+                     break;
+             }
          }
      }
 

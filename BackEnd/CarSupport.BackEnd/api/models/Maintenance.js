@@ -18,6 +18,16 @@ module.exports = {
             type: 'string',
             required: true,
             size: 45
+        },
+         Procedure:   {
+            type: 'string',
+            required: true,
+            size: 4500
+        },
+         TimeChange:   {
+            type: 'string',
+            required: true,
+            size: 45
         }
     }
 };

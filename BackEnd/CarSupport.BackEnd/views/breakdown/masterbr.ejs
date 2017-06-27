@@ -14,6 +14,10 @@
 <div id="grid"></div>
 <script id="template" type="text/x-kendo-template">
     <div>
+        <span>Nombre:</span>
+        <input type="text" name="name" data-bind="value:Name" class="k-textbox" required/>
+    </div>
+    <div>
         <span>Descripción:</span>
         <textarea name="description" data-bind="value:Description" class="k-textbox" required/>
     </div>
@@ -28,6 +32,14 @@
     <div>
         <span>Soluciones</span>
         <textarea name="solutions" data-bind="value:Solutions" class="k-textbox" required />
+    </div>
+    <div>
+        <span>Falla frecuente:</span>
+        <input type="text" name="frecuent" id="frecuent" required />
+    </div>
+    <div>
+        <span>Imagen:</span>
+        <input type="file" name="UploadImage1" id="UploadImage1" data-option="image1" />
     </div>
     <div>
         <span>Clasificación:</span>

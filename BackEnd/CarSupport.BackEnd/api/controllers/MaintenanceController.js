@@ -28,6 +28,8 @@ var MaintenanceController = {
             if (err) { return res.serverError(err); }
             maintenanceOr = {
                 Description: maintenanceOriginal[0].Description,
+                Procedure: maintenanceOriginal[0].Procedure,
+                TimeChange: maintenanceOriginal[0].TimeChange,
             }
             Maintenance.update({ Id: parameters.Id }, maintenanceOr).exec(function afterwards(err, updated) {
                 if (err) { return res.serverError(err); }

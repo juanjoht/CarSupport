@@ -44,15 +44,20 @@
                      parameterMap: function(data, operation) {
                          var maintenanceParameter = {
                              Id: 0,
-                             Description: data.Description
+                             Description: data.Description,
+                             Procedure: data.Procedure,
+                             TimeChange: data.TimeChange
                             
                          }
                          if (operation == 'create') {
+                             maintenanceParameter.TimeChange = data.change.Id;
                              return JSON.stringify(maintenanceParameter);
                          }
                          if (operation == 'update') {
                              maintenanceParameter.Id = data.Id;
                              maintenanceParameter.Description = data.Description;
+                             maintenanceParameter.Procedure = data.Procedure;
+                             maintenanceParameter.TimeChange = data.TimeChange;
                              return JSON.stringify(maintenanceParameter);
                          }
                          if (operation == 'destroy') {
@@ -72,6 +77,14 @@
                              },
                              Description: {
                                  validation: { required: true },
+                                 type: "string"
+                             },
+                             Procedure:{
+                                 validation:{ required: true},
+                                 type: "string"
+                             },
+                             TimeChange:{
+                                 validation: { required: true},
                                  type: "string"
                              }
                          }
@@ -113,8 +126,16 @@
                  }, {
                      field: "Description",
                      title: "Descripcion",
-                     width: "500px"
-                 }, {
+                     width: "150px"
+                 },{
+                     field: "Procedure",
+                     title: "Procedimiento",
+                     width: "150px"
+                 },{
+                     field: "TimeChange",
+                     title: "Tiempo cambio",
+                     width: "150px"
+                 },{
                      command: [{ name: "edit", text: "Editar" }, { name: "destroy", text: "Eliminar" }],
                      title: "&nbsp;",
                      width: "210px"
@@ -128,11 +149,46 @@
                      e.container.data("kendoWindow").title('Editar Mantenimiento');
                      var editWindow = e.container.data("kendoWindow");
                      editWindow.center();
+                     //manageMaintenance.fn.setDatTime();
+                     manageMaintenance.fn.setDatChange();
                      if (e.model.isNew()) {
                          editWindow.title('Crear Mantenimiento');
                      }
                  }
              }).data("kendoGrid");
+         },
+         setDatTime: function() {
+            $("#timechangenum").kendoNumericTextBox({
+                culture: "de-DE",
+                format: "n0",
+                min: 0,
+                placeholder: "Tiempo en meses"
+            });
+         },
+         setDatChange: function() {
+             $("#change").kendoComboBox({
+                 placeholder: "Tiempo en meses",
+                 dataTextField: "Desicioname",
+                 dataValueField: "Id",
+                 dataSource: [
+                    { Desicioname: "1", Id: "1" },
+                    { Desicioname: "2", Id: "2" },
+                    { Desicioname: "3", Id: "3" },
+                    { Desicioname: "4", Id: "4" },
+                    { Desicioname: "5", Id: "5" },
+                    { Desicioname: "6", Id: "6" },
+                    { Desicioname: "7", Id: "7" },
+                    { Desicioname: "8", Id: "8" },
+                    { Desicioname: "9", Id: "9" },
+                    { Desicioname: "10", Id: "10" },
+                    { Desicioname: "11", Id: "11" },
+                    { Desicioname: "12", Id: "12" },
+                    { Desicioname: "13", Id: "13" },
+                    { Desicioname: "14", Id: "14" },
+                    { Desicioname: "15", Id: "15" },
+                    { Desicioname: "16", Id: "16" },
+                 ]
+             });
          }
      }
 

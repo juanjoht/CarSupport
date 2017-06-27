@@ -11,7 +11,7 @@ var PartController = {
             if (err) {
                 return res.serverError(err);
             }
-            return res.jsonp(parts);
+            return res.json(parts);
         });
     },
     add: function(req, res) {
@@ -27,7 +27,9 @@ var PartController = {
         Part.find({ Id: parameters.Id }).exec(function(err, partOriginal) {
             if (err) { return res.serverError(err); }
             partOr = {
+                Name: parameters.Name,
                 Description: parameters.Description,
+                Path: paramaters.Path,
                 ShowScheme: parameters.ShowScheme,
             }
             
@@ -47,7 +49,15 @@ var PartController = {
             }
             return res.json(part[0].Id);
         });
-    }
+    },
+    uploadImage1: function(req, res) {
+        req.file('UploadImage1').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+            return res.json(uploadedFiles);
+        });
+    },
 
 }
 module.exports = PartController;

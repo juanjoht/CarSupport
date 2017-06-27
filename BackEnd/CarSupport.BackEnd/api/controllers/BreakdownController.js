@@ -37,10 +37,13 @@ var BreakdownController = {
         Breakdown.find({ Id: parameters.Id }).exec(function(err, breakdownOriginal) {
             if (err) { return res.serverError(err); }
             breakdownOr = {
+                Name: parameters.Name,
                 Description: parameters.Description,
                 Causes: parameters.Causes,
                 Consequences: parameters.Consequences,
                 Solutions: parameters.Solutions,
+                FrecuentFault: parameters.FrecuentFault,
+                PathImage: parameters.PathImage,
                 Rating: parameters.Rating,
                 Part: parameters.Part,
             }
@@ -60,7 +63,15 @@ var BreakdownController = {
             }
             return res.json(breakdown[0].Id);
         });
-    }
+    }, 
+    uploadImage1: function(req, res) {
+        req.file('UploadImage1').upload({
+            dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+        }, function(err, uploadedFiles) {
+            if (err) return res.negotiate(err);
+            return res.json(uploadedFiles);
+        });
+    },
 
 }
 
